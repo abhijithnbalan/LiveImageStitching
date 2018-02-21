@@ -1,0 +1,13 @@
+<map id="Category.hh" name="Category.hh">
+<area shape="rect" id="node2" href="$Portability_8hh.html" title="log4cpp/Portability.hh" alt="" coords="637,379,784,405"/>
+<area shape="rect" id="node6" href="$Appender_8hh.html" title="log4cpp/Appender.hh" alt="" coords="1016,80,1160,107"/>
+<area shape="rect" id="node15" href="$Priority_8hh.html" title="log4cpp/Priority.hh" alt="" coords="419,304,548,331"/>
+<area shape="rect" id="node18" href="$LoggingEvent_8hh.html" title="log4cpp/LoggingEvent.hh" alt="" coords="568,229,736,256"/>
+<area shape="rect" id="node20" href="$Threading_8hh.html" title="log4cpp/threading/Threading.hh" alt="" coords="1107,229,1309,256"/>
+<area shape="rect" id="node23" href="$CategoryStream_8hh.html" title="log4cpp/CategoryStream.hh" alt="" coords="160,229,344,256"/>
+<area shape="rect" id="node4" href="$Export_8hh.html" title="log4cpp/Export.hh" alt="" coords="647,453,773,480"/>
+<area shape="rect" id="node17" href="$Layout_8hh.html" title="log4cpp/Layout.hh" alt="" coords="923,155,1051,181"/>
+<area shape="rect" id="node19" href="$TimeStamp_8hh.html" title="log4cpp/TimeStamp.hh" alt="" coords="574,304,729,331"/>
+<area shape="rect" id="node21" href="$DummyThreads_8hh.html" title="log4cpp/threading/DummyThreads.hh" alt="" coords="1059,304,1297,331"/>
+<area shape="rect" id="node25" href="$Manipulator_8hh.html" title="log4cpp/Manipulator.hh" alt="" coords="74,304,229,331"/>
+</map>
