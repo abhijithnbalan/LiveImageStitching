@@ -21,26 +21,26 @@ int main(int argc, char **argv) //The main Function
     ImageMosaic mosaic;
     ViewFrame viewer;
 
-    CaptureFrame ima1,ima2;
-    ima1.capture_image(argv[1],"image1");
-    ima2.capture_image(argv[2],"image2");
-    logger.log_warn("Capturing images done");
+    // CaptureFrame ima1,ima2;
+    // ima1.capture_image(argv[1],"image1");
+    // ima2.capture_image(argv[2],"image2");
+    // logger.log_warn("Capturing images done");
     // mosaic.AKAZE_feature_match(ima1,ima2);
 
-    mosaic.ORB_feature_match(ima1,ima2);
-    logger.log_warn("feature detection done");
-    mosaic.view_keypoints();
-    logger.log_warn("Keypoint display done");
-    mosaic.BF_matcher();
-    logger.log_warn("feature matching done");
-    mosaic.find_homography();
-    logger.log_warn("homography done");
-    mosaic.good_match_selection();
-    logger.log_warn("goodmatch selection done");
-    mosaic.warp_image();
-    logger.log_warn("image warping done");
-    mosaic.image_blender();
-    logger.log_warn("blending done");
+    // mosaic.ORB_feature_match(ima1,ima2);
+    // logger.log_warn("feature detection done");
+    // mosaic.view_keypoints();
+    // logger.log_warn("Keypoint display done");
+    // mosaic.BF_matcher();
+    // logger.log_warn("feature matching done");
+    // mosaic.find_homography();
+    // logger.log_warn("homography done");
+    // mosaic.good_match_selection();
+    // logger.log_warn("goodmatch selection done");
+    // mosaic.warp_image();
+    // logger.log_warn("image warping done");
+    // mosaic.image_blender();
+    // logger.log_warn("blending done");
 
 
 
@@ -48,9 +48,10 @@ int main(int argc, char **argv) //The main Function
     // CaptureFrame image1,image2;
     // image1.capture_image(argv[1],"First Image");
     // image2.capture_image(argv[2],"Second Image");
+    // mosaic.image_vector_maker(argc, argv);
     // // viewer.single_view_interrupted(image1);
     // // mosaic.AKAZE_feature_match(image1,image2);
-    // mosaic.Opencv_Stitcher(image1,image2);
+    // mosaic.Opencv_Stitcher();
     // viewer.single_view_interrupted(mosaic.mosaic_image);
 
     // CaptureFrame video;
@@ -63,7 +64,13 @@ int main(int argc, char **argv) //The main Function
     // std::cout<<"image recording done\n";
     // mosaic.native_stitcher();
 
-
-
+    CaptureFrame vid;
+    vid.capture_video(argv[1],"video input");
+    mosaic.image_vector_maker(vid);
+    mosaic.display_image_vector();
+    mosaic.Opencv_Stitcher();
+    
+    viewer.single_view_interrupted(mosaic.mosaic_image);
+    cv::waitKey(15);
     return 0;
 }

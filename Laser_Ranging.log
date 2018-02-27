@@ -1577,3 +1577,988 @@
 [WARN] 2018-02-21 15:47:44,223 goodmatch selection done
 [WARN] 2018-02-21 15:47:44,236 image warping done
 [WARN] 2018-02-21 15:48:22,699 blending done
+[WARN] 2018-02-21 16:03:59,767 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:03:59,767 Working directory switched to one directory back
+[WARN] 2018-02-21 16:03:59,798 Capturing images done
+[WARN] 2018-02-21 16:03:59,845 feature detection done
+[WARN] 2018-02-21 16:04:02,440 Keypoint display done
+[WARN] 2018-02-21 16:04:02,504 feature matching done
+[WARN] 2018-02-21 16:04:02,567 homography done
+[WARN] 2018-02-21 16:04:03,815 goodmatch selection done
+[WARN] 2018-02-21 16:04:03,831 image warping done
+[WARN] 2018-02-21 16:04:15,129 blending done
+[WARN] 2018-02-21 16:04:22,253 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:04:22,254 Working directory switched to one directory back
+[WARN] 2018-02-21 16:04:22,285 Capturing images done
+[WARN] 2018-02-21 16:04:22,331 feature detection done
+[WARN] 2018-02-21 16:04:23,808 Keypoint display done
+[WARN] 2018-02-21 16:04:23,812 feature matching done
+[WARN] 2018-02-21 16:04:23,821 homography done
+[WARN] 2018-02-21 16:04:25,065 goodmatch selection done
+[WARN] 2018-02-21 16:04:25,082 image warping done
+[WARN] 2018-02-21 16:04:25,825 blending done
+[WARN] 2018-02-21 16:04:31,625 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:04:31,625 Working directory switched to one directory back
+[WARN] 2018-02-21 16:04:31,658 Capturing images done
+[WARN] 2018-02-21 16:04:31,707 feature detection done
+[WARN] 2018-02-21 16:04:33,043 Keypoint display done
+[WARN] 2018-02-21 16:04:33,047 feature matching done
+[WARN] 2018-02-21 16:04:33,049 homography done
+[WARN] 2018-02-21 16:04:33,985 goodmatch selection done
+[WARN] 2018-02-21 16:04:33,998 image warping done
+[WARN] 2018-02-21 16:04:34,902 blending done
+[WARN] 2018-02-21 16:04:40,466 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:04:40,466 Working directory switched to one directory back
+[WARN] 2018-02-21 16:04:40,756 Capturing images done
+[WARN] 2018-02-21 16:04:40,800 feature detection done
+[WARN] 2018-02-21 16:04:41,632 Keypoint display done
+[WARN] 2018-02-21 16:04:41,637 feature matching done
+[WARN] 2018-02-21 16:04:41,640 homography done
+[WARN] 2018-02-21 16:04:42,956 goodmatch selection done
+[WARN] 2018-02-21 16:04:42,976 image warping done
+[WARN] 2018-02-21 16:04:53,549 blending done
+[WARN] 2018-02-21 16:05:36,904 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:05:36,904 Working directory switched to one directory back
+[WARN] 2018-02-21 16:15:03,861 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:15:03,897 Working directory switched to one directory back
+[WARN] 2018-02-21 16:15:28,442 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:15:28,442 Working directory switched to one directory back
+[WARN] 2018-02-21 16:15:42,250 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:15:42,250 Working directory switched to one directory back
+[WARN] 2018-02-21 16:16:11,494 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:16:11,494 Working directory switched to one directory back
+[WARN] 2018-02-21 16:16:33,848 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:16:33,848 Working directory switched to one directory back
+[WARN] 2018-02-21 16:17:01,260 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:17:01,260 Working directory switched to one directory back
+[WARN] 2018-02-21 16:24:12,990 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:24:12,990 Working directory switched to one directory back
+[WARN] 2018-02-21 16:24:33,602 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:24:33,602 Working directory switched to one directory back
+[WARN] 2018-02-21 16:24:43,613 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:24:43,613 Working directory switched to one directory back
+[WARN] 2018-02-21 16:24:58,476 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:24:58,476 Working directory switched to one directory back
+[WARN] 2018-02-21 16:25:13,956 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:25:13,957 Working directory switched to one directory back
+[WARN] 2018-02-21 16:25:30,460 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:25:30,461 Working directory switched to one directory back
+[WARN] 2018-02-21 16:25:48,578 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:25:48,579 Working directory switched to one directory back
+[WARN] 2018-02-21 16:26:00,865 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:26:00,865 Working directory switched to one directory back
+[WARN] 2018-02-21 16:26:25,848 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:26:25,848 Working directory switched to one directory back
+[WARN] 2018-02-21 16:26:35,489 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:26:35,490 Working directory switched to one directory back
+[WARN] 2018-02-21 16:26:45,833 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:26:45,833 Working directory switched to one directory back
+[WARN] 2018-02-21 16:27:00,695 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:27:00,695 Working directory switched to one directory back
+[WARN] 2018-02-21 16:27:08,285 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:27:08,285 Working directory switched to one directory back
+[WARN] 2018-02-21 16:28:19,043 Image Mosaicing starts
+[DEBUG] 2018-02-21 16:28:19,043 Working directory switched to one directory back
+[WARN] 2018-02-21 16:28:19,069 Capturing images done
+[WARN] 2018-02-21 16:28:19,172 feature detection done
+[WARN] 2018-02-21 16:28:21,563 Keypoint display done
+[WARN] 2018-02-21 16:28:21,715 feature matching done
+[WARN] 2018-02-21 16:28:21,718 homography done
+[WARN] 2018-02-21 16:29:06,496 goodmatch selection done
+[WARN] 2018-02-21 16:29:07,603 image warping done
+[WARN] 2018-02-21 16:29:17,514 blending done
+[WARN] 2018-02-26 17:44:05,357 Image Mosaicing starts
+[DEBUG] 2018-02-26 17:44:05,393 Working directory switched to one directory back
+[WARN] 2018-02-26 17:47:06,721 Image Mosaicing starts
+[DEBUG] 2018-02-26 17:47:06,721 Working directory switched to one directory back
+[WARN] 2018-02-26 17:48:21,582 Image Mosaicing starts
+[DEBUG] 2018-02-26 17:48:21,583 Working directory switched to one directory back
+[WARN] 2018-02-26 17:50:13,162 Image Mosaicing starts
+[DEBUG] 2018-02-26 17:50:13,162 Working directory switched to one directory back
+[WARN] 2018-02-26 17:50:25,450 Images could not be stitched.
+[WARN] 2018-02-26 17:52:53,491 Image Mosaicing starts
+[DEBUG] 2018-02-26 17:52:53,491 Working directory switched to one directory back
+[WARN] 2018-02-26 17:52:54,916 Images could not be stitched.
+[WARN] 2018-02-26 17:55:03,520 Image Mosaicing starts
+[DEBUG] 2018-02-26 17:55:03,520 Working directory switched to one directory back
+[WARN] 2018-02-26 17:55:21,045 Images could not be stitched.
+[WARN] 2018-02-26 17:57:34,120 Image Mosaicing starts
+[DEBUG] 2018-02-26 17:57:34,120 Working directory switched to one directory back
+[WARN] 2018-02-26 17:59:00,721 Image Mosaicing starts
+[DEBUG] 2018-02-26 17:59:00,721 Working directory switched to one directory back
+[WARN] 2018-02-26 18:03:44,707 Image Mosaicing starts
+[DEBUG] 2018-02-26 18:03:44,707 Working directory switched to one directory back
+[WARN] 2018-02-26 18:19:47,114 Image Mosaicing starts
+[DEBUG] 2018-02-26 18:19:47,114 Working directory switched to one directory back
+[WARN] 2018-02-26 18:20:15,807 Image Mosaicing starts
+[DEBUG] 2018-02-26 18:20:15,808 Working directory switched to one directory back
+[WARN] 2018-02-26 18:20:41,394 Image Mosaicing starts
+[DEBUG] 2018-02-26 18:20:41,394 Working directory switched to one directory back
+[WARN] 2018-02-26 18:24:30,434 Image Mosaicing starts
+[DEBUG] 2018-02-26 18:24:30,434 Working directory switched to one directory back
+[WARN] 2018-02-26 18:28:43,720 Image Mosaicing starts
+[DEBUG] 2018-02-26 18:28:43,721 Working directory switched to one directory back
+[WARN] 2018-02-26 18:28:55,780 Images could not be stitched.
+[WARN] 2018-02-26 18:31:59,766 Image Mosaicing starts
+[DEBUG] 2018-02-26 18:31:59,766 Working directory switched to one directory back
+[WARN] 2018-02-26 18:32:06,100 Images could not be stitched.
+[WARN] 2018-02-26 18:32:27,292 Image Mosaicing starts
+[DEBUG] 2018-02-26 18:32:27,292 Working directory switched to one directory back
+[WARN] 2018-02-26 18:33:47,200 Images could not be stitched.
+[WARN] 2018-02-26 18:36:20,030 Image Mosaicing starts
+[DEBUG] 2018-02-26 18:36:20,030 Working directory switched to one directory back
+[WARN] 2018-02-26 18:36:25,651 Images could not be stitched.
+[WARN] 2018-02-26 18:40:00,391 Image Mosaicing starts
+[DEBUG] 2018-02-26 18:40:00,391 Working directory switched to one directory back
+[WARN] 2018-02-26 18:40:04,525 Images could not be stitched.
+[WARN] 2018-02-27 11:44:26,004 Image Mosaicing starts
+[DEBUG] 2018-02-27 11:44:26,074 Working directory switched to one directory back
+[WARN] 2018-02-27 11:44:40,881 Images could not be stitched.
+[WARN] 2018-02-27 12:01:07,678 Image Mosaicing starts
+[DEBUG] 2018-02-27 12:01:07,678 Working directory switched to one directory back
+[WARN] 2018-02-27 12:01:17,772 Images could not be stitched.
+[WARN] 2018-02-27 12:03:47,161 Image Mosaicing starts
+[DEBUG] 2018-02-27 12:03:47,161 Working directory switched to one directory back
+[WARN] 2018-02-27 12:03:52,251 Images could not be stitched.
+[WARN] 2018-02-27 12:04:47,050 Image Mosaicing starts
+[DEBUG] 2018-02-27 12:04:47,050 Working directory switched to one directory back
+[WARN] 2018-02-27 12:04:50,179 Images could not be stitched.
+[WARN] 2018-02-27 12:10:05,452 Image Mosaicing starts
+[DEBUG] 2018-02-27 12:10:05,452 Working directory switched to one directory back
+[WARN] 2018-02-27 12:10:09,764 Images could not be stitched.
+[WARN] 2018-02-27 12:10:25,920 Images could not be stitched.
+[WARN] 2018-02-27 14:29:36,306 Image Mosaicing starts
+[DEBUG] 2018-02-27 14:29:36,354 Working directory switched to one directory back
+[WARN] 2018-02-27 14:31:57,062 Image Mosaicing starts
+[DEBUG] 2018-02-27 14:31:57,062 Working directory switched to one directory back
+[WARN] 2018-02-27 14:31:57,335 image_vector making
+[WARN] 2018-02-27 14:31:57,335 loop starts
+[WARN] 2018-02-27 14:33:51,724 Image Mosaicing starts
+[DEBUG] 2018-02-27 14:33:51,724 Working directory switched to one directory back
+[WARN] 2018-02-27 14:33:51,790 image_vector making
+[WARN] 2018-02-27 14:33:51,790 loop starts
+[WARN] 2018-02-27 14:33:51,815 reload image
+[WARN] 2018-02-27 14:35:03,950 Image Mosaicing starts
+[DEBUG] 2018-02-27 14:35:03,950 Working directory switched to one directory back
+[WARN] 2018-02-27 14:35:04,010 image_vector making
+[WARN] 2018-02-27 14:35:04,010 loop starts
+[WARN] 2018-02-27 14:35:04,033 reload image
+[WARN] 2018-02-27 14:35:24,317 Image Mosaicing starts
+[DEBUG] 2018-02-27 14:35:24,317 Working directory switched to one directory back
+[WARN] 2018-02-27 14:35:24,380 image_vector making
+[WARN] 2018-02-27 14:35:24,381 loop starts
+[WARN] 2018-02-27 14:35:24,402 reload image
+[WARN] 2018-02-27 14:36:04,681 Image Mosaicing starts
+[DEBUG] 2018-02-27 14:36:04,681 Working directory switched to one directory back
+[WARN] 2018-02-27 14:36:04,745 image_vector making
+[WARN] 2018-02-27 14:36:04,746 loop starts
+[WARN] 2018-02-27 14:36:04,828 reload image
+[WARN] 2018-02-27 14:37:45,344 Image Mosaicing starts
+[DEBUG] 2018-02-27 14:37:45,344 Working directory switched to one directory back
+[WARN] 2018-02-27 14:37:45,409 image_vector making
+[WARN] 2018-02-27 14:37:45,411 loop starts
+[WARN] 2018-02-27 14:37:45,486 reload image
+[WARN] 2018-02-27 14:41:02,017 Image Mosaicing starts
+[DEBUG] 2018-02-27 14:41:02,017 Working directory switched to one directory back
+[WARN] 2018-02-27 14:41:02,203 image_vector making
+[WARN] 2018-02-27 14:41:02,204 loop starts
+[WARN] 2018-02-27 14:41:02,276 reload image
+[WARN] 2018-02-27 14:41:11,014 number of matches
+[WARN] 2018-02-27 14:41:11,916 more than 10 matches
+[WARN] 2018-02-27 14:41:12,002 reload image
+[WARN] 2018-02-27 14:41:17,806 number of matches
+[WARN] 2018-02-27 14:41:17,834 more than 10 matches
+[WARN] 2018-02-27 14:41:17,960 reload image
+[WARN] 2018-02-27 14:41:19,269 number of matches
+[WARN] 2018-02-27 14:41:19,297 more than 10 matches
+[WARN] 2018-02-27 14:41:19,567 reload image
+[WARN] 2018-02-27 14:41:20,547 number of matches
+[WARN] 2018-02-27 14:41:20,582 more than 10 matches
+[WARN] 2018-02-27 14:41:20,652 reload image
+[WARN] 2018-02-27 14:41:21,757 number of matches
+[WARN] 2018-02-27 14:41:21,789 more than 10 matches
+[WARN] 2018-02-27 14:41:21,862 reload image
+[WARN] 2018-02-27 14:41:22,938 number of matches
+[WARN] 2018-02-27 14:41:22,965 more than 10 matches
+[ERROR] 2018-02-27 14:41:23,263 No image data found to extract
+[WARN] 2018-02-27 14:50:35,659 Image Mosaicing starts
+[DEBUG] 2018-02-27 14:50:35,659 Working directory switched to one directory back
+[WARN] 2018-02-27 14:50:36,020 image_vector making
+[WARN] 2018-02-27 14:50:36,022 loop starts
+[WARN] 2018-02-27 14:50:36,097 reload image
+[WARN] 2018-02-27 14:50:42,101 number of matches
+[WARN] 2018-02-27 14:50:42,370 more than 10 matches
+[WARN] 2018-02-27 14:50:42,513 reload image
+[WARN] 2018-02-27 14:50:44,098 number of matches
+[WARN] 2018-02-27 14:50:44,519 more than 10 matches
+[WARN] 2018-02-27 14:50:44,588 reload image
+[WARN] 2018-02-27 14:50:45,422 number of matches
+[WARN] 2018-02-27 14:50:45,450 more than 10 matches
+[WARN] 2018-02-27 14:50:45,526 reload image
+[WARN] 2018-02-27 14:50:46,360 number of matches
+[WARN] 2018-02-27 14:50:46,390 more than 10 matches
+[WARN] 2018-02-27 14:50:46,786 reload image
+[WARN] 2018-02-27 14:50:48,185 number of matches
+[WARN] 2018-02-27 14:50:48,213 more than 10 matches
+[WARN] 2018-02-27 14:50:48,306 reload image
+[WARN] 2018-02-27 14:50:56,822 number of matches
+[WARN] 2018-02-27 14:50:56,852 more than 10 matches
+[ERROR] 2018-02-27 14:50:56,948 No image data found to extract
+[WARN] 2018-02-27 14:51:01,986 Image Mosaicing starts
+[DEBUG] 2018-02-27 14:51:01,986 Working directory switched to one directory back
+[WARN] 2018-02-27 14:51:02,046 image_vector making
+[WARN] 2018-02-27 14:51:02,048 loop starts
+[WARN] 2018-02-27 14:51:02,128 reload image
+[WARN] 2018-02-27 14:51:03,270 number of matches
+[WARN] 2018-02-27 14:51:03,305 more than 10 matches
+[WARN] 2018-02-27 14:51:03,384 reload image
+[WARN] 2018-02-27 14:51:03,811 number of matches
+[WARN] 2018-02-27 14:51:03,840 more than 10 matches
+[WARN] 2018-02-27 14:51:03,931 reload image
+[WARN] 2018-02-27 14:51:04,343 number of matches
+[WARN] 2018-02-27 14:51:04,369 more than 10 matches
+[WARN] 2018-02-27 14:51:04,447 reload image
+[WARN] 2018-02-27 14:51:04,859 number of matches
+[WARN] 2018-02-27 14:51:04,891 more than 10 matches
+[WARN] 2018-02-27 14:51:04,961 reload image
+[WARN] 2018-02-27 14:51:05,458 number of matches
+[WARN] 2018-02-27 14:51:05,488 more than 10 matches
+[WARN] 2018-02-27 14:51:05,579 reload image
+[WARN] 2018-02-27 14:51:14,970 number of matches
+[WARN] 2018-02-27 14:51:14,997 more than 10 matches
+[ERROR] 2018-02-27 14:51:15,091 No image data found to extract
+[WARN] 2018-02-27 14:52:56,398 Image Mosaicing starts
+[DEBUG] 2018-02-27 14:52:56,399 Working directory switched to one directory back
+[WARN] 2018-02-27 14:52:56,477 image_vector making
+[WARN] 2018-02-27 14:52:56,479 loop starts
+[WARN] 2018-02-27 14:52:56,584 reload image
+[WARN] 2018-02-27 14:52:58,358 number of matches
+[WARN] 2018-02-27 14:52:58,392 more than 10 matches
+[WARN] 2018-02-27 14:52:58,463 reload image
+[WARN] 2018-02-27 14:53:02,968 number of matches
+[WARN] 2018-02-27 14:53:02,999 more than 10 matches
+[WARN] 2018-02-27 14:53:03,075 reload image
+[WARN] 2018-02-27 14:53:06,085 number of matches
+[WARN] 2018-02-27 14:53:06,117 more than 10 matches
+[WARN] 2018-02-27 14:53:06,193 reload image
+[WARN] 2018-02-27 14:53:14,106 number of matches
+[WARN] 2018-02-27 14:53:14,132 more than 10 matches
+[WARN] 2018-02-27 14:53:14,206 reload image
+[WARN] 2018-02-27 14:53:18,000 number of matches
+[WARN] 2018-02-27 14:53:18,031 more than 10 matches
+[WARN] 2018-02-27 14:53:18,103 reload image
+[WARN] 2018-02-27 14:53:20,635 number of matches
+[WARN] 2018-02-27 14:53:20,666 more than 10 matches
+[ERROR] 2018-02-27 14:53:20,759 No image data found to extract
+[WARN] 2018-02-27 14:58:59,194 Image Mosaicing starts
+[DEBUG] 2018-02-27 14:58:59,194 Working directory switched to one directory back
+[WARN] 2018-02-27 14:58:59,259 image_vector making
+[WARN] 2018-02-27 14:58:59,261 loop starts
+[WARN] 2018-02-27 14:58:59,335 reload image
+[WARN] 2018-02-27 14:59:00,577 number of matches
+[WARN] 2018-02-27 14:59:00,605 more than 10 matches
+[WARN] 2018-02-27 14:59:00,684 reload image
+[WARN] 2018-02-27 14:59:01,595 number of matches
+[WARN] 2018-02-27 14:59:01,623 more than 10 matches
+[WARN] 2018-02-27 14:59:01,703 reload image
+[WARN] 2018-02-27 14:59:02,263 number of matches
+[WARN] 2018-02-27 14:59:02,290 more than 10 matches
+[WARN] 2018-02-27 14:59:02,368 reload image
+[WARN] 2018-02-27 14:59:03,370 number of matches
+[WARN] 2018-02-27 14:59:03,400 more than 10 matches
+[WARN] 2018-02-27 14:59:03,477 reload image
+[WARN] 2018-02-27 14:59:04,539 number of matches
+[WARN] 2018-02-27 14:59:04,565 more than 10 matches
+[WARN] 2018-02-27 14:59:04,643 reload image
+[WARN] 2018-02-27 14:59:05,957 number of matches
+[WARN] 2018-02-27 14:59:05,982 more than 10 matches
+[ERROR] 2018-02-27 14:59:06,076 No image data found to extract
+[WARN] 2018-02-27 15:00:12,855 Image Mosaicing starts
+[DEBUG] 2018-02-27 15:00:12,855 Working directory switched to one directory back
+[WARN] 2018-02-27 15:00:12,920 image_vector making
+[WARN] 2018-02-27 15:00:12,922 loop starts
+[WARN] 2018-02-27 15:00:13,003 reload image
+[WARN] 2018-02-27 15:00:14,582 number of matches
+[WARN] 2018-02-27 15:00:14,611 more than 10 matches
+[WARN] 2018-02-27 15:00:14,693 reload image
+[WARN] 2018-02-27 15:00:15,207 number of matches
+[WARN] 2018-02-27 15:00:15,233 more than 10 matches
+[WARN] 2018-02-27 15:00:15,312 reload image
+[WARN] 2018-02-27 15:00:15,699 number of matches
+[WARN] 2018-02-27 15:00:15,730 more than 10 matches
+[WARN] 2018-02-27 15:00:15,807 reload image
+[WARN] 2018-02-27 15:00:16,225 number of matches
+[WARN] 2018-02-27 15:00:16,255 more than 10 matches
+[WARN] 2018-02-27 15:00:16,330 reload image
+[WARN] 2018-02-27 15:00:16,826 number of matches
+[WARN] 2018-02-27 15:00:16,867 more than 10 matches
+[WARN] 2018-02-27 15:00:16,938 reload image
+[WARN] 2018-02-27 15:00:19,892 number of matches
+[WARN] 2018-02-27 15:00:19,924 more than 10 matches
+[ERROR] 2018-02-27 15:00:20,015 No image data found to extract
+[WARN] 2018-02-27 15:01:19,108 Image Mosaicing starts
+[DEBUG] 2018-02-27 15:01:19,108 Working directory switched to one directory back
+[WARN] 2018-02-27 15:01:19,173 image_vector making
+[WARN] 2018-02-27 15:01:19,175 loop starts
+[WARN] 2018-02-27 15:01:19,254 reload image
+[WARN] 2018-02-27 15:01:20,642 number of matches
+[WARN] 2018-02-27 15:01:20,678 more than 10 matches
+[WARN] 2018-02-27 15:01:20,752 reload image
+[WARN] 2018-02-27 15:01:21,277 number of matches
+[WARN] 2018-02-27 15:01:21,312 more than 10 matches
+[WARN] 2018-02-27 15:01:21,391 reload image
+[WARN] 2018-02-27 15:01:21,813 number of matches
+[WARN] 2018-02-27 15:01:21,848 more than 10 matches
+[WARN] 2018-02-27 15:01:21,928 reload image
+[WARN] 2018-02-27 15:01:22,392 number of matches
+[WARN] 2018-02-27 15:01:22,425 more than 10 matches
+[WARN] 2018-02-27 15:01:22,506 reload image
+[WARN] 2018-02-27 15:01:23,050 number of matches
+[WARN] 2018-02-27 15:01:23,081 more than 10 matches
+[WARN] 2018-02-27 15:01:23,160 reload image
+[WARN] 2018-02-27 15:01:23,650 number of matches
+[WARN] 2018-02-27 15:01:23,680 more than 10 matches
+[ERROR] 2018-02-27 15:01:23,773 No image data found to extract
+[WARN] 2018-02-27 15:02:01,275 Image Mosaicing starts
+[DEBUG] 2018-02-27 15:02:01,275 Working directory switched to one directory back
+[WARN] 2018-02-27 15:02:01,346 image_vector making
+[WARN] 2018-02-27 15:02:01,348 loop starts
+[WARN] 2018-02-27 15:02:01,429 reload image
+[WARN] 2018-02-27 15:02:02,423 number of matches
+[WARN] 2018-02-27 15:02:02,464 more than 10 matches
+[WARN] 2018-02-27 15:02:02,548 reload image
+[WARN] 2018-02-27 15:02:02,724 number of matches
+[WARN] 2018-02-27 15:02:02,753 more than 10 matches
+[WARN] 2018-02-27 15:02:02,831 reload image
+[WARN] 2018-02-27 15:02:02,960 number of matches
+[WARN] 2018-02-27 15:02:02,991 more than 10 matches
+[WARN] 2018-02-27 15:02:03,064 reload image
+[WARN] 2018-02-27 15:02:03,223 number of matches
+[WARN] 2018-02-27 15:02:03,255 more than 10 matches
+[WARN] 2018-02-27 15:02:03,343 reload image
+[WARN] 2018-02-27 15:02:04,258 number of matches
+[WARN] 2018-02-27 15:02:04,287 more than 10 matches
+[WARN] 2018-02-27 15:02:04,369 reload image
+[WARN] 2018-02-27 15:02:04,945 number of matches
+[WARN] 2018-02-27 15:02:04,973 more than 10 matches
+[ERROR] 2018-02-27 15:02:05,064 No image data found to extract
+[WARN] 2018-02-27 15:06:13,424 Image Mosaicing starts
+[DEBUG] 2018-02-27 15:06:13,424 Working directory switched to one directory back
+[WARN] 2018-02-27 15:06:13,503 image_vector making
+[WARN] 2018-02-27 15:06:13,505 loop starts
+[WARN] 2018-02-27 15:06:13,590 reload image
+[WARN] 2018-02-27 15:06:14,251 number of matches
+[WARN] 2018-02-27 15:06:14,294 more than 10 matches
+[WARN] 2018-02-27 15:06:14,448 reload image
+[WARN] 2018-02-27 15:06:14,567 number of matches
+[WARN] 2018-02-27 15:06:14,626 more than 10 matches
+[WARN] 2018-02-27 15:06:14,772 reload image
+[WARN] 2018-02-27 15:06:14,892 number of matches
+[WARN] 2018-02-27 15:06:14,924 more than 10 matches
+[WARN] 2018-02-27 15:06:15,007 reload image
+[WARN] 2018-02-27 15:06:15,213 number of matches
+[WARN] 2018-02-27 15:06:15,249 more than 10 matches
+[WARN] 2018-02-27 15:06:15,333 reload image
+[WARN] 2018-02-27 15:06:15,939 number of matches
+[WARN] 2018-02-27 15:06:15,970 more than 10 matches
+[WARN] 2018-02-27 15:06:16,060 reload image
+[WARN] 2018-02-27 15:06:16,676 number of matches
+[WARN] 2018-02-27 15:06:16,714 more than 10 matches
+[ERROR] 2018-02-27 15:06:16,821 No image data found to extract
+[WARN] 2018-02-27 15:09:44,676 Image Mosaicing starts
+[DEBUG] 2018-02-27 15:09:44,677 Working directory switched to one directory back
+[WARN] 2018-02-27 15:09:44,867 image_vector making
+[WARN] 2018-02-27 15:09:44,869 loop starts
+[WARN] 2018-02-27 15:09:44,950 reload image
+[WARN] 2018-02-27 15:09:46,887 number of matches
+[WARN] 2018-02-27 15:09:46,922 more than 10 matches
+[WARN] 2018-02-27 15:09:46,996 reload image
+[WARN] 2018-02-27 15:09:47,073 number of matches
+[WARN] 2018-02-27 15:09:47,109 more than 10 matches
+[WARN] 2018-02-27 15:09:47,188 reload image
+[WARN] 2018-02-27 15:09:47,453 number of matches
+[WARN] 2018-02-27 15:09:47,490 more than 10 matches
+[WARN] 2018-02-27 15:09:47,583 reload image
+[WARN] 2018-02-27 15:09:48,127 number of matches
+[WARN] 2018-02-27 15:09:48,159 more than 10 matches
+[WARN] 2018-02-27 15:09:48,241 reload image
+[WARN] 2018-02-27 15:09:48,834 number of matches
+[WARN] 2018-02-27 15:09:48,866 more than 10 matches
+[WARN] 2018-02-27 15:09:48,963 reload image
+[WARN] 2018-02-27 15:09:49,591 number of matches
+[WARN] 2018-02-27 15:09:49,619 more than 10 matches
+[ERROR] 2018-02-27 15:09:49,721 No image data found to extract
+[WARN] 2018-02-27 15:18:43,110 Image Mosaicing starts
+[DEBUG] 2018-02-27 15:18:43,110 Working directory switched to one directory back
+[WARN] 2018-02-27 15:18:43,175 image_vector making
+[WARN] 2018-02-27 15:18:43,178 loop starts
+[WARN] 2018-02-27 15:18:43,253 reload image
+[WARN] 2018-02-27 15:18:43,909 number of matches
+[WARN] 2018-02-27 15:18:43,944 more than 10 matches
+[WARN] 2018-02-27 15:18:44,094 reload image
+[WARN] 2018-02-27 15:18:44,215 number of matches
+[WARN] 2018-02-27 15:18:44,267 more than 10 matches
+[WARN] 2018-02-27 15:18:44,435 reload image
+[WARN] 2018-02-27 15:18:44,568 number of matches
+[WARN] 2018-02-27 15:18:44,598 more than 10 matches
+[WARN] 2018-02-27 15:18:44,685 reload image
+[WARN] 2018-02-27 15:18:45,302 number of matches
+[WARN] 2018-02-27 15:18:45,333 more than 10 matches
+[WARN] 2018-02-27 15:18:45,411 reload image
+[WARN] 2018-02-27 15:18:45,917 number of matches
+[WARN] 2018-02-27 15:18:45,957 more than 10 matches
+[WARN] 2018-02-27 15:18:46,042 reload image
+[WARN] 2018-02-27 15:18:46,580 number of matches
+[WARN] 2018-02-27 15:18:46,614 more than 10 matches
+[ERROR] 2018-02-27 15:18:46,726 No image data found to extract
+[WARN] 2018-02-27 15:19:19,306 Image Mosaicing starts
+[DEBUG] 2018-02-27 15:19:19,306 Working directory switched to one directory back
+[WARN] 2018-02-27 15:19:19,374 image_vector making
+[WARN] 2018-02-27 15:19:19,376 loop starts
+[WARN] 2018-02-27 15:19:19,457 reload image
+[WARN] 2018-02-27 15:19:20,026 number of matches
+[WARN] 2018-02-27 15:19:20,060 more than 10 matches
+[WARN] 2018-02-27 15:19:20,139 reload image
+[WARN] 2018-02-27 15:19:20,273 number of matches
+[WARN] 2018-02-27 15:19:20,305 more than 10 matches
+[WARN] 2018-02-27 15:19:20,391 reload image
+[WARN] 2018-02-27 15:19:20,494 number of matches
+[WARN] 2018-02-27 15:19:20,526 more than 10 matches
+[WARN] 2018-02-27 15:19:20,600 reload image
+[WARN] 2018-02-27 15:19:20,736 number of matches
+[WARN] 2018-02-27 15:19:20,772 more than 10 matches
+[WARN] 2018-02-27 15:19:20,843 reload image
+[WARN] 2018-02-27 15:19:21,242 number of matches
+[WARN] 2018-02-27 15:19:21,275 more than 10 matches
+[WARN] 2018-02-27 15:19:21,356 reload image
+[WARN] 2018-02-27 15:19:21,790 number of matches
+[WARN] 2018-02-27 15:19:21,820 more than 10 matches
+[ERROR] 2018-02-27 15:19:21,920 No image data found to extract
+[WARN] 2018-02-27 15:26:12,133 Image Mosaicing starts
+[DEBUG] 2018-02-27 15:26:12,133 Working directory switched to one directory back
+[WARN] 2018-02-27 15:26:12,825 image_vector making
+[WARN] 2018-02-27 15:26:12,829 loop starts
+[WARN] 2018-02-27 15:26:12,908 reload image
+[WARN] 2018-02-27 15:26:16,688 number of matches
+[WARN] 2018-02-27 15:26:16,733 more than 10 matches
+[WARN] 2018-02-27 15:26:16,805 reload image
+[WARN] 2018-02-27 15:26:17,359 number of matches
+[WARN] 2018-02-27 15:26:17,392 more than 10 matches
+[WARN] 2018-02-27 15:26:17,599 reload image
+[WARN] 2018-02-27 15:26:17,961 number of matches
+[WARN] 2018-02-27 15:26:18,140 more than 10 matches
+[WARN] 2018-02-27 15:26:18,247 reload image
+[WARN] 2018-02-27 15:26:18,556 number of matches
+[WARN] 2018-02-27 15:26:18,585 more than 10 matches
+[WARN] 2018-02-27 15:26:19,476 reload image
+[WARN] 2018-02-27 15:26:20,038 number of matches
+[WARN] 2018-02-27 15:26:20,077 more than 10 matches
+[WARN] 2018-02-27 15:26:20,166 reload image
+[WARN] 2018-02-27 15:26:20,854 number of matches
+[WARN] 2018-02-27 15:26:20,883 more than 10 matches
+[ERROR] 2018-02-27 15:26:21,083 No image data found to extract
+[WARN] 2018-02-27 15:59:03,946 Image Mosaicing starts
+[DEBUG] 2018-02-27 15:59:03,957 Working directory switched to one directory back
+[WARN] 2018-02-27 15:59:04,564 image_vector making
+[WARN] 2018-02-27 15:59:04,567 loop starts
+[WARN] 2018-02-27 15:59:04,645 reload image
+[WARN] 2018-02-27 15:59:08,833 number of matches
+[WARN] 2018-02-27 15:59:08,876 more than 10 matches
+[WARN] 2018-02-27 15:59:08,963 reload image
+[WARN] 2018-02-27 15:59:09,384 number of matches
+[WARN] 2018-02-27 15:59:09,414 more than 10 matches
+[WARN] 2018-02-27 15:59:09,606 reload image
+[WARN] 2018-02-27 15:59:09,963 number of matches
+[WARN] 2018-02-27 15:59:09,991 more than 10 matches
+[WARN] 2018-02-27 15:59:10,072 reload image
+[WARN] 2018-02-27 15:59:10,531 number of matches
+[WARN] 2018-02-27 15:59:10,559 more than 10 matches
+[WARN] 2018-02-27 15:59:10,635 reload image
+[WARN] 2018-02-27 15:59:11,166 number of matches
+[WARN] 2018-02-27 15:59:11,201 more than 10 matches
+[WARN] 2018-02-27 15:59:11,274 reload image
+[WARN] 2018-02-27 15:59:12,060 number of matches
+[WARN] 2018-02-27 15:59:12,089 more than 10 matches
+[ERROR] 2018-02-27 15:59:12,181 No image data found to extract
+[WARN] 2018-02-27 16:03:58,122 Image Mosaicing starts
+[DEBUG] 2018-02-27 16:03:58,123 Working directory switched to one directory back
+[WARN] 2018-02-27 16:03:58,262 image_vector making
+[WARN] 2018-02-27 16:03:58,263 loop starts
+[WARN] 2018-02-27 16:03:58,350 reload image
+[WARN] 2018-02-27 16:03:59,867 number of matches
+[WARN] 2018-02-27 16:03:59,898 trying now
+[WARN] 2018-02-27 16:03:59,898 more than 10 matches
+[WARN] 2018-02-27 16:03:59,993 reload image
+[WARN] 2018-02-27 16:04:00,405 number of matches
+[WARN] 2018-02-27 16:04:00,433 trying now
+[WARN] 2018-02-27 16:04:00,433 more than 10 matches
+[WARN] 2018-02-27 16:04:00,513 reload image
+[WARN] 2018-02-27 16:04:00,837 number of matches
+[WARN] 2018-02-27 16:04:00,871 trying now
+[WARN] 2018-02-27 16:04:00,871 more than 10 matches
+[WARN] 2018-02-27 16:04:01,007 reload image
+[WARN] 2018-02-27 16:04:01,190 number of matches
+[WARN] 2018-02-27 16:04:01,221 trying now
+[WARN] 2018-02-27 16:04:01,221 more than 10 matches
+[WARN] 2018-02-27 16:04:01,301 reload image
+[WARN] 2018-02-27 16:04:01,644 number of matches
+[WARN] 2018-02-27 16:04:01,677 trying now
+[WARN] 2018-02-27 16:04:01,677 more than 10 matches
+[WARN] 2018-02-27 16:04:01,850 reload image
+[WARN] 2018-02-27 16:04:02,157 number of matches
+[WARN] 2018-02-27 16:04:02,312 trying now
+[WARN] 2018-02-27 16:04:02,313 more than 10 matches
+[ERROR] 2018-02-27 16:04:02,555 No image data found to extract
+[WARN] 2018-02-27 16:05:27,402 Image Mosaicing starts
+[DEBUG] 2018-02-27 16:05:27,402 Working directory switched to one directory back
+[WARN] 2018-02-27 16:05:27,601 image_vector making
+[WARN] 2018-02-27 16:05:27,605 loop starts
+[WARN] 2018-02-27 16:05:27,701 reload image
+[WARN] 2018-02-27 16:05:29,344 number of matches
+[WARN] 2018-02-27 16:05:29,370 trying now
+[WARN] 2018-02-27 16:05:29,371 more than 10 matches
+[WARN] 2018-02-27 16:05:29,446 reload image
+[WARN] 2018-02-27 16:05:29,517 number of matches
+[WARN] 2018-02-27 16:05:29,552 trying now
+[WARN] 2018-02-27 16:05:29,552 more than 10 matches
+[WARN] 2018-02-27 16:05:29,625 reload image
+[WARN] 2018-02-27 16:05:29,732 number of matches
+[WARN] 2018-02-27 16:05:29,765 trying now
+[WARN] 2018-02-27 16:05:29,765 more than 10 matches
+[WARN] 2018-02-27 16:05:29,841 reload image
+[WARN] 2018-02-27 16:05:29,973 number of matches
+[WARN] 2018-02-27 16:05:30,014 trying now
+[WARN] 2018-02-27 16:05:30,015 more than 10 matches
+[WARN] 2018-02-27 16:05:30,106 reload image
+[WARN] 2018-02-27 16:05:30,338 number of matches
+[WARN] 2018-02-27 16:05:30,368 trying now
+[WARN] 2018-02-27 16:05:30,369 more than 10 matches
+[WARN] 2018-02-27 16:05:30,446 reload image
+[WARN] 2018-02-27 16:05:30,965 number of matches
+[WARN] 2018-02-27 16:05:30,993 trying now
+[WARN] 2018-02-27 16:05:30,993 more than 10 matches
+[ERROR] 2018-02-27 16:05:31,090 No image data found to extract
+[WARN] 2018-02-27 16:05:56,756 Image Mosaicing starts
+[DEBUG] 2018-02-27 16:05:56,756 Working directory switched to one directory back
+[WARN] 2018-02-27 16:05:56,820 image_vector making
+[WARN] 2018-02-27 16:05:56,824 loop starts
+[WARN] 2018-02-27 16:05:56,920 reload image
+[WARN] 2018-02-27 16:05:58,274 number of matches
+[WARN] 2018-02-27 16:05:58,303 trying now
+[WARN] 2018-02-27 16:05:58,303 more than 10 matches
+[WARN] 2018-02-27 16:05:58,379 reload image
+[WARN] 2018-02-27 16:05:58,554 number of matches
+[WARN] 2018-02-27 16:05:58,582 trying now
+[WARN] 2018-02-27 16:05:58,583 more than 10 matches
+[WARN] 2018-02-27 16:05:58,666 reload image
+[WARN] 2018-02-27 16:05:58,768 number of matches
+[WARN] 2018-02-27 16:05:58,797 trying now
+[WARN] 2018-02-27 16:05:58,797 more than 10 matches
+[WARN] 2018-02-27 16:05:58,896 reload image
+[WARN] 2018-02-27 16:05:59,054 number of matches
+[WARN] 2018-02-27 16:05:59,083 trying now
+[WARN] 2018-02-27 16:05:59,084 more than 10 matches
+[WARN] 2018-02-27 16:05:59,167 reload image
+[WARN] 2018-02-27 16:05:59,358 number of matches
+[WARN] 2018-02-27 16:05:59,394 trying now
+[WARN] 2018-02-27 16:05:59,395 more than 10 matches
+[WARN] 2018-02-27 16:05:59,481 reload image
+[WARN] 2018-02-27 16:05:59,966 number of matches
+[WARN] 2018-02-27 16:06:00,002 trying now
+[WARN] 2018-02-27 16:06:00,002 more than 10 matches
+[ERROR] 2018-02-27 16:06:00,108 No image data found to extract
+[WARN] 2018-02-27 16:07:05,144 Image Mosaicing starts
+[DEBUG] 2018-02-27 16:07:05,145 Working directory switched to one directory back
+[WARN] 2018-02-27 16:07:05,210 image_vector making
+[WARN] 2018-02-27 16:07:05,213 loop starts
+[WARN] 2018-02-27 16:07:05,295 reload image
+[WARN] 2018-02-27 16:07:06,019 number of matches
+[WARN] 2018-02-27 16:07:06,071 more than 10 matches
+[WARN] 2018-02-27 16:07:06,205 reload image
+[WARN] 2018-02-27 16:07:06,322 number of matches
+[WARN] 2018-02-27 16:07:06,366 more than 10 matches
+[WARN] 2018-02-27 16:07:06,464 reload image
+[WARN] 2018-02-27 16:07:06,574 number of matches
+[WARN] 2018-02-27 16:07:06,604 more than 10 matches
+[WARN] 2018-02-27 16:07:06,686 reload image
+[WARN] 2018-02-27 16:07:06,847 number of matches
+[WARN] 2018-02-27 16:07:06,879 more than 10 matches
+[WARN] 2018-02-27 16:07:06,967 reload image
+[WARN] 2018-02-27 16:07:07,150 number of matches
+[WARN] 2018-02-27 16:07:07,187 more than 10 matches
+[WARN] 2018-02-27 16:07:07,283 reload image
+[WARN] 2018-02-27 16:07:07,490 number of matches
+[WARN] 2018-02-27 16:07:07,525 more than 10 matches
+[ERROR] 2018-02-27 16:07:07,660 No image data found to extract
+[WARN] 2018-02-27 16:08:22,913 Image Mosaicing starts
+[DEBUG] 2018-02-27 16:08:22,914 Working directory switched to one directory back
+[WARN] 2018-02-27 16:08:22,976 image_vector making
+[WARN] 2018-02-27 16:08:22,977 loop starts
+[WARN] 2018-02-27 16:08:23,059 reload image
+[WARN] 2018-02-27 16:08:23,658 number of matches
+[WARN] 2018-02-27 16:08:23,698 trying now
+[WARN] 2018-02-27 16:08:23,698 more than 10 matches
+[WARN] 2018-02-27 16:08:23,839 reload image
+[WARN] 2018-02-27 16:08:23,943 number of matches
+[WARN] 2018-02-27 16:08:23,980 trying now
+[WARN] 2018-02-27 16:08:23,981 more than 10 matches
+[WARN] 2018-02-27 16:08:24,095 reload image
+[WARN] 2018-02-27 16:08:24,224 number of matches
+[WARN] 2018-02-27 16:08:24,269 trying now
+[WARN] 2018-02-27 16:08:24,269 more than 10 matches
+[WARN] 2018-02-27 16:08:24,359 reload image
+[WARN] 2018-02-27 16:08:24,527 number of matches
+[WARN] 2018-02-27 16:08:24,563 trying now
+[WARN] 2018-02-27 16:08:24,563 more than 10 matches
+[WARN] 2018-02-27 16:08:24,645 reload image
+[WARN] 2018-02-27 16:08:24,815 number of matches
+[WARN] 2018-02-27 16:08:24,850 trying now
+[WARN] 2018-02-27 16:08:24,850 more than 10 matches
+[WARN] 2018-02-27 16:08:24,938 reload image
+[WARN] 2018-02-27 16:08:25,157 number of matches
+[WARN] 2018-02-27 16:08:25,188 trying now
+[WARN] 2018-02-27 16:08:25,190 more than 10 matches
+[ERROR] 2018-02-27 16:08:25,290 No image data found to extract
+[WARN] 2018-02-27 16:09:49,388 Image Mosaicing starts
+[DEBUG] 2018-02-27 16:09:49,388 Working directory switched to one directory back
+[WARN] 2018-02-27 16:09:49,451 image_vector making
+[WARN] 2018-02-27 16:09:49,453 loop starts
+[WARN] 2018-02-27 16:09:49,534 reload image
+[WARN] 2018-02-27 16:09:50,303 number of matches
+[WARN] 2018-02-27 16:09:50,346 trying now
+[WARN] 2018-02-27 16:09:50,347 more than 10 matches
+[WARN] 2018-02-27 16:09:50,486 reload image
+[WARN] 2018-02-27 16:09:50,874 number of matches
+[WARN] 2018-02-27 16:09:50,905 trying now
+[WARN] 2018-02-27 16:09:50,906 more than 10 matches
+[WARN] 2018-02-27 16:09:51,000 reload image
+[WARN] 2018-02-27 16:09:51,378 number of matches
+[WARN] 2018-02-27 16:09:51,413 trying now
+[WARN] 2018-02-27 16:09:51,414 more than 10 matches
+[WARN] 2018-02-27 16:09:51,490 reload image
+[WARN] 2018-02-27 16:09:51,846 number of matches
+[WARN] 2018-02-27 16:09:51,876 trying now
+[WARN] 2018-02-27 16:09:51,876 more than 10 matches
+[WARN] 2018-02-27 16:09:51,957 reload image
+[WARN] 2018-02-27 16:09:52,358 number of matches
+[WARN] 2018-02-27 16:09:52,389 trying now
+[WARN] 2018-02-27 16:09:52,389 more than 10 matches
+[WARN] 2018-02-27 16:09:52,478 reload image
+[WARN] 2018-02-27 16:09:52,890 number of matches
+[WARN] 2018-02-27 16:09:52,919 trying now
+[WARN] 2018-02-27 16:09:52,919 more than 10 matches
+[ERROR] 2018-02-27 16:09:53,016 No image data found to extract
+[WARN] 2018-02-27 16:09:53,016 reached the end of  video. Exiting.. 
+
+[WARN] 2018-02-27 16:09:55,710 Images could not be stitched.
+[WARN] 2018-02-27 16:16:19,532 Image Mosaicing starts
+[DEBUG] 2018-02-27 16:16:19,532 Working directory switched to one directory back
+[WARN] 2018-02-27 16:16:19,611 image_vector making
+[WARN] 2018-02-27 16:16:19,613 loop starts
+[WARN] 2018-02-27 16:16:19,694 reload image
+[WARN] 2018-02-27 16:16:20,540 number of matches
+[WARN] 2018-02-27 16:16:20,755 trying now
+[WARN] 2018-02-27 16:16:20,756 more than 10 matches
+[WARN] 2018-02-27 16:16:20,834 reload image
+[WARN] 2018-02-27 16:16:20,914 number of matches
+[WARN] 2018-02-27 16:16:20,949 trying now
+[WARN] 2018-02-27 16:16:20,949 more than 10 matches
+[WARN] 2018-02-27 16:16:21,019 reload image
+[WARN] 2018-02-27 16:16:21,328 number of matches
+[WARN] 2018-02-27 16:16:21,363 trying now
+[WARN] 2018-02-27 16:16:21,363 more than 10 matches
+[WARN] 2018-02-27 16:16:21,439 reload image
+[WARN] 2018-02-27 16:16:21,926 number of matches
+[WARN] 2018-02-27 16:16:21,958 trying now
+[WARN] 2018-02-27 16:16:21,959 more than 10 matches
+[WARN] 2018-02-27 16:16:22,033 reload image
+[WARN] 2018-02-27 16:16:22,561 number of matches
+[WARN] 2018-02-27 16:16:22,594 trying now
+[WARN] 2018-02-27 16:16:22,595 more than 10 matches
+[WARN] 2018-02-27 16:16:22,691 reload image
+[WARN] 2018-02-27 16:16:29,753 number of matches
+[WARN] 2018-02-27 16:16:29,796 trying now
+[WARN] 2018-02-27 16:16:29,796 more than 10 matches
+[ERROR] 2018-02-27 16:16:29,907 No image data found to extract
+[WARN] 2018-02-27 16:16:29,907 reached the end of  video. Exiting.. 
+
+[WARN] 2018-02-27 16:16:44,293 Images could not be stitched.
+[WARN] 2018-02-27 16:17:45,776 Image Mosaicing starts
+[DEBUG] 2018-02-27 16:17:45,776 Working directory switched to one directory back
+[WARN] 2018-02-27 16:17:45,837 image_vector making
+[WARN] 2018-02-27 16:17:45,840 loop starts
+[WARN] 2018-02-27 16:17:45,929 reload image
+[WARN] 2018-02-27 16:17:46,622 number of matches
+[WARN] 2018-02-27 16:17:46,671 trying now
+[WARN] 2018-02-27 16:17:46,671 more than 10 matches
+[WARN] 2018-02-27 16:17:46,820 reload image
+[WARN] 2018-02-27 16:17:46,928 number of matches
+[WARN] 2018-02-27 16:17:46,960 trying now
+[WARN] 2018-02-27 16:17:46,962 more than 10 matches
+[WARN] 2018-02-27 16:17:47,038 reload image
+[WARN] 2018-02-27 16:17:47,183 number of matches
+[WARN] 2018-02-27 16:17:47,219 trying now
+[WARN] 2018-02-27 16:17:47,219 more than 10 matches
+[WARN] 2018-02-27 16:17:47,303 reload image
+[WARN] 2018-02-27 16:17:47,460 number of matches
+[WARN] 2018-02-27 16:17:47,492 trying now
+[WARN] 2018-02-27 16:17:47,492 more than 10 matches
+[WARN] 2018-02-27 16:17:47,580 reload image
+[WARN] 2018-02-27 16:17:49,996 number of matches
+[WARN] 2018-02-27 16:17:50,025 trying now
+[WARN] 2018-02-27 16:17:50,026 more than 10 matches
+[WARN] 2018-02-27 16:17:50,114 reload image
+[WARN] 2018-02-27 16:17:58,699 number of matches
+[WARN] 2018-02-27 16:17:58,727 trying now
+[WARN] 2018-02-27 16:17:58,727 more than 10 matches
+[ERROR] 2018-02-27 16:17:58,834 No image data found to extract
+[WARN] 2018-02-27 16:17:58,835 reached the end of  video. Exiting.. 
+
+[WARN] 2018-02-27 16:19:26,742 Image Mosaicing starts
+[DEBUG] 2018-02-27 16:19:26,742 Working directory switched to one directory back
+[WARN] 2018-02-27 16:19:26,806 image_vector making
+[WARN] 2018-02-27 16:19:26,808 loop starts
+[WARN] 2018-02-27 16:19:26,886 reload image
+[WARN] 2018-02-27 16:19:27,553 number of matches
+[WARN] 2018-02-27 16:19:27,595 trying now
+[WARN] 2018-02-27 16:19:27,595 more than 10 matches
+[WARN] 2018-02-27 16:19:27,704 reload image
+[WARN] 2018-02-27 16:19:27,795 number of matches
+[WARN] 2018-02-27 16:19:27,835 trying now
+[WARN] 2018-02-27 16:19:27,835 more than 10 matches
+[WARN] 2018-02-27 16:19:27,952 reload image
+[WARN] 2018-02-27 16:19:28,060 number of matches
+[WARN] 2018-02-27 16:19:28,092 trying now
+[WARN] 2018-02-27 16:19:28,093 more than 10 matches
+[WARN] 2018-02-27 16:19:28,167 reload image
+[WARN] 2018-02-27 16:19:28,304 number of matches
+[WARN] 2018-02-27 16:19:28,331 trying now
+[WARN] 2018-02-27 16:19:28,331 more than 10 matches
+[WARN] 2018-02-27 16:19:28,405 reload image
+[WARN] 2018-02-27 16:19:28,585 number of matches
+[WARN] 2018-02-27 16:19:28,638 trying now
+[WARN] 2018-02-27 16:19:28,641 more than 10 matches
+[WARN] 2018-02-27 16:19:28,738 reload image
+[WARN] 2018-02-27 16:19:28,929 number of matches
+[WARN] 2018-02-27 16:19:28,966 trying now
+[WARN] 2018-02-27 16:19:28,966 more than 10 matches
+[ERROR] 2018-02-27 16:19:29,077 No image data found to extract
+[WARN] 2018-02-27 16:19:29,077 reached the end of  video. Exiting.. 
+
+[WARN] 2018-02-27 16:25:00,970 Image Mosaicing starts
+[DEBUG] 2018-02-27 16:25:00,970 Working directory switched to one directory back
+[WARN] 2018-02-27 16:25:01,050 image_vector making
+[WARN] 2018-02-27 16:25:01,053 loop starts
+[WARN] 2018-02-27 16:25:01,157 reload image
+[WARN] 2018-02-27 16:25:02,029 number of matches
+[WARN] 2018-02-27 16:25:02,057 trying now
+[WARN] 2018-02-27 16:25:02,058 more than 10 matches
+[WARN] 2018-02-27 16:25:02,138 reload image
+[WARN] 2018-02-27 16:25:02,315 number of matches
+[WARN] 2018-02-27 16:25:02,348 trying now
+[WARN] 2018-02-27 16:25:02,348 more than 10 matches
+[WARN] 2018-02-27 16:25:02,430 reload image
+[WARN] 2018-02-27 16:25:02,541 number of matches
+[WARN] 2018-02-27 16:25:02,574 trying now
+[WARN] 2018-02-27 16:25:02,574 more than 10 matches
+[WARN] 2018-02-27 16:25:02,654 reload image
+[WARN] 2018-02-27 16:25:02,801 number of matches
+[WARN] 2018-02-27 16:25:02,838 trying now
+[WARN] 2018-02-27 16:25:02,839 more than 10 matches
+[WARN] 2018-02-27 16:25:02,922 reload image
+[WARN] 2018-02-27 16:25:03,161 number of matches
+[WARN] 2018-02-27 16:25:03,200 trying now
+[WARN] 2018-02-27 16:25:03,200 more than 10 matches
+[WARN] 2018-02-27 16:25:03,287 reload image
+[WARN] 2018-02-27 16:25:03,479 number of matches
+[WARN] 2018-02-27 16:25:03,513 trying now
+[WARN] 2018-02-27 16:25:03,513 more than 10 matches
+[ERROR] 2018-02-27 16:25:03,616 No image data found to extract
+[WARN] 2018-02-27 16:25:03,616 reached the end of  video. Exiting.. 
+
+[WARN] 2018-02-27 16:29:28,568 Image Mosaicing starts
+[DEBUG] 2018-02-27 16:29:28,568 Working directory switched to one directory back
+[WARN] 2018-02-27 16:29:28,633 image_vector making
+[WARN] 2018-02-27 16:29:28,635 loop starts
+[WARN] 2018-02-27 16:29:28,708 reload image
+[WARN] 2018-02-27 16:29:29,543 number of matches
+[WARN] 2018-02-27 16:29:29,572 trying now
+[WARN] 2018-02-27 16:29:29,572 more than 10 matches
+[WARN] 2018-02-27 16:29:29,647 reload image
+[WARN] 2018-02-27 16:29:29,723 number of matches
+[WARN] 2018-02-27 16:29:29,753 trying now
+[WARN] 2018-02-27 16:29:29,754 more than 10 matches
+[WARN] 2018-02-27 16:29:29,828 reload image
+[WARN] 2018-02-27 16:29:29,930 number of matches
+[WARN] 2018-02-27 16:29:29,961 trying now
+[WARN] 2018-02-27 16:29:29,961 more than 10 matches
+[WARN] 2018-02-27 16:29:30,037 reload image
+[WARN] 2018-02-27 16:29:30,191 number of matches
+[WARN] 2018-02-27 16:29:30,221 trying now
+[WARN] 2018-02-27 16:29:30,224 more than 10 matches
+[WARN] 2018-02-27 16:29:30,309 reload image
+[WARN] 2018-02-27 16:29:30,489 number of matches
+[WARN] 2018-02-27 16:29:30,528 trying now
+[WARN] 2018-02-27 16:29:30,529 more than 10 matches
+[WARN] 2018-02-27 16:29:30,610 reload image
+[WARN] 2018-02-27 16:29:30,793 number of matches
+[WARN] 2018-02-27 16:29:30,828 trying now
+[WARN] 2018-02-27 16:29:30,828 more than 10 matches
+[ERROR] 2018-02-27 16:29:30,928 No image data found to extract
+[WARN] 2018-02-27 16:29:30,928 reached the end of  video. Exiting.. 
+
+[WARN] 2018-02-27 16:50:54,108 Image Mosaicing starts
+[DEBUG] 2018-02-27 16:50:54,108 Working directory switched to one directory back
+[WARN] 2018-02-27 16:50:54,367 image_vector making
+[WARN] 2018-02-27 16:50:54,369 loop starts
+[WARN] 2018-02-27 16:50:54,456 reload image
+[WARN] 2018-02-27 16:50:56,430 number of matches
+[WARN] 2018-02-27 16:50:56,483 trying now
+[WARN] 2018-02-27 16:50:56,483 more than 10 matches
+[WARN] 2018-02-27 16:50:56,579 reload image
+[WARN] 2018-02-27 16:50:58,456 number of matches
+[WARN] 2018-02-27 16:50:58,493 trying now
+[WARN] 2018-02-27 16:50:58,493 more than 10 matches
+[WARN] 2018-02-27 16:50:58,647 reload image
+[WARN] 2018-02-27 16:50:59,200 number of matches
+[WARN] 2018-02-27 16:50:59,233 trying now
+[WARN] 2018-02-27 16:50:59,233 more than 10 matches
+[WARN] 2018-02-27 16:50:59,309 reload image
+[WARN] 2018-02-27 16:51:00,127 number of matches
+[WARN] 2018-02-27 16:51:00,156 trying now
+[WARN] 2018-02-27 16:51:00,156 more than 10 matches
+[WARN] 2018-02-27 16:51:00,244 reload image
+[WARN] 2018-02-27 16:51:01,947 number of matches
+[WARN] 2018-02-27 16:51:01,976 trying now
+[WARN] 2018-02-27 16:51:01,976 more than 10 matches
+[WARN] 2018-02-27 16:51:02,062 reload image
+[WARN] 2018-02-27 16:51:02,831 number of matches
+[WARN] 2018-02-27 16:51:02,863 trying now
+[WARN] 2018-02-27 16:51:02,863 more than 10 matches
+[ERROR] 2018-02-27 16:51:03,214 No image data found to extract
+[WARN] 2018-02-27 16:51:03,214 reached the end of  video. Exiting.. 
+
+[WARN] 2018-02-27 16:51:37,236 Image Mosaicing starts
+[DEBUG] 2018-02-27 16:51:37,236 Working directory switched to one directory back
+[WARN] 2018-02-27 16:51:37,303 image_vector making
+[WARN] 2018-02-27 16:51:37,306 loop starts
+[WARN] 2018-02-27 16:51:37,385 reload image
+[WARN] 2018-02-27 16:51:38,077 number of matches
+[WARN] 2018-02-27 16:51:38,109 trying now
+[WARN] 2018-02-27 16:51:38,110 more than 10 matches
+[WARN] 2018-02-27 16:51:38,191 reload image
+[WARN] 2018-02-27 16:51:38,294 number of matches
+[WARN] 2018-02-27 16:51:38,325 trying now
+[WARN] 2018-02-27 16:51:38,325 more than 10 matches
+[WARN] 2018-02-27 16:51:38,424 reload image
+[WARN] 2018-02-27 16:51:38,530 number of matches
+[WARN] 2018-02-27 16:51:38,563 trying now
+[WARN] 2018-02-27 16:51:38,563 more than 10 matches
+[WARN] 2018-02-27 16:51:38,638 reload image
+[WARN] 2018-02-27 16:51:38,791 number of matches
+[WARN] 2018-02-27 16:51:38,826 trying now
+[WARN] 2018-02-27 16:51:38,828 more than 10 matches
+[WARN] 2018-02-27 16:51:38,906 reload image
+[WARN] 2018-02-27 16:51:39,058 number of matches
+[WARN] 2018-02-27 16:51:39,094 trying now
+[WARN] 2018-02-27 16:51:39,094 more than 10 matches
+[WARN] 2018-02-27 16:51:39,185 reload image
+[WARN] 2018-02-27 16:51:39,355 number of matches
+[WARN] 2018-02-27 16:51:39,388 trying now
+[WARN] 2018-02-27 16:51:39,388 more than 10 matches
+[ERROR] 2018-02-27 16:51:39,485 No image data found to extract
+[WARN] 2018-02-27 16:51:39,485 reached the end of  video. Exiting.. 
+
+[WARN] 2018-02-27 16:52:06,349 Image Mosaicing starts
+[DEBUG] 2018-02-27 16:52:06,349 Working directory switched to one directory back
+[WARN] 2018-02-27 16:52:06,412 image_vector making
+[WARN] 2018-02-27 16:52:06,414 loop starts
+[WARN] 2018-02-27 16:52:06,495 reload image
+[WARN] 2018-02-27 16:52:07,658 number of matches
+[WARN] 2018-02-27 16:52:07,688 trying now
+[WARN] 2018-02-27 16:52:07,688 more than 10 matches
+[WARN] 2018-02-27 16:52:07,764 reload image
+[WARN] 2018-02-27 16:52:07,836 number of matches
+[WARN] 2018-02-27 16:52:07,869 trying now
+[WARN] 2018-02-27 16:52:07,869 more than 10 matches
+[WARN] 2018-02-27 16:52:07,947 reload image
+[WARN] 2018-02-27 16:52:08,059 number of matches
+[WARN] 2018-02-27 16:52:08,093 trying now
+[WARN] 2018-02-27 16:52:08,094 more than 10 matches
+[WARN] 2018-02-27 16:52:08,181 reload image
+[WARN] 2018-02-27 16:52:08,352 number of matches
+[WARN] 2018-02-27 16:52:08,391 trying now
+[WARN] 2018-02-27 16:52:08,391 more than 10 matches
+[WARN] 2018-02-27 16:52:08,476 reload image
+[WARN] 2018-02-27 16:52:08,680 number of matches
+[WARN] 2018-02-27 16:52:08,718 trying now
+[WARN] 2018-02-27 16:52:08,718 more than 10 matches
+[WARN] 2018-02-27 16:52:08,806 reload image
+[WARN] 2018-02-27 16:52:08,986 number of matches
+[WARN] 2018-02-27 16:52:09,025 trying now
+[WARN] 2018-02-27 16:52:09,025 more than 10 matches
+[ERROR] 2018-02-27 16:52:09,130 No image data found to extract
+[WARN] 2018-02-27 16:52:09,130 reached the end of  video. Exiting.. 
+
+[WARN] 2018-02-27 16:53:22,979 Image Mosaicing starts
+[DEBUG] 2018-02-27 16:53:22,979 Working directory switched to one directory back
+[WARN] 2018-02-27 16:53:23,114 image_vector making
+[WARN] 2018-02-27 16:53:23,115 loop starts
+[WARN] 2018-02-27 16:53:23,192 reload image
+[WARN] 2018-02-27 16:53:24,330 number of matches
+[WARN] 2018-02-27 16:53:24,360 trying now
+[WARN] 2018-02-27 16:53:24,361 more than 10 matches
+[WARN] 2018-02-27 16:53:24,444 reload image
+[WARN] 2018-02-27 16:53:24,515 number of matches
+[WARN] 2018-02-27 16:53:24,548 trying now
+[WARN] 2018-02-27 16:53:24,548 more than 10 matches
+[WARN] 2018-02-27 16:53:24,742 reload image
+[WARN] 2018-02-27 16:53:24,852 number of matches
+[WARN] 2018-02-27 16:53:25,168 trying now
+[WARN] 2018-02-27 16:53:25,169 more than 10 matches
+[WARN] 2018-02-27 16:53:25,253 reload image
+[WARN] 2018-02-27 16:53:25,422 number of matches
+[WARN] 2018-02-27 16:53:25,469 trying now
+[WARN] 2018-02-27 16:53:25,469 more than 10 matches
+[WARN] 2018-02-27 16:53:25,554 reload image
+[WARN] 2018-02-27 16:53:25,740 number of matches
+[WARN] 2018-02-27 16:53:25,782 trying now
+[WARN] 2018-02-27 16:53:25,782 more than 10 matches
+[WARN] 2018-02-27 16:53:25,863 reload image
+[WARN] 2018-02-27 16:53:26,691 number of matches
+[WARN] 2018-02-27 16:53:26,724 trying now
+[WARN] 2018-02-27 16:53:26,726 more than 10 matches
+[ERROR] 2018-02-27 16:53:26,847 No image data found to extract
+[WARN] 2018-02-27 16:53:26,847 reached the end of  video. Exiting.. 
+
+[WARN] 2018-02-27 17:17:48,148 Image Mosaicing starts
+[DEBUG] 2018-02-27 17:17:48,148 Working directory switched to one directory back
+[WARN] 2018-02-27 17:17:48,345 image_vector making
+[WARN] 2018-02-27 17:17:48,346 loop starts
+[WARN] 2018-02-27 17:17:48,428 reload image
+[WARN] 2018-02-27 17:17:57,555 number of matches
+[WARN] 2018-02-27 17:17:57,590 trying now
+[WARN] 2018-02-27 17:17:57,591 more than 10 matches
+[WARN] 2018-02-27 17:17:57,666 reload image
+[WARN] 2018-02-27 17:18:02,607 number of matches
+[WARN] 2018-02-27 17:18:02,633 trying now
+[WARN] 2018-02-27 17:18:02,635 more than 10 matches
+[WARN] 2018-02-27 17:18:02,713 reload image
+[WARN] 2018-02-27 17:18:03,153 number of matches
+[WARN] 2018-02-27 17:18:03,184 trying now
+[WARN] 2018-02-27 17:18:03,184 more than 10 matches
+[WARN] 2018-02-27 17:18:03,257 reload image
+[WARN] 2018-02-27 17:18:03,671 number of matches
+[WARN] 2018-02-27 17:18:03,702 trying now
+[WARN] 2018-02-27 17:18:03,703 more than 10 matches
+[WARN] 2018-02-27 17:18:03,782 reload image
+[WARN] 2018-02-27 17:18:04,120 number of matches
+[WARN] 2018-02-27 17:18:04,155 trying now
+[WARN] 2018-02-27 17:18:04,155 more than 10 matches
+[WARN] 2018-02-27 17:18:04,234 reload image
+[WARN] 2018-02-27 17:18:04,601 number of matches
+[WARN] 2018-02-27 17:18:04,640 trying now
+[WARN] 2018-02-27 17:18:04,641 more than 10 matches
+[ERROR] 2018-02-27 17:18:04,745 No image data found to extract
+[WARN] 2018-02-27 17:18:04,745 reached the end of  video. Exiting.. 
+

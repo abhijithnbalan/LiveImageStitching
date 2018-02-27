@@ -60,7 +60,7 @@ void CaptureFrame::reload_image(cv::Mat image_input,std::string str)
             exit(0);
         }
         //Assignes new value to image and window name.
-        image = image_input;
+        image = image_input.clone();
         window_name = str;
     }
 
@@ -80,7 +80,7 @@ cv::Mat CaptureFrame::retrieve_image()
 //retrieve the video file stored in object
 cv::VideoCapture CaptureFrame::retrieve_video()
     {  
-        //returns the VideoCapture file.
+        //returns the VideoCapture fil  e.
         return cap;
     }
 
@@ -99,8 +99,27 @@ void CaptureFrame::frame_extraction()
         return;
     }
 
-//Clear the values and release the memory allocated to every varibales
-void CaptureFrame::clear()
+    void CaptureFrame::frame_extraction(int number)
+    {
+        //extracting the current frame to the image file.
+        for (int i = 1; i < number; i++)
+        {
+            cap >> image;
+            if (!image.data)
+            {
+                logger.log_error("No image data found to extract");
+                // std::cout << "No image data found for " << window_name << "\n"; // no input image found
+                throw(1);
+                
+                logger.log_warn("just threw it now");
+                break;
+            } //After this function call the current frame is saved in the image file of the same object.
+        }
+        return;
+    }
+
+    //Clear the values and release the memory allocated to every varibales
+    void CaptureFrame::clear()
     {
         //Clears all the varibles
         image.release();
@@ -114,7 +133,7 @@ void CaptureFrame::clear()
 CaptureFrame::CaptureFrame(cv::Mat input,std::string window)
     {
         //Assignes the parameters
-        image = input;
+        image = input.clone();
         window_name = window;
     }
 CaptureFrame::CaptureFrame()

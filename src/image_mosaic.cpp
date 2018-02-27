@@ -143,7 +143,10 @@ void ImageMosaic::Opencv_Stitcher(CaptureFrame image1, CaptureFrame image2)
 
     if (cv::Stitcher::OK == status)
     {
+
         mosaic_image.reload_image(rImg,"Mosaic");
+        success_stitch = true;
+        cv::imshow("image",rImg);
         
     } 
     else
@@ -157,29 +160,34 @@ void ImageMosaic::Opencv_Stitcher(CaptureFrame image1, CaptureFrame image2)
     return;
 }
 
-void ImageMosaic::video_mosaic(CaptureFrame input_video)
+void ImageMosaic::Opencv_Stitcher()
 {
     ViewFrame viewer;
-    input_video.frame_extraction();
-    mosaic_image = CaptureFrame(input_video.retrieve_image().clone(),"original image");
-    // cv::Mat current_frame;
-    for (total_images = 0;; total_images++)
+    Logger logger;
+    cv::Mat rImg;
+    // image1 = resize_image(image1, 20);
+    // image2 = resize_image(image2, 20);
+
+    cv::Stitcher stitcher = cv::Stitcher::createDefault();
+
+    cv::Stitcher::Status status = stitcher.stitch(image_vector, rImg);
+
+    if (cv::Stitcher::OK == status)
     {
-        
-        for(int i = 0;i<20;i++)
-        {
-            input_video.frame_extraction();
-        }
-        input_video.frame_extraction();
-        cv::imwrite("bin/test3.png",input_video.retrieve_image());
-        // current_frame = input_video.retrieve_image();
-        Opencv_Stitcher(mosaic_image,input_video);
-        viewer.single_view_interrupted(mosaic_image,25);
-        // viewer.single_view_uninterrupted(input_video,25);
-        std::cout<<total_images<<"\n";
+        mosaic_image.reload_image(rImg,"Mosaic");
+        success_stitch = true;
+    } 
+    else
+    {
+        logger.log_warn("Images could not be stitched.");
+        cv::waitKey(30);
+        return;
     }
+
+    cv::waitKey(30);
     return;
 }
+
 void ImageMosaic::native_stitcher()
 {
     ViewFrame viewer;
@@ -215,7 +223,10 @@ void ImageMosaic::image_stream_recorder(CaptureFrame video,int frame_rate)
         image_vector.push_back(video.retrieve_image());
         for(int i = 0; i < frame_rate; i++)
         {
-            try{video.frame_extraction();}
+            try
+            {
+                video.frame_extraction();
+            }
             catch(int)
             {
                 return;
@@ -228,14 +239,15 @@ ImageMosaic::ImageMosaic()
     total_images = 0;
     inlier_threshold = 2.5f; // Distance threshold to identify inliers
     nn_match_ratio = 0.8f; 
+    success_stitch = false;
 }
 void ImageMosaic::ORB_feature_match(CaptureFrame image1,CaptureFrame image2)
 {
 
 
     cv::Ptr<cv::ORB> orb = cv::ORB::create();
-    current_image = (resize_image(image1,100)).retrieve_image();
-    next_image = (resize_image(image2,100)).retrieve_image();
+    current_image = image1.retrieve_image();
+    next_image = image2.retrieve_image();
     orb->detectAndCompute(current_image, cv::noArray(), keypoints1, description1);
     orb->detectAndCompute(next_image, cv::noArray(), keypoints2, description2);
     return;
@@ -284,8 +296,7 @@ void ImageMosaic::good_match_selection()
     }
     cv::Mat res;
     cv::drawMatches(current_image, inliers1, next_image, inliers2, good_matches, res);
-    cv::imshow("respng", res);
-    std::cout<<homography<<"\n";
+    cv::imshow("Good Matches",res);
     cv::waitKey(0);
     return;
 }
@@ -296,6 +307,78 @@ void ImageMosaic::find_actual_homography()
     std::cout<<homography<<"\n";
     return;
     
+}
+
+void ImageMosaic::image_vector_maker(int argc, char **argv)
+{
+    cv::Mat temp;
+    for (int i = 1; i < argc ; i++)
+    {
+        temp = cv::imread(argv[i],1);
+        image_vector.push_back(temp);
+    }
+    return;
+}
+
+void ImageMosaic::image_vector_maker(CaptureFrame vid)
+{
+    cv::Mat temp;
+    int matches = 0;
+    vid.frame_extraction(10);
+    logger.log_warn("image_vector making");
+    image_vector.push_back(vid.retrieve_image());
+    CaptureFrame first_img(vid.retrieve_image(),"first image");
+    CaptureFrame second_img(vid.retrieve_image(),"second image");
+    logger.log_warn("loop starts");
+    for (int i = 1;; i++)
+    {
+        try 
+            {
+                vid.frame_extraction(50);
+            }
+            catch(...)
+            {
+                logger.log_warn("reached the end of  video. Exiting.. \n");
+                break;  
+            }
+        second_img.reload_image(vid.retrieve_image(),"current frame");
+        logger.log_warn("reload image");
+        viewer.multiple_view_uninterrupted(first_img,second_img,70);
+        matches = number_of_matches(first_img,second_img);
+        logger.log_warn("number of matches");
+        if(matches > 10)
+        {
+            image_vector.push_back(vid.retrieve_image().clone());
+            try 
+            {
+                vid.frame_extraction(20);
+                logger.log_warn("trying now");
+            }
+            catch(...)
+            {
+                logger.log_warn("reached the end of  video. Exiting.. \n");
+                break;
+            }
+            first_img = second_img;
+            logger.log_warn("more than 10 matches");
+        }
+        else 
+        {
+            try 
+            {
+                logger.log_warn("trying now");
+                vid.frame_extraction(10);
+                
+            }
+            catch(...)
+            {
+                logger.log_warn("reached the end of  video. Exiting.. \n");
+                break;
+            }
+        }
+    }
+    std::cout<<"creation of image vector : done\n";
+    return;
 }
 
 
@@ -348,3 +431,45 @@ void ImageMosaic::image_blender()
     cv::waitKey(0);
     return;
 }
+
+int ImageMosaic::number_of_matches(CaptureFrame image1, CaptureFrame image2)
+{
+    ORB_feature_match(image1,image2);
+    // logger.log_warn("ORB features : done");
+    BF_matcher();
+    // logger.log_warn("matching : done");
+    find_homography();
+
+    good_match_selection();
+
+    return good_matches.size();
+}
+
+int ImageMosaic::number_of_matches(cv::Mat image1, cv::Mat image2)
+{
+    CaptureFrame img1(image1,"first image");
+    CaptureFrame img2(image2,"second image");
+    ORB_feature_match(img1,img2);
+    
+    BF_matcher();
+    find_homography();
+    std::cout<<"ORB and homo\n";
+    good_match_selection();
+    return good_matches.size();
+}
+void ImageMosaic::display_image_vector()
+{
+    ViewFrame viewer;
+    CaptureFrame temp;
+    for (int i = 0; i < image_vector.size(); i++)
+    {
+        temp = CaptureFrame(image_vector[i],"image vector");
+        viewer.single_view_interrupted(temp,70);
+    }
+    return;
+}
+
+void ImageMosaic::live_mosaicing()
+    {
+        return;
+    }

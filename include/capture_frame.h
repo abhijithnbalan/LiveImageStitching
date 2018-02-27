@@ -40,6 +40,8 @@ class CaptureFrame
 
         void frame_extraction();//Extract frames from video
 
+        void frame_extraction(int number_of_frames);
+
         void clear();//Clears and releases the memory allocated for variables
 
         // Constrructors that will take image file and window name
