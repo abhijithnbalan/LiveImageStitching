@@ -18,112 +18,47 @@
 
 void ImageMosaic::AKAZE_feature_match(CaptureFrame image1, CaptureFrame image2)
 {
-    const float inlier_threshold = 2.5f; // Distance threshold to identify inliers
-    const float nn_match_ratio = 0.8f;   // Nearest neighbor matching ratio
+    inlier_threshold = 2.5f; // Distance threshold to identify inliers
     
-    cv::Mat img1,img2;
-    image1 = resize_image(image1,20);
-    image2 = resize_image(image2,20);
-    // viewer.multiple_view_interrupted(image1,image2);
-
-
-    // cv::cvtColor(image1.retrieve_image(),img1,CV_BGR2GRAY);
-    // cv::cvtColor(image2.retrieve_image(),img2,CV_BGR2GRAY);
-    img1 = image1.retrieve_image();
-    img2 = image2.retrieve_image();
-    std::vector<cv::KeyPoint> kpts1, kpts2;
-    cv::Mat desc1, desc2;
+    current_image = image1.retrieve_image().clone();
+    previous_image = image2.retrieve_image().clone();
     cv::Ptr<cv::AKAZE> akaze = cv::AKAZE::create();
-    akaze->detectAndCompute(img1, cv::noArray(), kpts1, desc1);
-    akaze->detectAndCompute(img2, cv::noArray(), kpts2, desc2);
-    std::cout<<"Akaze keypoints done\n";
+    akaze->detectAndCompute(current_image, cv::noArray(), keypoints_current_image, description_current_image);
+    akaze->detectAndCompute(previous_image, cv::noArray(), keypoints_previous_image, description_previous_image);
 
-    // cv::Mat imgkey1,imgkey2;
-    // cv::drawKeypoints(img1,kpts1,imgkey1);
-    // cv::drawKeypoints(img2,kpts2,imgkey2);
-    // cv::imshow("key1",imgkey1);
-    // cv::imshow("key2",imgkey2);    
-    // cv::waitKey(20);
+    return;
 
-    // cv::drawMatches( img1, kpts1, img2, kpts2,
-    //            good_matches, img_matches, cv::Scalar::all(-1), cv::Scalar::all(-1),
-    //            std::vector<char>(), cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS );
+}
+void ImageMosaic::ORB_feature_match(CaptureFrame image1,CaptureFrame image2)
+{
 
-    
+
+    cv::Ptr<cv::ORB> orb = cv::ORB::create();
+    current_image = image1.retrieve_image();
+    previous_image = image2.retrieve_image();
+    orb->detectAndCompute(current_image, cv::noArray(), keypoints_current_image, description_current_image);
+    orb->detectAndCompute(previous_image, cv::noArray(), keypoints_previous_image, description_previous_image);
+    return;
+}
+void ImageMosaic::BF_matcher()
+{  
+    matched_current_image.clear();
+    matched_previous_image.clear();
     cv::BFMatcher matcher(cv::NORM_HAMMING);
     std::vector< std::vector<cv::DMatch> > nn_matches;
-    matcher.knnMatch(desc1, desc2, nn_matches, 2);
-    std::vector<cv::KeyPoint> inliers1, inliers2;
-    std::vector<cv::Point2d> matched1, matched2;
-    std::vector<cv::DMatch> good_matches;
-    for(size_t i = 0; i < nn_matches.size(); i++) {
+    matcher.knnMatch(description_current_image, description_previous_image, nn_matches, 2);
+    for(size_t i = 0; i < nn_matches.size(); i++) 
+    {
         cv::DMatch first = nn_matches[i][0];
         float dist1 = nn_matches[i][0].distance;
         float dist2 = nn_matches[i][1].distance;
-        if(dist1 < nn_match_ratio * dist2) {
-            matched1.push_back(kpts1[first.queryIdx].pt);
-            matched2.push_back(kpts2[first.trainIdx].pt);
+        if(dist1 < nn_match_ratio * dist2) 
+        {
+            matched_current_image.push_back(keypoints_current_image[first.queryIdx].pt);
+            matched_previous_image.push_back(keypoints_previous_image[first.trainIdx].pt);
         }
     }
-
-    cv::Mat homography = cv::findHomography( matched1, matched2, CV_RANSAC);
-
-    // std::cout<<homography;
-
-    for(unsigned i = 0; i < matched1.size(); i++) {
-        cv::Mat col = cv::Mat::ones(3, 1, CV_64F);
-        col.at<double>(0) = matched1[i].x;
-        col.at<double>(1) = matched1[i].y;
-        col = homography * col;  
-        col /= col.at<double>(2);
-        double dist = sqrt( pow(col.at<double>(0) - matched2[i].x, 2) +
-                            pow(col.at<double>(1) - matched2[i].y, 2));
-        if(dist < inlier_threshold) {
-            int new_i = static_cast<int>(inliers1.size());
-            inliers1.push_back(cv::KeyPoint(matched1[i],1.0f));
-            inliers2.push_back(cv::KeyPoint(matched2[i],1.0f));
-            good_matches.push_back(cv::DMatch(new_i, new_i, 0));
-        }
-    }
-    cv::Mat res;
-    cv::drawMatches(img1, inliers1, img2, inliers2, good_matches, res);
-    cv::imshow("respng", res);
-    cv::waitKey(0);
-    if(good_matches.size()<4)
-    {
-        std::cout<<"Complete homography cannot be found with available frames\n";
-        return;
-    }
-
-    cv::Mat big_pic(img1.cols+img2.cols,img1.rows+img2.rows,CV_8UC3);
-    cv::Mat outimg1,outimg2;
-    cv::Mat mask1(img1.size(), CV_8UC1, cv::Scalar::all(255));
-    cv::Mat mask2(img2.size(), CV_8UC1, cv::Scalar::all(255));
-    warpPerspective(img1, outimg1, homography,big_pic.size());
-    warpPerspective(img2, outimg2, homography,big_pic.size());
-    warpPerspective(mask1, mask1, homography,big_pic.size());
-    warpPerspective(mask2, mask2, homography,big_pic.size());
-
-    
-
-    // cv::detail::MultiBandBlender blender(false, 5);
-    // blender.feed(outimg1, mask1, cv::Point2f (0,0));
-    // blender.feed(outimg2, mask2, cv::Point2f (0,0));
-    //prepare resulting size of image
-    std::cout<<"blah blah passed\n";
-    // blender.prepare(cv::Rect(0, 0, big_pic.size().width, big_pic.size().height));
-    cv::Mat result_s, result_mask;
-    // blender.blend(result_s, result_mask);
-    // img2.copyTo(big_pic);
-    // big_pic = big_pic + outimg1;
-    // outimg2.copyTo(big_pic);
-    // cv::imshow("the big picture",result_s);
-    cv::imshow("warped ima1ge",outimg1);
-    cv::imshow("warped ima2ge",outimg2);
-    // // cv::imshow("warped image",img1);
-    cv::waitKey(0);
     return;
-
 }
 void ImageMosaic::Opencv_Stitcher(CaptureFrame image1, CaptureFrame image2)
 {
@@ -131,9 +66,6 @@ void ImageMosaic::Opencv_Stitcher(CaptureFrame image1, CaptureFrame image2)
     Logger logger;
     std::vector<cv::Mat> vImg;
     cv::Mat rImg;
-    // image1 = resize_image(image1, 20);
-    // image2 = resize_image(image2, 20);
-    viewer.multiple_view_interrupted(image1,image2);
     vImg.push_back(image1.retrieve_image());
     vImg.push_back(image2.retrieve_image());
 
@@ -146,7 +78,7 @@ void ImageMosaic::Opencv_Stitcher(CaptureFrame image1, CaptureFrame image2)
 
         mosaic_image.reload_image(rImg,"Mosaic");
         success_stitch = true;
-        cv::imshow("image",rImg);
+        // cv::imshow("image",rImg);
         
     } 
     else
@@ -159,7 +91,6 @@ void ImageMosaic::Opencv_Stitcher(CaptureFrame image1, CaptureFrame image2)
     cv::waitKey(30);
     return;
 }
-
 void ImageMosaic::Opencv_Stitcher()
 {
     ViewFrame viewer;
@@ -185,30 +116,6 @@ void ImageMosaic::Opencv_Stitcher()
     }
 
     cv::waitKey(30);
-    return;
-}
-
-void ImageMosaic::native_stitcher()
-{
-    ViewFrame viewer;
-    Logger logger;
-
-    cv::Stitcher stitcher = cv::Stitcher::createDefault();
-    // cv::Mat temp_mosaic;
-    cv::Stitcher::Status status = stitcher.stitch(image_vector, mosaic);
-
-    if (cv::Stitcher::OK == status)
-    {
-        mosaic_image.reload_image(mosaic,"Mosaic");
-        viewer.single_view_interrupted(mosaic_image);
-    } 
-    else
-    {
-        logger.log_warn("Images could not be stitched.");
-        cv::waitKey(30);
-        return;
-    }
-
     return;
 }
 void ImageMosaic::image_stream_recorder(CaptureFrame video,int frame_rate)
@@ -241,26 +148,13 @@ ImageMosaic::ImageMosaic()
     nn_match_ratio = 0.8f; 
     success_stitch = false;
 }
-void ImageMosaic::ORB_feature_match(CaptureFrame image1,CaptureFrame image2)
-{
-
-
-    cv::Ptr<cv::ORB> orb = cv::ORB::create();
-    current_image = image1.retrieve_image();
-    next_image = image2.retrieve_image();
-    orb->detectAndCompute(current_image, cv::noArray(), keypoints1, description1);
-    orb->detectAndCompute(next_image, cv::noArray(), keypoints2, description2);
-    return;
-}
-
-
 void ImageMosaic::view_keypoints()
 {    
-    cv::Mat imgkey1,imgkey2;
-    cv::drawKeypoints(current_image,keypoints1,imgkey1);
-    cv::drawKeypoints(next_image,keypoints2,imgkey2);
-    cv::imshow("key1",imgkey1);
-    cv::imshow("key2",imgkey2);
+    cv::Mat keypoints_current_view,keypoints_previous_view;
+    cv::drawKeypoints(current_image,keypoints_current_image,keypoints_current_view);
+    cv::drawKeypoints(previous_image,keypoints_previous_image,keypoints_previous_view);
+    cv::imshow("Key Points in the current frame",keypoints_current_view);
+    cv::imshow("Key Ponts in the previous frmae",keypoints_previous_view);
     cv::waitKey(0);
     return;
 
@@ -268,43 +162,48 @@ void ImageMosaic::view_keypoints()
 
 void ImageMosaic::find_homography()
 {
-    homography = cv::findHomography( matched1, matched2, CV_RANSAC);
-    std::cout<<homography<<"\n";
+    homography_matrix = cv::findHomography( matched_current_image, matched_previous_image, CV_RANSAC);
+    std::cout<<homography_matrix<<"\n";
     return;
     
 }
     
-    
 void ImageMosaic::good_match_selection()
 {
-    for(unsigned i = 0; i < matched1.size(); i++) {
+    good_matches.clear();
+    good_matched_current_image.clear();
+    good_matched_previous_image.clear();
+    inliers_current_image.clear();
+    inliers_previous_image.clear();
+    for(unsigned i = 0; i < matched_current_image.size(); i++) {
         cv::Mat col = cv::Mat::ones(3, 1, CV_64F);
-        col.at<double>(0) = matched1[i].x;
-        col.at<double>(1) = matched1[i].y;
-        col = homography * col;  
+        col.at<double>(0) = matched_current_image[i].x;
+        col.at<double>(1) = matched_current_image[i].y;
+        col = homography_matrix * col;  
         col /= col.at<double>(2);
-        double dist = sqrt( pow(col.at<double>(0) - matched2[i].x, 2) +
-                            pow(col.at<double>(1) - matched2[i].y, 2));
+        double dist = sqrt( pow(col.at<double>(0) - matched_previous_image[i].x, 2) +
+                            pow(col.at<double>(1) - matched_previous_image[i].y, 2));
         if(dist < inlier_threshold) {
-            int new_i = static_cast<int>(inliers1.size());
-            inliers1.push_back(cv::KeyPoint(matched1[i],1.0f));
-            inliers2.push_back(cv::KeyPoint(matched2[i],1.0f));
-            good_matched1.push_back(matched1[i]);
-            good_matched2.push_back(matched2[i]);
+            int new_i = static_cast<int>(inliers_current_image.size());
+            inliers_current_image.push_back(cv::KeyPoint(matched_current_image[i],1.0f));
+            inliers_previous_image.push_back(cv::KeyPoint(matched_previous_image[i],1.0f));
+            good_matched_current_image.push_back(matched_current_image[i]);
+            good_matched_previous_image.push_back(matched_previous_image[i]);
             good_matches.push_back(cv::DMatch(new_i, new_i, 0));
         }
     }
+    logger.log_warn("last message");
     cv::Mat res;
-    cv::drawMatches(current_image, inliers1, next_image, inliers2, good_matches, res);
-    cv::imshow("Good Matches",res);
-    cv::waitKey(0);
+    cv::drawMatches(current_image, inliers_current_image, previous_image, inliers_previous_image, good_matches, res);
+    // cv::imshow("Good Matches",res);
+    // cv::waitKey(0);
     return;
 }
 
 void ImageMosaic::find_actual_homography()
 {
-    homography = cv::findHomography( good_matched1, good_matched2, CV_RANSAC);
-    std::cout<<homography<<"\n";
+    homography_matrix = cv::findHomography( good_matched_current_image, good_matched_previous_image, CV_RANSAC);
+    std::cout<<homography_matrix<<"\n";
     return;
     
 }
@@ -383,52 +282,75 @@ void ImageMosaic::image_vector_maker(CaptureFrame vid)
 
 
 void ImageMosaic::warp_image()
-{
-    cv::Mat big_pic(current_image.cols+next_image.cols,next_image.rows,CV_8UC3);
+{  
+     cv::Mat big_pic;
+    big_pic.release();
+    big_pic = cv::Mat::zeros(3 * previous_image.cols,3 * previous_image.rows ,CV_8UC3);
     cv::Mat mask1(current_image.size(), CV_8UC1, cv::Scalar::all(255));
+    cv::Mat mask2(previous_image.size(), CV_8UC1, cv::Scalar::all(255));
     // cv::Mat big_pic_mask(big_pic.size(), CV_8UC1, cv::Scalar::all(255));
-    warpPerspective(current_image, warped_image, homography,big_pic.size());
-    // warpPerspective(img2, outimg2, homography,big_pic.size());
-    warpPerspective(mask1, warped_mask, homography,big_pic.size());
-    // warpPerspective(mask2, mask2, homography,big_pic.size());
-    return;
-}
+    warp_offset = (cv::Mat_<double>(3,3) << 1, 0, current_image.cols/2, 0, 1,current_image.rows/2, 0, 0, 1);
+    logger.log_warn("warping offset");
+    std::cout<<warp_offset<<"\n";
+    logger.log_warn("homography matrix premultiplied by offset");
+    cv::Mat effective_homography_matrix = warp_offset * homography_matrix;
+    std::cout<<effective_homography_matrix<<"\n";
 
-
-void ImageMosaic::BF_matcher()
-{
-    cv::BFMatcher matcher(cv::NORM_HAMMING);
-    std::vector< std::vector<cv::DMatch> > nn_matches;
-    matcher.knnMatch(description1, description2, nn_matches, 2);
-    for(size_t i = 0; i < nn_matches.size(); i++) 
-    {
-        cv::DMatch first = nn_matches[i][0];
-        float dist1 = nn_matches[i][0].distance;
-        float dist2 = nn_matches[i][1].distance;
-        if(dist1 < nn_match_ratio * dist2) 
-        {
-            matched1.push_back(keypoints1[first.queryIdx].pt);
-            matched2.push_back(keypoints2[first.trainIdx].pt);
-        }
-    }
+    warpPerspective(current_image, warped_image, effective_homography_matrix,big_pic.size());
+    warpPerspective(previous_image, previous_image, warp_offset,big_pic.size());
+    warpPerspective(mask1, warped_mask,effective_homography_matrix,big_pic.size());
+    warpPerspective(mask2, original_mask, warp_offset,big_pic.size());
+    // cv::imshow("skfsidubfiu",warped_image);
+    // cv::waitKey(0);
     return;
 }
 
 void ImageMosaic::image_blender()
 {
-    next_image.convertTo(next_image, CV_16S);
+    previous_image.convertTo(previous_image, CV_16S);
     warped_image.convertTo(warped_image, CV_16S);
     cv::detail::FeatherBlender  blender(0.5f); //sharpness
 
-    blender.prepare(cv::Rect(0,0,std::max(next_image.cols,warped_image.cols),std::max(next_image.rows,warped_image.rows)));
-    cv::Mat mask2(next_image.size(), CV_8UC1, cv::Scalar::all(255));
+    blender.prepare(cv::Rect(0,0,std::max(previous_image.cols,warped_image.cols),std::max(previous_image.rows,warped_image.rows)));
+    
+    
+    blender.feed(previous_image, original_mask, cv::Point2f (0,0));
     blender.feed(warped_image, warped_mask, cv::Point2f (0,0));
-    blender.feed(next_image, mask2, cv::Point2f (0,0));
+    
     cv::Mat result_s, result_mask;
     blender.blend(result_s, result_mask);
-    result_s.convertTo(mosaic, CV_8U);
-    cv::imshow("result",mosaic);
-    cv::waitKey(0);
+    result_s.convertTo(mosaic, CV_8UC3);
+    cv::Mat gray_mosaic = cv::Mat::zeros(mosaic.size(),CV_8UC1);
+    cv::cvtColor(mosaic,gray_mosaic,cv::COLOR_BGR2GRAY);
+    logger.log_warn("blending fine");
+    // cv::imshow("result",mosaic);
+    // cv::waitKey(0);
+    
+    int largest_area=0;
+    int largest_contour_index=0;
+    cv::Rect bounding_rect;
+    std::vector<std::vector<cv::Point>> contours; // Vector for storing contour
+    std::vector<cv::Vec4i> hierarchy;
+    cv::findContours( gray_mosaic, contours, hierarchy,CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE );
+    // iterate through each contour.
+    for( int i = 0; i< contours.size(); i++ )
+    {
+        //  Find the area of contour
+        double a=contourArea( contours[i],false); 
+        if(a>largest_area)
+        {
+            largest_area=a;
+            // Store the index of largest contour
+            largest_contour_index = i;    
+            logger.log_warn("largest area contour found out");          
+            // Find the bounding rectangle for biggest contour
+            bounding_rect=boundingRect(contours[i]);
+        }   
+    }
+    cv::Mat cropped_image = mosaic(bounding_rect).clone();
+    // cv::imshow("result",cropped_image);
+    mosaic_image.reload_image(cropped_image,"mosaic");
+    // cv::waitKey(0);
     return;
 }
 
@@ -453,7 +375,7 @@ int ImageMosaic::number_of_matches(cv::Mat image1, cv::Mat image2)
     
     BF_matcher();
     find_homography();
-    std::cout<<"ORB and homo\n";
+    logger.log_info("priliminary homography matrix");
     good_match_selection();
     return good_matches.size();
 }
@@ -469,7 +391,75 @@ void ImageMosaic::display_image_vector()
     return;
 }
 
-void ImageMosaic::live_mosaicing()
-    {
+void ImageMosaic::live_mosaicing(CaptureFrame vid)
+{   
+        try{vid.frame_extraction(5);}
+        catch(...){logger.log_warn("video done already");return;}
+        ViewFrame viewer;
+        CaptureFrame current_frame;
+        CaptureFrame previous_frame;
+        int matches = 0;
+        try{vid.frame_extraction(25);}
+            catch(...){logger.log_warn("video ended ");return;}
+            previous_frame = CaptureFrame(vid.retrieve_image(),"previous frame");
+            try{vid.frame_extraction(25);}
+            catch(...){logger.log_warn("video ended ");return;}
+            current_frame = CaptureFrame(vid.retrieve_image(),"current frame");
+
+        for(int image_count = 0; ; image_count++)
+        {
+            
+            ORB_feature_match(current_frame,previous_frame);
+            BF_matcher();
+            find_homography();
+            good_match_selection();
+            matches = good_matches.size();
+            if(matches > 10)
+            {
+                find_actual_homography();
+                logger.log_warn("actual homo");
+                warp_image();
+                logger.log_warn("warping completed");
+                image_blender();
+                logger.log_warn("blended in");
+                viewer.single_view_uninterrupted(mosaic_image,80);
+                cv::waitKey(10);
+                try
+                {
+                    vid.frame_extraction(25);
+                    if(mosaic_image.retrieve_image().data)
+                    {
+                        previous_frame.reload_image(mosaic_image.retrieve_image().clone(),"mosaic as first image");
+                    }
+                    else previous_frame.reload_image(current_frame.retrieve_image().clone(),"mosaic as first image");
+                    
+                    current_frame.reload_image(vid.retrieve_image(),"current image");
+                }
+                catch(...)
+                {
+                    logger.log_warn("end of video reached");
+                    break;
+                }
+            }
+            else
+            {
+                logger.log_warn("The images cannot be stitched");
+                try
+                {
+                    vid.frame_extraction(25);
+                    // previous_frame = current_frame;
+                    current_frame.reload_image(vid.retrieve_image(),"current image");
+                }
+                catch(...)
+                {
+                    logger.log_warn("end of video reached");
+                    break;
+                }
+            }
+            
+        }
+        logger.log_warn("Image mosaicing completed");
+        cv::Mat output = mosaic_image.retrieve_image(); 
+        cv::imwrite("Mosaic_image.jpg",output);
         return;
-    }
+}

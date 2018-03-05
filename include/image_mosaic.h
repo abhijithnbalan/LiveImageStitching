@@ -12,19 +12,20 @@ class ImageMosaic : public ImageProcessing
     private:
         ViewFrame viewer;
         std::vector<cv::Mat> image_vector;
-        std::vector<cv::KeyPoint> keypoints1, keypoints2, inliers1, inliers2;
-        cv::Mat description1, description2, homography;
+        std::vector<cv::KeyPoint> keypoints_previous_image, keypoints_current_image, inliers_current_image, inliers_previous_image;
+        cv::Mat description_current_image, description_previous_image, homography_matrix;
         std::vector<cv::DMatch> good_matches;
-        std::vector<cv::Point2d> matched1, matched2,good_matched1,good_matched2;
-        cv::Mat current_image,next_image, warped_image, warped_mask;
+        std::vector<cv::Point2d> matched_current_image, matched_previous_image,good_matched_current_image,good_matched_previous_image;
+        cv::Mat current_image,previous_image,original_mask,warped_image, warped_mask;
         float inlier_threshold; // Distance threshold to identify inliers
         float nn_match_ratio; 
         bool success_stitch;
         Logger logger;
-
+        
     protected:
 
     public:
+        cv::Mat warp_offset;
         cv::Mat mosaic;
         CaptureFrame mosaic_image;
         int total_images;
@@ -36,7 +37,7 @@ class ImageMosaic : public ImageProcessing
         void find_homography();
         void find_actual_homography();
         void warp_image();
-        void live_mosaicing();
+        void live_mosaicing(CaptureFrame vid);
         void good_match_selection();
         void image_vector_maker(int argc ,char **argv);
         void image_vector_maker(CaptureFrame vid);

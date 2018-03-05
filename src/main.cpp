@@ -66,10 +66,11 @@ int main(int argc, char **argv) //The main Function
 
     CaptureFrame vid;
     vid.capture_video(argv[1],"video input");
-    mosaic.image_vector_maker(vid);
-    mosaic.display_image_vector();
-    mosaic.Opencv_Stitcher();
-    
+    // mosaic.image_vector_maker(vid);
+    // mosaic.display_image_vector();
+    // mosaic.Opencv_Stitcher();
+    mosaic.live_mosaicing(vid);
+    logger.log_warn("everything done now");
     viewer.single_view_interrupted(mosaic.mosaic_image);
     cv::waitKey(15);
     return 0;
