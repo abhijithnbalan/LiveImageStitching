@@ -3,6 +3,7 @@
 #include "image_mosaic.h"
 #include <unistd.h>
 #include <string.h>
+#include <sstream>
 
 int main(int argc, char **argv) //The main Function
 {
@@ -88,14 +89,31 @@ int main(int argc, char **argv) //The main Function
         logger.log_warn("live mosaic mode");
         CaptureFrame vid;
         std::cout<<argv[1]<<"\n";
-        vid.capture_video(argv[1],"video input");
+        std::istringstream ss(argv[1]);
+        int camera_port;
+        if (!(ss >> camera_port))
+        {
+            vid.capture_video(argv[1],"video input");
+            mosaic.live_mosaicing_video(vid);
+        }
+        else
+        {
+            vid.capture_video(camera_port,"camera input");
+            mosaic.live_mosaicing_camera(vid);
+        }
         // mosaic.image_vector_maker(vid);
         // mosaic.display_image_vector();
         // mosaic.Opencv_Stitcher();
-        mosaic.live_mosaicing(vid);
+        
         logger.log_warn("Mosaicing Completed ");
         viewer.single_view_interrupted(mosaic.mosaic_image);
+        //Writing the mosaic image to disk
+        cv::Mat output = mosaic.mosaic_image.retrieve_image(); 
+        cv::imwrite("Mosaic_image.jpg",output);
+        logger.log_info("Image written to disk");
         cv::waitKey(15);
     }
     return 0;
 }
+
+

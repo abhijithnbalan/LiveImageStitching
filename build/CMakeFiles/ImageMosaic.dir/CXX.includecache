@@ -69,6 +69,8 @@ capture_frame.h
 /home/plankton/CodeMax/ImageMosaic/src/capture_frame.h
 view_frame.h
 /home/plankton/CodeMax/ImageMosaic/src/view_frame.h
+logger.h
+/home/plankton/CodeMax/ImageMosaic/src/logger.h
 opencv2/opencv.hpp
 -
 opencv2/imgproc/imgproc.hpp
@@ -87,19 +89,7 @@ iostream
 -
 iomanip
 -
-logger.h
-/home/plankton/CodeMax/ImageMosaic/src/logger.h
-
-/home/plankton/CodeMax/ImageMosaic/src/main.cpp
-capture_frame.h
-/home/plankton/CodeMax/ImageMosaic/src/capture_frame.h
-view_frame.h
-/home/plankton/CodeMax/ImageMosaic/src/view_frame.h
-image_mosaic.h
-/home/plankton/CodeMax/ImageMosaic/src/image_mosaic.h
 unistd.h
--
-string.h
 -
 
 /usr/local/include/log4cpp/Appender.hh

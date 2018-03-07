@@ -28,6 +28,8 @@ class ImageMosaic : public ImageProcessing
     protected:
 
     public:
+        int image_count;
+        bool reset_mosaic,stop_mosaic;
         cv::Mat warp_offset;//used for stitching in all direction
         cv::Mat mosaic;
         CaptureFrame mosaic_image;//the output variable
@@ -66,7 +68,8 @@ class ImageMosaic : public ImageProcessing
         //video mosaic using OpenCV stitcher
         void video_mosaic(CaptureFrame input_video);
         //Live mosaicing from video or camera 
-        void live_mosaicing(CaptureFrame vid);
+        void live_mosaicing_video(CaptureFrame vid);
+        void live_mosaicing_camera(CaptureFrame vid);
         //Construcor
         ImageMosaic();
 
