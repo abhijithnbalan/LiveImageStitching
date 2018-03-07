@@ -523,6 +523,17 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
             
         }
         logger.log_warn("Image mosaicing completed");
+        previous_frame.clear();
+        current_frame.clear();
+        keypoints_current_image.clear();
+        keypoints_previous_image.clear();
+        good_matched_current_image.clear();
+        good_matched_previous_image.clear();
+        good_matches.clear();
+        matched_current_image.clear();
+        matched_previous_image.clear();
+    
+        std::cout<<"\nImage count : "<<image_count<<"\n";
 
         return;
 }
