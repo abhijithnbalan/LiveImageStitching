@@ -20,78 +20,7 @@
 #include <iostream>
 #include <iomanip>
 #include <unistd.h>
- 
-//Akaze feature points identification
-void ImageMosaic::AKAZE_feature_points(CaptureFrame image1, CaptureFrame image2)
-{
-    
-    inlier_threshold = 2.5f; // Distance threshold to identify inliers
-    
-    //Input images for identifying the keypoints
-    current_image = image1.retrieve_image().clone();
-    previous_image = image2.retrieve_image().clone();
 
-    //Creating akaze object
-    cv::Ptr<cv::AKAZE> akaze = cv::AKAZE::create();
-
-    //Detecting keypoints in the images
-    akaze->detectAndCompute(current_image, cv::noArray(), keypoints_current_image, description_current_image);
-    akaze->detectAndCompute(previous_image, cv::noArray(), keypoints_previous_image, description_previous_image);
-    
-    //logging
-    logger.log_info("Akaze feature point idenfication");
-    return;
-
-}
-
-//Orb feature points identification
-void ImageMosaic::ORB_feature_points(CaptureFrame image1,CaptureFrame image2)
-{
-    //Creating ORB object
-    cv::Ptr<cv::ORB> orb = cv::ORB::create();
-
-    //Input images
-    current_image = image1.retrieve_image();
-    previous_image = image2.retrieve_image();
-
-    //Detecting feature points through ORB
-    orb->detectAndCompute(current_image, cv::noArray(), keypoints_current_image, description_current_image);
-    orb->detectAndCompute(previous_image, cv::noArray(), keypoints_previous_image, description_previous_image);
-    
-    //logging
-    logger.log_info("ORB feature point idenfication");
-    return;
-}
-
-//Matches the images in which keypoints are identified already
-void ImageMosaic::BF_matcher()
-{  
-    //Clearing previous data
-    matched_current_image.clear();
-    matched_previous_image.clear();
-
-    //Creating BruteForce matcher object
-    cv::BFMatcher matcher(cv::NORM_HAMMING);
-
-    //Matching
-    std::vector< std::vector<cv::DMatch> > nn_matches;
-    matcher.knnMatch(description_current_image, description_previous_image, nn_matches, 2);
-    for(size_t i = 0; i < nn_matches.size(); i++) 
-    {
-        cv::DMatch first = nn_matches[i][0];
-        float dist1 = nn_matches[i][0].distance;
-        float dist2 = nn_matches[i][1].distance;
-        if(dist1 < nn_match_ratio * dist2) 
-        {
-            matched_current_image.push_back(keypoints_current_image[first.queryIdx].pt);
-            matched_previous_image.push_back(keypoints_previous_image[first.trainIdx].pt);
-        }
-    }
-
-    //logging
-    logger.log_info("Brute Force matching");
-    return;
-}
 
 //Creates image vector from a video with specified frame interval.
 void ImageMosaic::image_stream_recorder(CaptureFrame video,int frame_rate)
@@ -131,11 +60,12 @@ ImageMosaic::ImageMosaic()
     //Initialising variables
     total_images = 0;
     image_count = 0;
-    inlier_threshold = 2.5f; 
-    nn_match_ratio = 0.8f; 
     success_stitch = false;
     stop_mosaic = false;
     reset_mosaic = false;
+    use_dehaze = false;
+    mosaic_trigger = false;
+    previous_area = 0;
 }
 
 //show keypoints on image
@@ -145,8 +75,8 @@ void ImageMosaic::view_keypoints()
     cv::Mat keypoints_current_view,keypoints_previous_view;
 
     //drawing keypoints
-    cv::drawKeypoints(current_image,keypoints_current_image,keypoints_current_view);
-    cv::drawKeypoints(previous_image,keypoints_previous_image,keypoints_previous_view);
+    cv::drawKeypoints(algo.current_image,algo.keypoints_current_image,keypoints_current_view);
+    cv::drawKeypoints(algo.previous_image,algo.keypoints_previous_image,keypoints_previous_view);
 
     //showing keypoints and waiting for user input to continue
     cv::imshow("Key Points in the current frame",keypoints_current_view);
@@ -163,7 +93,14 @@ void ImageMosaic::view_keypoints()
 void ImageMosaic::find_homography()
 {
     //Using RANSAC to find homography transformation matrix
-    homography_matrix = cv::findHomography( matched_current_image, matched_previous_image, CV_RANSAC);
+    try{
+    homography_matrix = cv::findHomography( algo.matched_current_image, algo.matched_previous_image, CV_RANSAC);
+    }
+    catch(...)
+    {
+        logger.log_error("Homography matrix could not be calculated.");
+        throw 1;
+    }
     // std::cout<<homography_matrix<<"\n";
     
     //logging
@@ -180,24 +117,24 @@ void ImageMosaic::good_match_selection()
     good_matches.clear();
     good_matched_current_image.clear();
     good_matched_previous_image.clear();
-    inliers_current_image.clear();
-    inliers_previous_image.clear();
+    algo.inliers_current_image.clear();
+    algo.inliers_previous_image.clear();
 
     //Filtering good matches
-    for(unsigned i = 0; i < matched_current_image.size(); i++) {
+    for(unsigned i = 0; i < algo.matched_current_image.size(); i++) {
         cv::Mat col = cv::Mat::ones(3, 1, CV_64F);
-        col.at<double>(0) = matched_current_image[i].x;
-        col.at<double>(1) = matched_current_image[i].y;
+        col.at<double>(0) = algo.matched_current_image[i].x;
+        col.at<double>(1) = algo.matched_current_image[i].y;
         col = homography_matrix * col;  
         col /= col.at<double>(2);
-        double dist = sqrt( pow(col.at<double>(0) - matched_previous_image[i].x, 2) +
-                            pow(col.at<double>(1) - matched_previous_image[i].y, 2));
-        if(dist < inlier_threshold) {
-            int new_i = static_cast<int>(inliers_current_image.size());
-            inliers_current_image.push_back(cv::KeyPoint(matched_current_image[i],1.0f));
-            inliers_previous_image.push_back(cv::KeyPoint(matched_previous_image[i],1.0f));
-            good_matched_current_image.push_back(matched_current_image[i]);
-            good_matched_previous_image.push_back(matched_previous_image[i]);
+        double dist = sqrt( pow(col.at<double>(0) - algo.matched_previous_image[i].x, 2) +
+                            pow(col.at<double>(1) - algo.matched_previous_image[i].y, 2));
+        if(dist < algo.inlier_threshold) {
+            int new_i = static_cast<int>(algo.inliers_current_image.size());
+            algo.inliers_current_image.push_back(cv::KeyPoint(algo.matched_current_image[i],1.0f));
+            algo.inliers_previous_image.push_back(cv::KeyPoint(algo.matched_previous_image[i],1.0f));
+            good_matched_current_image.push_back(algo.matched_current_image[i]);
+            good_matched_previous_image.push_back(algo.matched_previous_image[i]);
             good_matches.push_back(cv::DMatch(new_i, new_i, 0));
         }
     }
@@ -212,7 +149,7 @@ void ImageMosaic::good_match_selection()
 void ImageMosaic::view_matches()
 {
     cv::Mat image_matches;
-    cv::drawMatches(current_image, inliers_current_image, previous_image, inliers_previous_image, good_matches, image_matches);
+    cv::drawMatches(algo.current_image, algo.inliers_current_image, algo.previous_image, algo.inliers_previous_image, good_matches, image_matches);
     cv::imshow("Good Matches",image_matches);
 
     //logging
@@ -225,7 +162,13 @@ void ImageMosaic::view_matches()
 void ImageMosaic::find_actual_homography()
 {
     //using good matches instead of normal matches
+    try{
     homography_matrix = cv::findHomography( good_matched_current_image, good_matched_previous_image, CV_RANSAC);
+    }
+    catch(...)
+    {
+        logger.log_error("Homography matrix could not be calculated");
+    }
     // std::cout<<homography_matrix<<"\n";
 
     //logger
@@ -241,20 +184,20 @@ void ImageMosaic::warp_image()
     //Initializing big picture to accomodate the warped image and blending which will happen in later stage
     cv::Mat big_pic;
     big_pic.release();
-    big_pic = cv::Mat::zeros(3 * previous_image.cols,3 * previous_image.rows ,CV_8UC3);
+    big_pic = cv::Mat::zeros(3 * algo.previous_image.cols,3 * algo.previous_image.rows ,CV_8UC3);
     //Masks are needed for blending and also need to be warped like original image
-    cv::Mat mask1(current_image.size(), CV_8UC1, cv::Scalar::all(255));
-    cv::Mat mask2(previous_image.size(), CV_8UC1, cv::Scalar::all(255));
+    cv::Mat mask1(algo.current_image.size(), CV_8UC1, cv::Scalar::all(255));
+    cv::Mat mask2(algo.previous_image.size(), CV_8UC1, cv::Scalar::all(255));
     
     //Offset is multiplied with homogrophy matrix to place the image in the center so that it can be stitched in any direction.
-    warp_offset = (cv::Mat_<double>(3,3) << 1, 0, current_image.cols/2, 0, 1,current_image.rows/2, 0, 0, 1);
+    warp_offset = (cv::Mat_<double>(3,3) << 1, 0, algo.current_image.cols/2, 0, 1,algo.current_image.rows/2, 0, 0, 1);
     
     cv::Mat effective_homography_matrix = warp_offset * homography_matrix;
     // std::cout<<effective_homography_matrix<<"\n";
 
     //Warping the images according to homography + translation
-    warpPerspective(current_image, warped_image, effective_homography_matrix,big_pic.size());
-    warpPerspective(previous_image, previous_image, warp_offset,big_pic.size());
+    warpPerspective(algo.current_image, warped_image, effective_homography_matrix,big_pic.size());
+    warpPerspective(algo.previous_image, algo.previous_image, warp_offset,big_pic.size());
     warpPerspective(mask1, warped_mask,effective_homography_matrix,big_pic.size());
     warpPerspective(mask2, original_mask, warp_offset,big_pic.size());
 
@@ -267,17 +210,18 @@ void ImageMosaic::warp_image()
 void ImageMosaic::image_blender()
 {
     //Converting into 16S for blending
-    previous_image.convertTo(previous_image, CV_16S);
+    algo.previous_image.convertTo(algo.previous_image, CV_16S);
     warped_image.convertTo(warped_image, CV_16S);
 
     //Creating feather blend for blending images with specified sharpness
+    
     cv::detail::FeatherBlender  blender(0.5f); //sharpness
 
     //Blender preparing
-    blender.prepare(cv::Rect(0,0,std::max(previous_image.cols,warped_image.cols),std::max(previous_image.rows,warped_image.rows)));
+    blender.prepare(cv::Rect(0,0,std::max(algo.previous_image.cols,warped_image.cols),std::max(algo.previous_image.rows,warped_image.rows)));
     
     //Feeding the images with points to blend
-    blender.feed(previous_image, original_mask, cv::Point2f (0,0));
+    blender.feed(algo.previous_image, original_mask, cv::Point2f (0,0));
     blender.feed(warped_image, warped_mask, cv::Point2f (0,0));
     
     //Blending the fed images
@@ -294,7 +238,7 @@ void ImageMosaic::image_blender()
     int largest_area=0;
     int largest_contour_index=0;
     cv::Rect bounding_rect;
-    std::vector<std::vector<cv::Point>> contours; // Vector for storing contour
+    std::vector<std::vector<cv::Point> > contours; // Vector for storing contour
     std::vector<cv::Vec4i> hierarchy;
     cv::findContours( gray_mosaic, contours, hierarchy,CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE );
     // iterate through each contour.
@@ -311,6 +255,16 @@ void ImageMosaic::image_blender()
             bounding_rect=boundingRect(contours[i]);
         }   
     }
+    if(largest_area < (previous_area * 1.5) || previous_area == 0)
+    {
+        previous_area = largest_area;
+    }
+    else
+    {
+        logger.log_warn("Bad mapping identified. Negleting frame");
+        return;
+    }
+
     //Cropping the image
     cv::Mat cropped_image = mosaic(bounding_rect).clone();
     // Loading the image to public CaptureFrame object
@@ -325,9 +279,9 @@ void ImageMosaic::image_blender()
 int ImageMosaic::number_of_matches(CaptureFrame image1, CaptureFrame image2)
 {
     //feature points
-    ORB_feature_points(image1,image2);
+    algo.ORB_feature_points(image1,image2);
     //Brute Force matching
-    BF_matcher();
+    algo.BF_matcher();
     //homography calcualtion
     find_homography();
     //Good match filtering
@@ -430,7 +384,6 @@ void ImageMosaic::Opencv_Stitcher()
 void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
 {
         //live mosaicing is used to stitch imges in realtme
-
         //extracting frames
         try{vid.frame_extraction(5);}
         catch(...){logger.log_warn("video done already");return;}
@@ -444,27 +397,32 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
         int matches = 0;
 
         //Extracting frames and loading it in current and previous images
-        try{vid.frame_extraction(25);}
+        try{vid.frame_extraction(5);}
             catch(...){logger.log_warn("video ended ");return;}
             previous_frame = CaptureFrame(vid.retrieve_image(),"previous frame");
-            try{vid.frame_extraction(25);}
+            try{vid.frame_extraction(5);}
             catch(...){logger.log_warn("video ended ");return;}
             current_frame = CaptureFrame(vid.retrieve_image(),"current frame");
-
+           if(use_dehaze){previous_frame = algo.CLAHE_dehaze(previous_frame);}
         // stitching in loop and number of images are counted
-        for(int image_count = 0; ; image_count++)
+        for(image_count = 0; ; image_count++)
         {
-            
-            ORB_feature_points(current_frame,previous_frame);
-            BF_matcher();
-            find_homography();
+            if(mosaic_trigger)
+            {
+                
+            if(use_dehaze){current_frame = algo.CLAHE_dehaze(current_frame);}
+            algo.ORB_feature_points(current_frame,previous_frame);
+            algo.BF_matcher();
+            try{find_homography();}
+            catch(int err){logger.log_info("skipping frame");continue;}
             good_match_selection();
             matches = good_matches.size();
 
             //Stitch images only if more than 10 good matches are obtained. 4 is the theoratical minimum.
             if(matches > 10)
             {
-                find_actual_homography();
+                try{find_actual_homography();}
+                catch(int err){logger.log_info("skipping frame");continue;}
                 warp_image();
                 image_blender();
 
@@ -475,7 +433,7 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
                 //start extracting frames for next iteration
                 try
                 {
-                    vid.frame_extraction(25);
+                    vid.frame_extraction(5);
                     if(mosaic_image.retrieve_image().data)
                     {
                         previous_frame.reload_image(mosaic_image.retrieve_image().clone(),"mosaic as first image");
@@ -495,7 +453,7 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
                 logger.log_warn("The images cannot be stitched");
                 try
                 {
-                    vid.frame_extraction(25);
+                    vid.frame_extraction(5);
                     // previous_frame = current_frame;
                     current_frame.reload_image(vid.retrieve_image(),"current image");
                 }
@@ -505,11 +463,21 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
                     break;
                 }
             }
-            char c = (char)cv::waitKey(30);
-            if(c == 115 || c == 83 || stop_mosaic)//checking for 's' or 'S' to stop mosaicing
+            }
+            else
             {
-                logger.log_warn("User interruption. stopping..");
-                break;
+                // cv::destroyAllWindows();
+                CaptureFrame image_view;
+                if(use_dehaze){image_view = algo.CLAHE_dehaze(vid);viewer.single_view_uninterrupted(vid);}
+                else viewer.single_view_uninterrupted(vid);
+                vid.frame_extraction();
+            }
+            char c = (char)cv::waitKey(30);
+            if(c == 116 || c == 84 || stop_mosaic)//checking for 't' or 'T' to toggle the trigger
+            {
+                mosaic_trigger = !mosaic_trigger;//Toggling the current value in mosaic_trigger
+                logger.log_warn("User interruption. Toggling mosaic state..");
+                continue;
             }
             else if(c == 114 || c == 82 || reset_mosaic)//Checking for 'r' or 'R' to reset the mosaic image.
             {
@@ -520,21 +488,28 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
                 image_count = 1;
                 continue;
             }
+            else if(c == 115 || c == 83 || stop_mosaic)//checking for 's' or 'S' to stop mosaicing
+            {
+                mosaic_trigger = !mosaic_trigger;//Toggling the current value in mosaic_trigger
+                logger.log_warn("User interruption. Stopping mosaic..");
+                break;
+            }
             
         }
         logger.log_warn("Image mosaicing completed");
         previous_frame.clear();
         current_frame.clear();
-        keypoints_current_image.clear();
-        keypoints_previous_image.clear();
+        algo.keypoints_current_image.clear();
+        algo.keypoints_previous_image.clear();
         good_matched_current_image.clear();
         good_matched_previous_image.clear();
         good_matches.clear();
-        matched_current_image.clear();
-        matched_previous_image.clear();
+        algo.matched_current_image.clear();
+        algo.matched_previous_image.clear();
     
         std::cout<<"\nImage count : "<<image_count<<"\n";
-
+       
+        
         return;
 }
 void ImageMosaic::live_mosaicing_camera(CaptureFrame vid)
@@ -563,23 +538,27 @@ void ImageMosaic::live_mosaicing_camera(CaptureFrame vid)
             current_frame = CaptureFrame(vid.retrieve_image(),"current frame");
 
         // stitching in loop and number of images are counted
-        for(image_count = 0; ; image_count++)
+        for(image_count = 0; ;)
         {
-            
-            ORB_feature_points(current_frame,previous_frame);
-            BF_matcher();
-            find_homography();
+            if(mosaic_trigger)
+            {
+            algo.ORB_feature_points(current_frame,previous_frame);
+            algo.BF_matcher();
+            try{find_homography();}
+            catch(int err){logger.log_info("skipping frame");continue;}
             good_match_selection();
             matches = good_matches.size();
 
             //Stitch images only if more than 10 good matches are obtained. 4 is the theoratical minimum.
             if(matches > 10)
             {
-                find_actual_homography();
+                try{find_actual_homography();}
+                catch(int err){logger.log_info("skipping frame");continue;}
                 warp_image();
                 image_blender();
 
                 //Show live mosaic result 
+                image_count++;
                 viewer.single_view_uninterrupted(mosaic_image,80);
                 cv::waitKey(10);
 
@@ -620,11 +599,18 @@ void ImageMosaic::live_mosaicing_camera(CaptureFrame vid)
                     break;
                 }
             }
+        }
+        else
+        {
+            vid.frame_extraction();
+            viewer.single_view_uninterrupted(vid);
+        }
             char c = (char)cv::waitKey(30);
-            if(c == 115 || c == 83 || stop_mosaic)//checking for 's' or 'S' to stop mosaicing
+            if(c == 116 || c == 84 || stop_mosaic)//checking for 't' or 'T' to stop mosaicing
             {
-                logger.log_warn("User interruption. stopping..");
-                break;
+                mosaic_trigger = !mosaic_trigger;
+                logger.log_warn("User interruption. toggling mosaic state..");
+                continue;
             }
             else if(c == 114 || c == 82 || reset_mosaic)//Checking for 'r' or 'R' to reset the mosaic image.
             {
@@ -636,18 +622,23 @@ void ImageMosaic::live_mosaicing_camera(CaptureFrame vid)
                 image_count = 1;
                 continue;
             }
+            if(c == 115 || c == 83 || stop_mosaic)//checking for 's' or 'S' to stop mosaicing
+            {
+                logger.log_warn("User interruption. stopping..");
+                break;
+            }
             
         }
         logger.log_warn("Image mosaicing completed");
         previous_frame.clear();
         current_frame.clear();
-        keypoints_current_image.clear();
-        keypoints_previous_image.clear();
+        algo.keypoints_current_image.clear();
+        algo.keypoints_previous_image.clear();
         good_matched_current_image.clear();
         good_matched_previous_image.clear();
         good_matches.clear();
-        matched_current_image.clear();
-        matched_previous_image.clear();
+        algo.matched_current_image.clear();
+        algo.matched_previous_image.clear();
     
         std::cout<<"\nImage count : "<<image_count<<"\n";
         usleep(20000);

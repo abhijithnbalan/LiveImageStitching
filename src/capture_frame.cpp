@@ -110,8 +110,6 @@ void CaptureFrame::frame_extraction()
                 logger.log_error("No image data found to extract");
                 // std::cout << "No image data found for " << window_name << "\n"; // no input image found
                 throw(1);
-                
-                logger.log_warn("just threw it now");
                 break;
             } //After this function call the current frame is saved in the image file of the same object.
         }

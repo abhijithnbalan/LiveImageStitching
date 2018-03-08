@@ -20,9 +20,11 @@ _Two images are stitchable when we can identify enought number of(depending on t
 6. Blending two images togoether to get a final bigger image.
 
 ## 1. Keypoint and Description
+
 ### 1.  AKAZE
 
 ### 2. ORB
+ORB (Oriented FAST and Rotated BRIEF), is an efficient alternative to SIFT and SURF algorithms(copyright protected).
 
 ## 2. Matching
 ### 1. Brute Force Matcher

@@ -14,35 +14,28 @@ class ImageMosaic : public ImageProcessing
     private:
         ViewFrame viewer;// can be used anywhere within the class to show output
         std::vector<cv::Mat> image_vector;//used for opencv stitcher
-        std::vector<cv::KeyPoint> keypoints_previous_image,//keypoints variables
-        keypoints_current_image, inliers_current_image, inliers_previous_image;
-        cv::Mat description_current_image, description_previous_image, homography_matrix;
+        cv::Mat homography_matrix;
         std::vector<cv::DMatch> good_matches;
-        std::vector<cv::Point2d> matched_current_image, matched_previous_image,good_matched_current_image,good_matched_previous_image;
-        cv::Mat current_image,previous_image,original_mask,warped_image, warped_mask;
-        float inlier_threshold; // Distance threshold to identify inliers
-        float nn_match_ratio; 
+        std::vector<cv::Point2d> good_matched_current_image,good_matched_previous_image;
+        cv::Mat original_mask,warped_image, warped_mask;
         bool success_stitch;
+        int previous_area;
         Logger logger;//Can be used everywhere inside the class
         
     protected:
 
     public:
+        bool mosaic_trigger,use_dehaze;
         int image_count;
         bool reset_mosaic,stop_mosaic;
         cv::Mat warp_offset;//used for stitching in all direction
         cv::Mat mosaic;
-        CaptureFrame mosaic_image;//the output variable
+        CaptureFrame mosaic_image,mosai_image_stable;//the output variable
         int total_images;
 
-        //Akaze keypoint creation with discription
-        void AKAZE_feature_points(CaptureFrame image1,CaptureFrame image2);
-        //ORB keypoint creation with description
-        void ORB_feature_points(CaptureFrame image1, CaptureFrame image2);
+        
         //Shows found out keypoints on the corresponding image
         void view_keypoints();
-        //Brute Force matcher : creates matches
-        void BF_matcher();
         //finding homography transformation matrix from match points and good matches
         void find_homography();
         void find_actual_homography();
