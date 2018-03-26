@@ -646,6 +646,7 @@ CMakeFiles/ImageMosaic.dir/src/main.cpp.o: ../include/capture_frame.h
 CMakeFiles/ImageMosaic.dir/src/main.cpp.o: ../include/image_mosaic.h
 CMakeFiles/ImageMosaic.dir/src/main.cpp.o: ../include/image_processing.h
 CMakeFiles/ImageMosaic.dir/src/main.cpp.o: ../include/logger.h
+CMakeFiles/ImageMosaic.dir/src/main.cpp.o: ../include/timer.h
 CMakeFiles/ImageMosaic.dir/src/main.cpp.o: ../include/view_frame.h
 CMakeFiles/ImageMosaic.dir/src/main.cpp.o: ../src/main.cpp
 CMakeFiles/ImageMosaic.dir/src/main.cpp.o: /usr/local/include/log4cpp/Appender.hh
@@ -734,7 +735,6 @@ CMakeFiles/ImageMosaic.dir/src/main.cpp.o: /usr/local/include/opencv2/flann/rand
 CMakeFiles/ImageMosaic.dir/src/main.cpp.o: /usr/local/include/opencv2/flann/result_set.h
 CMakeFiles/ImageMosaic.dir/src/main.cpp.o: /usr/local/include/opencv2/flann/sampling.h
 CMakeFiles/ImageMosaic.dir/src/main.cpp.o: /usr/local/include/opencv2/flann/saving.h
-CMakeFiles/ImageMosaic.dir/src/main.cpp.o: /usr/local/include/opencv2/flann/timer.h
 CMakeFiles/ImageMosaic.dir/src/main.cpp.o: /usr/local/include/opencv2/highgui.hpp
 CMakeFiles/ImageMosaic.dir/src/main.cpp.o: /usr/local/include/opencv2/highgui/highgui_c.h
 CMakeFiles/ImageMosaic.dir/src/main.cpp.o: /usr/local/include/opencv2/imgcodecs.hpp

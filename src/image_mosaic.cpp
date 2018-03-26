@@ -400,78 +400,15 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
         try{vid.frame_extraction(5);}
             catch(...){logger.log_warn("video ended ");return;}
             previous_frame = CaptureFrame(vid.retrieve_image(),"previous frame");
+            previous_frame = resize_image(previous_frame,50);
             try{vid.frame_extraction(5);}
             catch(...){logger.log_warn("video ended ");return;}
             current_frame = CaptureFrame(vid.retrieve_image(),"current frame");
+            current_frame = resize_image(current_frame,50);
            if(use_dehaze){previous_frame = algo.CLAHE_dehaze(previous_frame);}
         // stitching in loop and number of images are counted
         for(image_count = 0; ; image_count++)
         {
-            if(mosaic_trigger)
-            {
-                
-            if(use_dehaze){current_frame = algo.CLAHE_dehaze(current_frame);}
-            algo.ORB_feature_points(current_frame,previous_frame);
-            algo.BF_matcher();
-            try{find_homography();}
-            catch(int err){logger.log_info("skipping frame");continue;}
-            good_match_selection();
-            matches = good_matches.size();
-
-            //Stitch images only if more than 10 good matches are obtained. 4 is the theoratical minimum.
-            if(matches > 10)
-            {
-                try{find_actual_homography();}
-                catch(int err){logger.log_info("skipping frame");continue;}
-                warp_image();
-                image_blender();
-
-                //Show live mosaic result 
-                viewer.single_view_uninterrupted(mosaic_image,80);
-                cv::waitKey(10);
-
-                //start extracting frames for next iteration
-                try
-                {
-                    vid.frame_extraction(5);
-                    if(mosaic_image.retrieve_image().data)
-                    {
-                        previous_frame.reload_image(mosaic_image.retrieve_image().clone(),"mosaic as first image");
-                    }
-                    else previous_frame.reload_image(current_frame.retrieve_image().clone(),"mosaic as first image");
-                    
-                    current_frame.reload_image(vid.retrieve_image(),"current image");
-                }
-                catch(...)
-                {
-                    logger.log_warn("end of video reached");
-                    break;
-                }
-            }
-            else
-            {
-                logger.log_warn("The images cannot be stitched");
-                try
-                {
-                    vid.frame_extraction(5);
-                    // previous_frame = current_frame;
-                    current_frame.reload_image(vid.retrieve_image(),"current image");
-                }
-                catch(...)
-                {
-                    logger.log_warn("end of video reached");
-                    break;
-                }
-            }
-            }
-            else
-            {
-                // cv::destroyAllWindows();
-                CaptureFrame image_view;
-                if(use_dehaze){image_view = algo.CLAHE_dehaze(vid);viewer.single_view_uninterrupted(vid);}
-                else viewer.single_view_uninterrupted(vid);
-                vid.frame_extraction();
-            }
             char c = (char)cv::waitKey(30);
             if(c == 116 || c == 84 || stop_mosaic)//checking for 't' or 'T' to toggle the trigger
             {
@@ -493,6 +430,74 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
                 mosaic_trigger = !mosaic_trigger;//Toggling the current value in mosaic_trigger
                 logger.log_warn("User interruption. Stopping mosaic..");
                 break;
+            }
+
+            if(mosaic_trigger)
+            {
+                
+            if(use_dehaze){current_frame = algo.CLAHE_dehaze(current_frame);}
+            algo.AKAZE_feature_points(current_frame,previous_frame);
+            algo.BF_matcher();
+            try{find_homography();
+            good_match_selection();
+            matches = good_matches.size();}
+            catch(...){logger.log_warn("mapping insufficient");matches = 0;}
+
+            //Stitch images only if more than 10 good matches are obtained. 4 is the theoratical minimum.
+            if(matches > 10)
+            {
+                try{find_actual_homography();}
+                catch(...){logger.log_warn("skipping frame");continue;}
+                warp_image();
+                image_blender();
+
+                //Show live mosaic result 
+                viewer.single_view_uninterrupted(mosaic_image,80);
+                cv::waitKey(10);
+
+                //start extracting frames for next iteration
+                try
+                {
+                    vid.frame_extraction(5);
+                    if(mosaic_image.retrieve_image().data)
+                    {
+                        previous_frame.reload_image(mosaic_image.retrieve_image().clone(),"mosaic as first image");
+                    }
+                    else previous_frame.reload_image(current_frame.retrieve_image().clone(),"mosaic as first image");
+                    
+                    current_frame.reload_image(vid.retrieve_image(),"current image");
+                    current_frame = resize_image(current_frame,50);
+                }
+                catch(...)
+                {
+                    logger.log_warn("end of video reached");
+                    break;
+                }
+            }
+            else
+            {
+                logger.log_warn("The images cannot be stitched");
+                try
+                {
+                    vid.frame_extraction(5);
+                    // previous_frame = current_frame;
+                    current_frame.reload_image(vid.retrieve_image(),"current image");
+                    current_frame = resize_image(current_frame,50);
+                }
+                catch(...)
+                {
+                    logger.log_warn("end of video reached");
+                    break;
+                }
+            }
+            }
+            else
+            {
+                // cv::destroyAllWindows();
+                CaptureFrame image_view;
+                if(use_dehaze){image_view = algo.CLAHE_dehaze(vid);viewer.single_view_uninterrupted(vid);}
+                else viewer.single_view_uninterrupted(vid);
+                vid.frame_extraction();
             }
             
         }
@@ -645,3 +650,12 @@ void ImageMosaic::live_mosaicing_camera(CaptureFrame vid)
         return;
    
 }
+// void ImageMosaic::testing(CaptureFrame image)
+// {
+//     // cv::Mat img = image.retrieve_image().clone();
+//     algo.AKAZE_feature_points(image,image);
+//     view_keypoints();
+//     algo.ORB_feature_points(image,image);
+//     view_keypoints();
+//     return;
+// }

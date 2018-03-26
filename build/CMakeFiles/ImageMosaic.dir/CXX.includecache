@@ -50,6 +50,14 @@ log4cpp/Category.hh
 string
 -
 
+../include/timer.h
+capture_frame.h
+../include/capture_frame.h
+view_frame.h
+../include/view_frame.h
+time.h
+-
+
 ../include/view_frame.h
 capture_frame.h
 ../include/capture_frame.h
@@ -74,6 +82,8 @@ unistd.h
 string.h
 -
 sstream
+-
+timer.h
 -
 
 /usr/local/include/log4cpp/Appender.hh
@@ -1025,14 +1035,6 @@ general.h
 /usr/local/include/opencv2/flann/general.h
 nn_index.h
 /usr/local/include/opencv2/flann/nn_index.h
-
-/usr/local/include/opencv2/flann/timer.h
-time.h
--
-opencv2/core.hpp
-/usr/local/include/opencv2/flann/opencv2/core.hpp
-opencv2/core/utility.hpp
-/usr/local/include/opencv2/flann/opencv2/core/utility.hpp
 
 /usr/local/include/opencv2/highgui.hpp
 opencv2/core.hpp

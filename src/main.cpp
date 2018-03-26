@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <sstream>
+#include <timer.h>
 
 int main(int argc, char **argv) //The main Function
 {
@@ -21,12 +22,12 @@ int main(int argc, char **argv) //The main Function
         return -1;    
     } 
     ImageMosaic mosaic;
-    // mosaic.use_dehaze = true;
+    mosaic.use_dehaze = true;
     ViewFrame viewer;
     char* mode = argv[1];
     
     
-
+    Timer timer1,timer2,timer3,timer4,timer5,timer6;
     if(std::string(argv[1]) == "pair")
     {
         argv = argv + 1;
@@ -35,23 +36,44 @@ int main(int argc, char **argv) //The main Function
         ima1.capture_image(argv[1],"image1");
         ima2.capture_image(argv[2],"image2");
         logger.log_warn("Capturing images done");
-    
+
+        timer1.timer_init();
         mosaic.algo.ORB_feature_points(ima1,ima2);
+        timer1.timer_end();
         logger.log_warn("feature detection done");
-        mosaic.view_keypoints();
-        logger.log_warn("Keypoint display done");
+        // mosaic.view_keypoints();
+        // logger.log_warn("Keypoint display done");
+
+        printf("number of keypoints img1 : %d  img2 : %d  \n",static_cast<int>(mosaic.algo.keypoints_current_image.size()),static_cast<int>(mosaic.algo.keypoints_previous_image.size()));
+
+        timer2.timer_init();
         mosaic.algo.BF_matcher();
+        timer2.timer_end();
         logger.log_warn("feature matching done");
+
+        timer3.timer_init();
         mosaic.find_homography();
+        timer3.timer_end();
         logger.log_warn("homography done");
+
+        timer4.timer_init();
         mosaic.good_match_selection();
+        timer4.timer_end();
         logger.log_warn("goodmatch selection done");
         mosaic.find_actual_homography();
         logger.log_warn("homography according to good matches");
+
+        timer5.timer_init();
         mosaic.warp_image();
+        timer5.timer_end();
         logger.log_warn("image warping done");
+
+        timer6.timer_init();
         mosaic.image_blender();
+        timer6.timer_end();
         logger.log_warn("blending done");
+
+        printf("keypoint %f matcher %f homogra %f goodones %f warp %f blender %f\n",timer1.execution_time*1000,timer2.execution_time*1000,timer3.execution_time*1000,timer4.execution_time*1000,timer5.execution_time*1000,timer6.execution_time*1000);
         viewer.single_view_interrupted(mosaic.mosaic_image);
         cv::waitKey(15);
     }

@@ -63,6 +63,7 @@ class ImageMosaic : public ImageProcessing
         //Live mosaicing from video or camera 
         void live_mosaicing_video(CaptureFrame vid);
         void live_mosaicing_camera(CaptureFrame vid);
+        // void testing(CaptureFrame image);
         //Construcor
         ImageMosaic();
 
