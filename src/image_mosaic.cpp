@@ -279,7 +279,7 @@ void ImageMosaic::image_blender()
 int ImageMosaic::number_of_matches(CaptureFrame image1, CaptureFrame image2)
 {
     //feature points
-    algo.ORB_feature_points(image1,image2);
+    algo.AKAZE_feature_points(image1,image2);
     //Brute Force matching
     algo.BF_matcher();
     //homography calcualtion
@@ -411,7 +411,7 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
             {
                 
             if(use_dehaze){current_frame = algo.CLAHE_dehaze(current_frame);}
-            algo.ORB_feature_points(current_frame,previous_frame);
+            algo.AKAZE_feature_points(current_frame,previous_frame);
             algo.BF_matcher();
             try{find_homography();}
             catch(int err){logger.log_info("skipping frame");continue;}
@@ -542,7 +542,7 @@ void ImageMosaic::live_mosaicing_camera(CaptureFrame vid)
         {
             if(mosaic_trigger)
             {
-            algo.ORB_feature_points(current_frame,previous_frame);
+            algo.AKAZE_feature_points(current_frame,previous_frame);
             algo.BF_matcher();
             try{find_homography();}
             catch(int err){logger.log_info("skipping frame");continue;}

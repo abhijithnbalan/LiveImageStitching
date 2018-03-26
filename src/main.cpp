@@ -36,7 +36,7 @@ int main(int argc, char **argv) //The main Function
         ima2.capture_image(argv[2],"image2");
         logger.log_warn("Capturing images done");
     
-        mosaic.algo.ORB_feature_points(ima1,ima2);
+        mosaic.algo.AKAZE_feature_points(ima1,ima2);
         logger.log_warn("feature detection done");
         mosaic.view_keypoints();
         logger.log_warn("Keypoint display done");
