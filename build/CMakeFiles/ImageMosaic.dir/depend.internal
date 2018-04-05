@@ -5,7 +5,7 @@ CMakeFiles/ImageMosaic.dir/src/algorithm.cpp.o
  ../include/algorithm.h
  ../include/capture_frame.h
  ../include/logger.h
- /home/plankton/CodeMax/ImageMosaic/src/algorithm.cpp
+ /home/plankton/CodeMax/IMageMosaic/src/algorithm.cpp
  /usr/local/include/log4cpp/Appender.hh
  /usr/local/include/log4cpp/Category.hh
  /usr/local/include/log4cpp/CategoryStream.hh
@@ -155,7 +155,7 @@ CMakeFiles/ImageMosaic.dir/src/algorithm.cpp.o
 CMakeFiles/ImageMosaic.dir/src/capture_frame.cpp.o
  ../include/capture_frame.h
  ../include/logger.h
- /home/plankton/CodeMax/ImageMosaic/src/capture_frame.cpp
+ /home/plankton/CodeMax/IMageMosaic/src/capture_frame.cpp
  /usr/local/include/log4cpp/Appender.hh
  /usr/local/include/log4cpp/Category.hh
  /usr/local/include/log4cpp/CategoryStream.hh
@@ -309,7 +309,7 @@ CMakeFiles/ImageMosaic.dir/src/image_mosaic.cpp.o
  ../include/image_processing.h
  ../include/logger.h
  ../include/view_frame.h
- /home/plankton/CodeMax/ImageMosaic/src/image_mosaic.cpp
+ /home/plankton/CodeMax/IMageMosaic/src/image_mosaic.cpp
  /usr/local/include/log4cpp/Appender.hh
  /usr/local/include/log4cpp/Category.hh
  /usr/local/include/log4cpp/CategoryStream.hh
@@ -463,7 +463,7 @@ CMakeFiles/ImageMosaic.dir/src/image_processing.cpp.o
  ../include/logger.h
  ../include/timer.h
  ../include/view_frame.h
- /home/plankton/CodeMax/ImageMosaic/src/image_processing.cpp
+ /home/plankton/CodeMax/IMageMosaic/src/image_processing.cpp
  /usr/local/include/log4cpp/Appender.hh
  /usr/local/include/log4cpp/Category.hh
  /usr/local/include/log4cpp/CategoryStream.hh
@@ -611,7 +611,7 @@ CMakeFiles/ImageMosaic.dir/src/image_processing.cpp.o
  /usr/local/include/opencv2/xfeatures2d/nonfree.hpp
 CMakeFiles/ImageMosaic.dir/src/logger.cpp.o
  ../include/logger.h
- /home/plankton/CodeMax/ImageMosaic/src/logger.cpp
+ /home/plankton/CodeMax/IMageMosaic/src/logger.cpp
  /usr/local/include/log4cpp/Appender.hh
  /usr/local/include/log4cpp/AppenderSkeleton.hh
  /usr/local/include/log4cpp/BasicLayout.hh
@@ -648,7 +648,7 @@ CMakeFiles/ImageMosaic.dir/src/main.cpp.o
  ../include/image_processing.h
  ../include/logger.h
  ../include/view_frame.h
- /home/plankton/CodeMax/ImageMosaic/src/main.cpp
+ /home/plankton/CodeMax/IMageMosaic/src/main.cpp
  /usr/local/include/log4cpp/Appender.hh
  /usr/local/include/log4cpp/Category.hh
  /usr/local/include/log4cpp/CategoryStream.hh
@@ -800,7 +800,7 @@ CMakeFiles/ImageMosaic.dir/src/timer.cpp.o
  ../include/logger.h
  ../include/timer.h
  ../include/view_frame.h
- /home/plankton/CodeMax/ImageMosaic/src/timer.cpp
+ /home/plankton/CodeMax/IMageMosaic/src/timer.cpp
  /usr/local/include/log4cpp/Appender.hh
  /usr/local/include/log4cpp/Category.hh
  /usr/local/include/log4cpp/CategoryStream.hh
@@ -950,7 +950,7 @@ CMakeFiles/ImageMosaic.dir/src/view_frame.cpp.o
  ../include/capture_frame.h
  ../include/logger.h
  ../include/view_frame.h
- /home/plankton/CodeMax/ImageMosaic/src/view_frame.cpp
+ /home/plankton/CodeMax/IMageMosaic/src/view_frame.cpp
  /usr/local/include/log4cpp/Appender.hh
  /usr/local/include/log4cpp/Category.hh
  /usr/local/include/log4cpp/CategoryStream.hh

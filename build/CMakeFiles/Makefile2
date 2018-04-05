@@ -47,10 +47,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/plankton/CodeMax/ImageMosaic
+CMAKE_SOURCE_DIR = /home/plankton/CodeMax/IMageMosaic
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/plankton/CodeMax/ImageMosaic/build
+CMAKE_BINARY_DIR = /home/plankton/CodeMax/IMageMosaic/build
 
 #=============================================================================
 # Target rules for target CMakeFiles/ImageMosaic.dir
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/plankton/CodeMax/ImageMosaic/build
 CMakeFiles/ImageMosaic.dir/all:
 	$(MAKE) -f CMakeFiles/ImageMosaic.dir/build.make CMakeFiles/ImageMosaic.dir/depend
 	$(MAKE) -f CMakeFiles/ImageMosaic.dir/build.make CMakeFiles/ImageMosaic.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/plankton/CodeMax/ImageMosaic/build/CMakeFiles  1 2 3 4 5 6 7 8
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/plankton/CodeMax/IMageMosaic/build/CMakeFiles  1 2 3 4 5 6 7 8
 	@echo "Built target ImageMosaic"
 .PHONY : CMakeFiles/ImageMosaic.dir/all
 
@@ -69,9 +69,9 @@ all: CMakeFiles/ImageMosaic.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/ImageMosaic.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/plankton/CodeMax/ImageMosaic/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/plankton/CodeMax/IMageMosaic/build/CMakeFiles 8
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ImageMosaic.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/plankton/CodeMax/ImageMosaic/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/plankton/CodeMax/IMageMosaic/build/CMakeFiles 0
 .PHONY : CMakeFiles/ImageMosaic.dir/rule
 
 # Convenience name for target.

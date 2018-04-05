@@ -184,13 +184,13 @@ void ImageMosaic::warp_image()
     //Initializing big picture to accomodate the warped image and blending which will happen in later stage
     cv::Mat big_pic;
     big_pic.release();
-    big_pic = cv::Mat::zeros(3 * algo.previous_image.cols,3 * algo.previous_image.rows ,CV_8UC3);
+    big_pic = cv::Mat::zeros(3 * algo.previous_image.rows,3 * algo.previous_image.cols ,CV_8UC3);
     //Masks are needed for blending and also need to be warped like original image
     cv::Mat mask1(algo.current_image.size(), CV_8UC1, cv::Scalar::all(255));
     cv::Mat mask2(algo.previous_image.size(), CV_8UC1, cv::Scalar::all(255));
     
     //Offset is multiplied with homogrophy matrix to place the image in the center so that it can be stitched in any direction.
-    warp_offset = (cv::Mat_<double>(3,3) << 1, 0, algo.current_image.cols/2, 0, 1,algo.current_image.rows/2, 0, 0, 1);
+    warp_offset = (cv::Mat_<double>(3,3) << 1, 0, algo.current_image.cols, 0, 1,algo.current_image.rows, 0, 0, 1);
     
     cv::Mat effective_homography_matrix = warp_offset * homography_matrix;
     // std::cout<<effective_homography_matrix<<"\n";
@@ -215,7 +215,7 @@ void ImageMosaic::image_blender()
 
     //Creating feather blend for blending images with specified sharpness
     
-    cv::detail::FeatherBlender  blender(0.5f); //sharpness
+    cv::detail::FeatherBlender  blender(0.05f); //sharpness
 
     //Blender preparing
     blender.prepare(cv::Rect(0,0,std::max(algo.previous_image.cols,warped_image.cols),std::max(algo.previous_image.rows,warped_image.rows)));

@@ -4,14 +4,14 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/plankton/CodeMax/ImageMosaic/src/algorithm.cpp" "/home/plankton/CodeMax/ImageMosaic/build/CMakeFiles/ImageMosaic.dir/src/algorithm.cpp.o"
-  "/home/plankton/CodeMax/ImageMosaic/src/capture_frame.cpp" "/home/plankton/CodeMax/ImageMosaic/build/CMakeFiles/ImageMosaic.dir/src/capture_frame.cpp.o"
-  "/home/plankton/CodeMax/ImageMosaic/src/image_mosaic.cpp" "/home/plankton/CodeMax/ImageMosaic/build/CMakeFiles/ImageMosaic.dir/src/image_mosaic.cpp.o"
-  "/home/plankton/CodeMax/ImageMosaic/src/image_processing.cpp" "/home/plankton/CodeMax/ImageMosaic/build/CMakeFiles/ImageMosaic.dir/src/image_processing.cpp.o"
-  "/home/plankton/CodeMax/ImageMosaic/src/logger.cpp" "/home/plankton/CodeMax/ImageMosaic/build/CMakeFiles/ImageMosaic.dir/src/logger.cpp.o"
-  "/home/plankton/CodeMax/ImageMosaic/src/main.cpp" "/home/plankton/CodeMax/ImageMosaic/build/CMakeFiles/ImageMosaic.dir/src/main.cpp.o"
-  "/home/plankton/CodeMax/ImageMosaic/src/timer.cpp" "/home/plankton/CodeMax/ImageMosaic/build/CMakeFiles/ImageMosaic.dir/src/timer.cpp.o"
-  "/home/plankton/CodeMax/ImageMosaic/src/view_frame.cpp" "/home/plankton/CodeMax/ImageMosaic/build/CMakeFiles/ImageMosaic.dir/src/view_frame.cpp.o"
+  "/home/plankton/CodeMax/IMageMosaic/src/algorithm.cpp" "/home/plankton/CodeMax/IMageMosaic/build/CMakeFiles/ImageMosaic.dir/src/algorithm.cpp.o"
+  "/home/plankton/CodeMax/IMageMosaic/src/capture_frame.cpp" "/home/plankton/CodeMax/IMageMosaic/build/CMakeFiles/ImageMosaic.dir/src/capture_frame.cpp.o"
+  "/home/plankton/CodeMax/IMageMosaic/src/image_mosaic.cpp" "/home/plankton/CodeMax/IMageMosaic/build/CMakeFiles/ImageMosaic.dir/src/image_mosaic.cpp.o"
+  "/home/plankton/CodeMax/IMageMosaic/src/image_processing.cpp" "/home/plankton/CodeMax/IMageMosaic/build/CMakeFiles/ImageMosaic.dir/src/image_processing.cpp.o"
+  "/home/plankton/CodeMax/IMageMosaic/src/logger.cpp" "/home/plankton/CodeMax/IMageMosaic/build/CMakeFiles/ImageMosaic.dir/src/logger.cpp.o"
+  "/home/plankton/CodeMax/IMageMosaic/src/main.cpp" "/home/plankton/CodeMax/IMageMosaic/build/CMakeFiles/ImageMosaic.dir/src/main.cpp.o"
+  "/home/plankton/CodeMax/IMageMosaic/src/timer.cpp" "/home/plankton/CodeMax/IMageMosaic/build/CMakeFiles/ImageMosaic.dir/src/timer.cpp.o"
+  "/home/plankton/CodeMax/IMageMosaic/src/view_frame.cpp" "/home/plankton/CodeMax/IMageMosaic/build/CMakeFiles/ImageMosaic.dir/src/view_frame.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

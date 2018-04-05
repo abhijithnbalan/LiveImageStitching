@@ -1,1 +1,1 @@
-/home/plankton/CodeMax/ImageMosaic/build/CMakeFiles/ImageMosaic.dir
+/home/plankton/CodeMax/IMageMosaic/build/CMakeFiles/ImageMosaic.dir

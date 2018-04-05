@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/plankton/CodeMax/ImageMosaic
+CMAKE_SOURCE_DIR = /home/plankton/CodeMax/IMageMosaic
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/plankton/CodeMax/ImageMosaic/build
+CMAKE_BINARY_DIR = /home/plankton/CodeMax/IMageMosaic/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/ImageMosaic.dir/depend.make
@@ -51,17 +51,17 @@ include CMakeFiles/ImageMosaic.dir/flags.make
 
 CMakeFiles/ImageMosaic.dir/src/capture_frame.cpp.o: CMakeFiles/ImageMosaic.dir/flags.make
 CMakeFiles/ImageMosaic.dir/src/capture_frame.cpp.o: ../src/capture_frame.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/plankton/CodeMax/ImageMosaic/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/plankton/CodeMax/IMageMosaic/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ImageMosaic.dir/src/capture_frame.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ImageMosaic.dir/src/capture_frame.cpp.o -c /home/plankton/CodeMax/ImageMosaic/src/capture_frame.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ImageMosaic.dir/src/capture_frame.cpp.o -c /home/plankton/CodeMax/IMageMosaic/src/capture_frame.cpp
 
 CMakeFiles/ImageMosaic.dir/src/capture_frame.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ImageMosaic.dir/src/capture_frame.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/plankton/CodeMax/ImageMosaic/src/capture_frame.cpp > CMakeFiles/ImageMosaic.dir/src/capture_frame.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/plankton/CodeMax/IMageMosaic/src/capture_frame.cpp > CMakeFiles/ImageMosaic.dir/src/capture_frame.cpp.i
 
 CMakeFiles/ImageMosaic.dir/src/capture_frame.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ImageMosaic.dir/src/capture_frame.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/plankton/CodeMax/ImageMosaic/src/capture_frame.cpp -o CMakeFiles/ImageMosaic.dir/src/capture_frame.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/plankton/CodeMax/IMageMosaic/src/capture_frame.cpp -o CMakeFiles/ImageMosaic.dir/src/capture_frame.cpp.s
 
 CMakeFiles/ImageMosaic.dir/src/capture_frame.cpp.o.requires:
 .PHONY : CMakeFiles/ImageMosaic.dir/src/capture_frame.cpp.o.requires
@@ -74,17 +74,17 @@ CMakeFiles/ImageMosaic.dir/src/capture_frame.cpp.o.provides.build: CMakeFiles/Im
 
 CMakeFiles/ImageMosaic.dir/src/logger.cpp.o: CMakeFiles/ImageMosaic.dir/flags.make
 CMakeFiles/ImageMosaic.dir/src/logger.cpp.o: ../src/logger.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/plankton/CodeMax/ImageMosaic/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/plankton/CodeMax/IMageMosaic/build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ImageMosaic.dir/src/logger.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ImageMosaic.dir/src/logger.cpp.o -c /home/plankton/CodeMax/ImageMosaic/src/logger.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ImageMosaic.dir/src/logger.cpp.o -c /home/plankton/CodeMax/IMageMosaic/src/logger.cpp
 
 CMakeFiles/ImageMosaic.dir/src/logger.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ImageMosaic.dir/src/logger.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/plankton/CodeMax/ImageMosaic/src/logger.cpp > CMakeFiles/ImageMosaic.dir/src/logger.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/plankton/CodeMax/IMageMosaic/src/logger.cpp > CMakeFiles/ImageMosaic.dir/src/logger.cpp.i
 
 CMakeFiles/ImageMosaic.dir/src/logger.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ImageMosaic.dir/src/logger.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/plankton/CodeMax/ImageMosaic/src/logger.cpp -o CMakeFiles/ImageMosaic.dir/src/logger.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/plankton/CodeMax/IMageMosaic/src/logger.cpp -o CMakeFiles/ImageMosaic.dir/src/logger.cpp.s
 
 CMakeFiles/ImageMosaic.dir/src/logger.cpp.o.requires:
 .PHONY : CMakeFiles/ImageMosaic.dir/src/logger.cpp.o.requires
@@ -97,17 +97,17 @@ CMakeFiles/ImageMosaic.dir/src/logger.cpp.o.provides.build: CMakeFiles/ImageMosa
 
 CMakeFiles/ImageMosaic.dir/src/view_frame.cpp.o: CMakeFiles/ImageMosaic.dir/flags.make
 CMakeFiles/ImageMosaic.dir/src/view_frame.cpp.o: ../src/view_frame.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/plankton/CodeMax/ImageMosaic/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/plankton/CodeMax/IMageMosaic/build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ImageMosaic.dir/src/view_frame.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ImageMosaic.dir/src/view_frame.cpp.o -c /home/plankton/CodeMax/ImageMosaic/src/view_frame.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ImageMosaic.dir/src/view_frame.cpp.o -c /home/plankton/CodeMax/IMageMosaic/src/view_frame.cpp
 
 CMakeFiles/ImageMosaic.dir/src/view_frame.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ImageMosaic.dir/src/view_frame.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/plankton/CodeMax/ImageMosaic/src/view_frame.cpp > CMakeFiles/ImageMosaic.dir/src/view_frame.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/plankton/CodeMax/IMageMosaic/src/view_frame.cpp > CMakeFiles/ImageMosaic.dir/src/view_frame.cpp.i
 
 CMakeFiles/ImageMosaic.dir/src/view_frame.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ImageMosaic.dir/src/view_frame.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/plankton/CodeMax/ImageMosaic/src/view_frame.cpp -o CMakeFiles/ImageMosaic.dir/src/view_frame.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/plankton/CodeMax/IMageMosaic/src/view_frame.cpp -o CMakeFiles/ImageMosaic.dir/src/view_frame.cpp.s
 
 CMakeFiles/ImageMosaic.dir/src/view_frame.cpp.o.requires:
 .PHONY : CMakeFiles/ImageMosaic.dir/src/view_frame.cpp.o.requires
@@ -120,17 +120,17 @@ CMakeFiles/ImageMosaic.dir/src/view_frame.cpp.o.provides.build: CMakeFiles/Image
 
 CMakeFiles/ImageMosaic.dir/src/algorithm.cpp.o: CMakeFiles/ImageMosaic.dir/flags.make
 CMakeFiles/ImageMosaic.dir/src/algorithm.cpp.o: ../src/algorithm.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/plankton/CodeMax/ImageMosaic/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/plankton/CodeMax/IMageMosaic/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ImageMosaic.dir/src/algorithm.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ImageMosaic.dir/src/algorithm.cpp.o -c /home/plankton/CodeMax/ImageMosaic/src/algorithm.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ImageMosaic.dir/src/algorithm.cpp.o -c /home/plankton/CodeMax/IMageMosaic/src/algorithm.cpp
 
 CMakeFiles/ImageMosaic.dir/src/algorithm.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ImageMosaic.dir/src/algorithm.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/plankton/CodeMax/ImageMosaic/src/algorithm.cpp > CMakeFiles/ImageMosaic.dir/src/algorithm.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/plankton/CodeMax/IMageMosaic/src/algorithm.cpp > CMakeFiles/ImageMosaic.dir/src/algorithm.cpp.i
 
 CMakeFiles/ImageMosaic.dir/src/algorithm.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ImageMosaic.dir/src/algorithm.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/plankton/CodeMax/ImageMosaic/src/algorithm.cpp -o CMakeFiles/ImageMosaic.dir/src/algorithm.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/plankton/CodeMax/IMageMosaic/src/algorithm.cpp -o CMakeFiles/ImageMosaic.dir/src/algorithm.cpp.s
 
 CMakeFiles/ImageMosaic.dir/src/algorithm.cpp.o.requires:
 .PHONY : CMakeFiles/ImageMosaic.dir/src/algorithm.cpp.o.requires
@@ -143,17 +143,17 @@ CMakeFiles/ImageMosaic.dir/src/algorithm.cpp.o.provides.build: CMakeFiles/ImageM
 
 CMakeFiles/ImageMosaic.dir/src/timer.cpp.o: CMakeFiles/ImageMosaic.dir/flags.make
 CMakeFiles/ImageMosaic.dir/src/timer.cpp.o: ../src/timer.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/plankton/CodeMax/ImageMosaic/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/plankton/CodeMax/IMageMosaic/build/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ImageMosaic.dir/src/timer.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ImageMosaic.dir/src/timer.cpp.o -c /home/plankton/CodeMax/ImageMosaic/src/timer.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ImageMosaic.dir/src/timer.cpp.o -c /home/plankton/CodeMax/IMageMosaic/src/timer.cpp
 
 CMakeFiles/ImageMosaic.dir/src/timer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ImageMosaic.dir/src/timer.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/plankton/CodeMax/ImageMosaic/src/timer.cpp > CMakeFiles/ImageMosaic.dir/src/timer.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/plankton/CodeMax/IMageMosaic/src/timer.cpp > CMakeFiles/ImageMosaic.dir/src/timer.cpp.i
 
 CMakeFiles/ImageMosaic.dir/src/timer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ImageMosaic.dir/src/timer.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/plankton/CodeMax/ImageMosaic/src/timer.cpp -o CMakeFiles/ImageMosaic.dir/src/timer.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/plankton/CodeMax/IMageMosaic/src/timer.cpp -o CMakeFiles/ImageMosaic.dir/src/timer.cpp.s
 
 CMakeFiles/ImageMosaic.dir/src/timer.cpp.o.requires:
 .PHONY : CMakeFiles/ImageMosaic.dir/src/timer.cpp.o.requires
@@ -166,17 +166,17 @@ CMakeFiles/ImageMosaic.dir/src/timer.cpp.o.provides.build: CMakeFiles/ImageMosai
 
 CMakeFiles/ImageMosaic.dir/src/image_processing.cpp.o: CMakeFiles/ImageMosaic.dir/flags.make
 CMakeFiles/ImageMosaic.dir/src/image_processing.cpp.o: ../src/image_processing.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/plankton/CodeMax/ImageMosaic/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/plankton/CodeMax/IMageMosaic/build/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ImageMosaic.dir/src/image_processing.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ImageMosaic.dir/src/image_processing.cpp.o -c /home/plankton/CodeMax/ImageMosaic/src/image_processing.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ImageMosaic.dir/src/image_processing.cpp.o -c /home/plankton/CodeMax/IMageMosaic/src/image_processing.cpp
 
 CMakeFiles/ImageMosaic.dir/src/image_processing.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ImageMosaic.dir/src/image_processing.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/plankton/CodeMax/ImageMosaic/src/image_processing.cpp > CMakeFiles/ImageMosaic.dir/src/image_processing.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/plankton/CodeMax/IMageMosaic/src/image_processing.cpp > CMakeFiles/ImageMosaic.dir/src/image_processing.cpp.i
 
 CMakeFiles/ImageMosaic.dir/src/image_processing.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ImageMosaic.dir/src/image_processing.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/plankton/CodeMax/ImageMosaic/src/image_processing.cpp -o CMakeFiles/ImageMosaic.dir/src/image_processing.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/plankton/CodeMax/IMageMosaic/src/image_processing.cpp -o CMakeFiles/ImageMosaic.dir/src/image_processing.cpp.s
 
 CMakeFiles/ImageMosaic.dir/src/image_processing.cpp.o.requires:
 .PHONY : CMakeFiles/ImageMosaic.dir/src/image_processing.cpp.o.requires
@@ -189,17 +189,17 @@ CMakeFiles/ImageMosaic.dir/src/image_processing.cpp.o.provides.build: CMakeFiles
 
 CMakeFiles/ImageMosaic.dir/src/image_mosaic.cpp.o: CMakeFiles/ImageMosaic.dir/flags.make
 CMakeFiles/ImageMosaic.dir/src/image_mosaic.cpp.o: ../src/image_mosaic.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/plankton/CodeMax/ImageMosaic/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/plankton/CodeMax/IMageMosaic/build/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ImageMosaic.dir/src/image_mosaic.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ImageMosaic.dir/src/image_mosaic.cpp.o -c /home/plankton/CodeMax/ImageMosaic/src/image_mosaic.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ImageMosaic.dir/src/image_mosaic.cpp.o -c /home/plankton/CodeMax/IMageMosaic/src/image_mosaic.cpp
 
 CMakeFiles/ImageMosaic.dir/src/image_mosaic.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ImageMosaic.dir/src/image_mosaic.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/plankton/CodeMax/ImageMosaic/src/image_mosaic.cpp > CMakeFiles/ImageMosaic.dir/src/image_mosaic.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/plankton/CodeMax/IMageMosaic/src/image_mosaic.cpp > CMakeFiles/ImageMosaic.dir/src/image_mosaic.cpp.i
 
 CMakeFiles/ImageMosaic.dir/src/image_mosaic.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ImageMosaic.dir/src/image_mosaic.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/plankton/CodeMax/ImageMosaic/src/image_mosaic.cpp -o CMakeFiles/ImageMosaic.dir/src/image_mosaic.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/plankton/CodeMax/IMageMosaic/src/image_mosaic.cpp -o CMakeFiles/ImageMosaic.dir/src/image_mosaic.cpp.s
 
 CMakeFiles/ImageMosaic.dir/src/image_mosaic.cpp.o.requires:
 .PHONY : CMakeFiles/ImageMosaic.dir/src/image_mosaic.cpp.o.requires
@@ -212,17 +212,17 @@ CMakeFiles/ImageMosaic.dir/src/image_mosaic.cpp.o.provides.build: CMakeFiles/Ima
 
 CMakeFiles/ImageMosaic.dir/src/main.cpp.o: CMakeFiles/ImageMosaic.dir/flags.make
 CMakeFiles/ImageMosaic.dir/src/main.cpp.o: ../src/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/plankton/CodeMax/ImageMosaic/build/CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/plankton/CodeMax/IMageMosaic/build/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ImageMosaic.dir/src/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ImageMosaic.dir/src/main.cpp.o -c /home/plankton/CodeMax/ImageMosaic/src/main.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ImageMosaic.dir/src/main.cpp.o -c /home/plankton/CodeMax/IMageMosaic/src/main.cpp
 
 CMakeFiles/ImageMosaic.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ImageMosaic.dir/src/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/plankton/CodeMax/ImageMosaic/src/main.cpp > CMakeFiles/ImageMosaic.dir/src/main.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/plankton/CodeMax/IMageMosaic/src/main.cpp > CMakeFiles/ImageMosaic.dir/src/main.cpp.i
 
 CMakeFiles/ImageMosaic.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ImageMosaic.dir/src/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/plankton/CodeMax/ImageMosaic/src/main.cpp -o CMakeFiles/ImageMosaic.dir/src/main.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/plankton/CodeMax/IMageMosaic/src/main.cpp -o CMakeFiles/ImageMosaic.dir/src/main.cpp.s
 
 CMakeFiles/ImageMosaic.dir/src/main.cpp.o.requires:
 .PHONY : CMakeFiles/ImageMosaic.dir/src/main.cpp.o.requires
@@ -344,6 +344,6 @@ CMakeFiles/ImageMosaic.dir/clean:
 .PHONY : CMakeFiles/ImageMosaic.dir/clean
 
 CMakeFiles/ImageMosaic.dir/depend:
-	cd /home/plankton/CodeMax/ImageMosaic/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/plankton/CodeMax/ImageMosaic /home/plankton/CodeMax/ImageMosaic /home/plankton/CodeMax/ImageMosaic/build /home/plankton/CodeMax/ImageMosaic/build /home/plankton/CodeMax/ImageMosaic/build/CMakeFiles/ImageMosaic.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/plankton/CodeMax/IMageMosaic/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/plankton/CodeMax/IMageMosaic /home/plankton/CodeMax/IMageMosaic /home/plankton/CodeMax/IMageMosaic/build /home/plankton/CodeMax/IMageMosaic/build /home/plankton/CodeMax/IMageMosaic/build/CMakeFiles/ImageMosaic.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ImageMosaic.dir/depend
 
