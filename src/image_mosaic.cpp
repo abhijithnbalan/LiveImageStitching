@@ -205,6 +205,44 @@ void ImageMosaic::warp_image()
     logger.log_info("warping successful");
     return;
 }
+void ImageMosaic::warp_image_live()
+{
+    if(!big_pic.data)
+    {
+        big_pic = cv::Mat::zeros(3 * algo.current_image.rows, 3 * algo.current_image.cols ,CV_8UC3);
+    }
+    
+    //Masks are needed for blending and also need to be warped like original image
+    cv::Mat mask1(algo.current_image.size(), CV_8UC1, cv::Scalar::all(255));
+    cv::Mat mask2(algo.previous_image.size(), CV_8UC1, cv::Scalar::all(255));
+    
+    //Offset is multiplied with homogrophy matrix to place the image in the center so that it can be stitched in any direction.
+    if(!warp_offset.data)
+    {
+        warp_offset = (cv::Mat_<double>(3,3) << 1, 0, algo.current_image.cols, 0, 1,algo.current_image.rows, 0, 0, 1);
+    }
+    // std::cout<<prev_homography<<"\n";
+    // std::cout<<homography_matrix<<"\n";
+    
+    cv::Mat effective_homography_matrix = warp_offset *  prev_homography * homography_matrix.clone();
+    // std::cout<<effective_homography_matrix<<"\n";
+    // blend_offset = (cv::Mat_<double>(3,3) << 1, 0, -homography_matrix.at<int>(0,2), 0, 1,-homography_matrix.at<int>(1,2), 0, 0, 1);
+    //Warping the images according to homography + translation
+    warpPerspective(algo.current_image, warped_image,effective_homography_matrix,big_pic.size());
+    warpPerspective(algo.previous_image, algo.previous_image,blend_offset,big_pic.size());
+    warpPerspective(mask1, warped_mask,effective_homography_matrix,big_pic.size());
+    warpPerspective(mask2, original_mask, blend_offset,big_pic.size());
+    
+    if(blend_once)
+    {
+        blend_offset = (cv::Mat_<double>(3,3) << 1, 0, 0, 0, 1,0, 0, 0, 1);
+    }
+    blend_once = false;
+    //logging
+    logger.log_info("warping successful");
+    return;
+
+}
 
 //Blending the two images together
 void ImageMosaic::image_blender()
@@ -264,8 +302,7 @@ void ImageMosaic::image_blender()
         logger.log_warn("Bad mapping identified. Negleting frame");
         return;
     }
-
-    //Cropping the image
+ //Cropping the image
     cv::Mat cropped_image = mosaic(bounding_rect).clone();
     // Loading the image to public CaptureFrame object
     mosaic_image.reload_image(cropped_image,"mosaic");
@@ -273,6 +310,113 @@ void ImageMosaic::image_blender()
     //logging
     logger.log_info("Blending and cropping successful");
     return;
+}
+
+void ImageMosaic::image_blender_live()
+{
+    //Converting into 16S for blending
+    algo.previous_image.convertTo(algo.previous_image, CV_16S);
+    warped_image.convertTo(warped_image, CV_16S);
+
+    //Creating feather blend for blending images with specified sharpness
+    
+    cv::detail::FeatherBlender  blender(0.05f); //sharpness
+
+    //Blender preparing
+    blender.prepare(cv::Rect(0,0,std::max(algo.previous_image.cols,warped_image.cols),std::max(algo.previous_image.rows,warped_image.rows)));
+    
+    //Feeding the images with points to blend
+    blender.feed(algo.previous_image, original_mask, cv::Point2f (0,0));
+    blender.feed(warped_image, warped_mask, cv::Point2f (0,0));
+    
+    //Blending the fed images
+    cv::Mat result_s, result_mask;
+    blender.blend(result_s, result_mask);
+    result_s.convertTo(mosaic, CV_8UC3);
+    cv::Mat gray_mosaic = cv::Mat::zeros(mosaic.size(),CV_8UC1);
+    cv::cvtColor(mosaic,gray_mosaic,cv::COLOR_BGR2GRAY);
+    logger.log_info("Blending successful");
+    // cv::imshow("result",mosaic);
+    // cv::waitKey(0);
+    
+    //Find the contour with largest area to crop the imges out from the big picture
+    int largest_area=0;
+    int largest_contour_index=0;
+    bounding_rect = cv::Rect(0,0,0,0);
+    std::vector<std::vector<cv::Point> > contours; // Vector for storing contour
+    std::vector<cv::Vec4i> hierarchy;
+    cv::findContours( gray_mosaic, contours, hierarchy,CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE );
+    // iterate through each contour.
+    for( int i = 0; i< contours.size(); i++ )
+    {
+        //  Find the area of contour
+        double a=contourArea( contours[i],false); 
+        if(a>largest_area)
+        {
+            largest_area=a;
+            // Store the index of largest contour
+            largest_contour_index = i;            
+            // Find the bounding rectangle for biggest contour
+            bounding_rect=boundingRect(contours[i]);
+        }   
+    }
+    if(largest_area < (previous_area * 1.5) || previous_area == 0)
+    {
+        previous_area = largest_area;
+    }
+    else
+    {
+        logger.log_warn("Bad mapping identified. Negleting frame");
+        return;
+    }
+
+    int new_row = big_pic.rows;
+    int new_col = big_pic.cols;
+    if(bounding_rect.x < big_pic.cols/8)
+    {
+        logger.log_info("big picture expanded to left");
+        warp_offset.at<double>(0,2) = warp_offset.at<double>(0,2) + big_pic.cols/8;
+        blend_offset.at<double>(0,2) = blend_offset.at<double>(0,2) + big_pic.cols/8;
+        blend_once = true;
+        new_col = new_col + big_pic.cols/8;
+    }
+    if((bounding_rect.x + bounding_rect.width) > (7 * big_pic.cols/8))
+    {
+        logger.log_info("big picture expanded to right");
+        new_col = new_col + big_pic.cols/8;
+    }
+    if(bounding_rect.y < big_pic.rows/8)
+    {
+        logger.log_info("big picture expanded to up");
+        warp_offset.at<double>(1,2) = warp_offset.at<double>(1,2) + big_pic.rows/8;
+        blend_offset.at<double>(1,2) = blend_offset.at<double>(1,2) + big_pic.rows/8;
+        blend_once = true;
+        new_row = new_row + big_pic.rows/8;
+    }
+    if((bounding_rect.y + bounding_rect.height) > (7 * big_pic.rows/8))
+    {
+        logger.log_info("big picture expanded to down");
+        new_row = new_row + big_pic.rows/8;
+    }
+
+    big_pic = cv::Mat::zeros(new_row, new_col ,CV_8UC3);
+
+    //Cropping the image
+    cv::Mat cropped_image = mosaic(bounding_rect).clone();
+    // Loading the image to public CaptureFrame object
+    mosaic_image.reload_image(mosaic,"mosaic");
+
+    //logging
+    logger.log_info("Blending successful");
+    return;
+}
+
+CaptureFrame ImageMosaic::crop_live()
+{
+    cv::Mat full_image = mosaic_image.retrieve_image().clone();
+    cv::Mat cropped_image = full_image(bounding_rect).clone();
+    CaptureFrame output(cropped_image,"cropped mosaic");
+    return output;
 }
 
 //finding the number of matches between two images
@@ -389,7 +533,7 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
         catch(...){logger.log_warn("video done already");return;}
 
         ViewFrame viewer;
-
+        blend_once = true;
         // current frame and previous frames will be used to stitch images
         CaptureFrame current_frame;
         CaptureFrame previous_frame;
@@ -404,6 +548,11 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
             catch(...){logger.log_warn("video ended ");return;}
             current_frame = CaptureFrame(vid.retrieve_image(),"current frame");
            if(use_dehaze){previous_frame = algo.CLAHE_dehaze(previous_frame);}
+        //Initialising homographies used in live mosaic
+        prev_homography = (cv::Mat_<double>(3,3) << 1, 0, 0, 0, 1,0, 0, 0, 1);
+        blend_offset = (cv::Mat_<double>(3,3) << 1, 0, current_frame.retrieve_image().cols, 0, 1,current_frame.retrieve_image().rows, 0, 0, 1);
+
+
         // stitching in loop and number of images are counted
         for(image_count = 0; ; image_count++)
         {
@@ -421,10 +570,22 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
             //Stitch images only if more than 10 good matches are obtained. 4 is the theoratical minimum.
             if(matches > 10)
             {
+
+                if(mosaic_image.retrieve_image().data)
+                {
+                    algo.previous_image.release();
+                    algo.current_image.release();
+                    algo.previous_image = mosaic_image.retrieve_image().clone();
+                    algo.current_image = current_frame.retrieve_image().clone();
+                }
+
                 try{find_actual_homography();}
                 catch(int err){logger.log_info("skipping frame");continue;}
-                warp_image();
-                image_blender();
+                warp_image_live();
+                image_blender_live();
+
+                prev_homography =  prev_homography * homography_matrix;
+                homography_matrix.release();
 
                 //Show live mosaic result 
                 viewer.single_view_uninterrupted(mosaic_image,80);
@@ -434,13 +595,10 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
                 try
                 {
                     vid.frame_extraction(5);
-                    if(mosaic_image.retrieve_image().data)
-                    {
-                        previous_frame.reload_image(mosaic_image.retrieve_image().clone(),"mosaic as first image");
-                    }
-                    else previous_frame.reload_image(current_frame.retrieve_image().clone(),"mosaic as first image");
                     
-                    current_frame.reload_image(vid.retrieve_image(),"current image");
+                    previous_frame.reload_image(current_frame.retrieve_image().clone(),"mosaic as first image");
+                    
+                    current_frame.reload_image(vid.retrieve_image(),"latest frame");
                 }
                 catch(...)
                 {

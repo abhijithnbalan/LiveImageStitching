@@ -14,12 +14,16 @@ class ImageMosaic : public ImageProcessing
     private:
         ViewFrame viewer;// can be used anywhere within the class to show output
         std::vector<cv::Mat> image_vector;//used for opencv stitcher
-        cv::Mat homography_matrix;
+        cv::Mat homography_matrix,prev_homography;
         std::vector<cv::DMatch> good_matches;
         std::vector<cv::Point2d> good_matched_current_image,good_matched_previous_image;
-        cv::Mat original_mask,warped_image, warped_mask;
+        cv::Mat original_mask,warped_image, warped_mask,blend_offset;
         bool success_stitch;
         int previous_area;
+        cv::Rect bounding_rect;
+        cv::Mat big_pic;
+        bool blend_once;
+
         Logger logger;//Can be used everywhere inside the class
         
     protected:
@@ -45,8 +49,11 @@ class ImageMosaic : public ImageProcessing
         void view_matches();
         //Warping images according to the homography matrix
         void warp_image();
+        void warp_image_live();
         //blending the two images to get final single image : feather blending is used
         void image_blender();
+        void image_blender_live();
+        CaptureFrame crop_live();
         //Image vector maker : makes image vecotr from video or set of images passed as arguments
         void image_vector_maker(int argc ,char **argv);
         void image_stream_recorder(CaptureFrame video,int frame_rate);

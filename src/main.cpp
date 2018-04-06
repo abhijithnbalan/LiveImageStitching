@@ -109,8 +109,8 @@ int main(int argc, char **argv) //The main Function
         logger.log_warn("Mosaicing Completed ");
         viewer.single_view_interrupted(mosaic.mosaic_image);
         //Writing the mosaic image to disk
-        cv::Mat output = mosaic.mosaic_image.retrieve_image(); 
-        cv::imwrite("Mosaic_image.jpg",output);
+        CaptureFrame output = mosaic.crop_live(); 
+        cv::imwrite("Mosaic_image.jpg",output.retrieve_image());
         logger.log_info("Image written to disk");
         cv::waitKey(15);
     }
