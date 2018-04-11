@@ -89,7 +89,6 @@ int main(int argc, char **argv) //The main Function
         argv = argv + 1;
         logger.log_warn("live mosaic mode");
         CaptureFrame vid;
-        std::cout<<argv[1]<<"\n";
         std::istringstream ss(argv[1]);
         int camera_port;
         if (!(ss >> camera_port))
@@ -106,11 +105,12 @@ int main(int argc, char **argv) //The main Function
         // mosaic.display_image_vector();
         // mosaic.Opencv_Stitcher();
         
-        logger.log_warn("Mosaicing Completed ");
+        logger.log_info("Mosaicing Completed ");
         viewer.single_view_interrupted(mosaic.mosaic_image);
         //Writing the mosaic image to disk
         CaptureFrame output = mosaic.crop_live(); 
         cv::imwrite("Mosaic_image.jpg",output.retrieve_image());
+        cv::imshow("output is the is of the",output.retrieve_image());
         logger.log_info("Image written to disk");
         cv::waitKey(15);
     }

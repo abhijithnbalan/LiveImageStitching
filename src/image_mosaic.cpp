@@ -335,7 +335,6 @@ void ImageMosaic::image_blender_live()
     result_s.convertTo(mosaic, CV_8UC3);
     cv::Mat gray_mosaic = cv::Mat::zeros(mosaic.size(),CV_8UC1);
     cv::cvtColor(mosaic,gray_mosaic,cv::COLOR_BGR2GRAY);
-    logger.log_info("Blending successful");
     // cv::imshow("result",mosaic);
     // cv::waitKey(0);
     
@@ -554,7 +553,7 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
 
 
         // stitching in loop and number of images are counted
-        for(image_count = 0; ; image_count++)
+        for(image_count = 0; ;)
         {
             if(mosaic_trigger)
             {
@@ -563,7 +562,7 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
             algo.AKAZE_feature_points(current_frame,previous_frame);
             algo.BF_matcher();
             try{find_homography();}
-            catch(int err){logger.log_info("skipping frame");continue;}
+            catch(int err){logger.log_info("Couldn't Find Homography. Skipping frame");continue;}
             good_match_selection();
             matches = good_matches.size();
 
@@ -580,7 +579,7 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
                 }
 
                 try{find_actual_homography();}
-                catch(int err){logger.log_info("skipping frame");continue;}
+                catch(...){logger.log_info("skipping frame");continue;}
                 warp_image_live();
                 image_blender_live();
 
@@ -588,6 +587,7 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
                 homography_matrix.release();
 
                 //Show live mosaic result 
+                image_count++;
                 viewer.single_view_uninterrupted(mosaic_image,80);
                 cv::waitKey(10);
 
@@ -678,6 +678,8 @@ void ImageMosaic::live_mosaicing_camera(CaptureFrame vid)
         try{vid.frame_extraction();}
         catch(...){logger.log_error("Camera stopped working. Exiting");return;}
 
+        ViewFrame viewer;
+        blend_once = true;
         // current frame and previous frames will be used to stitch images
         CaptureFrame current_frame;
         CaptureFrame previous_frame;
@@ -695,25 +697,68 @@ void ImageMosaic::live_mosaicing_camera(CaptureFrame vid)
             catch(...){logger.log_error("Camera stopped working ");return;}
             current_frame = CaptureFrame(vid.retrieve_image(),"current frame");
 
+        //Initialising homographies used in live mosaic
+        prev_homography = (cv::Mat_<double>(3,3) << 1, 0, 0, 0, 1,0, 0, 0, 1);
+        blend_offset = (cv::Mat_<double>(3,3) << 1, 0, current_frame.retrieve_image().cols, 0, 1,current_frame.retrieve_image().rows, 0, 0, 1);
+
+
         // stitching in loop and number of images are counted
         for(image_count = 0; ;)
         {
+            char c = (char)cv::waitKey(30);
+            if(c == 116 || c == 84 || stop_mosaic)//checking for 't' or 'T' to stop mosaicing
+            {
+                mosaic_trigger = !mosaic_trigger;
+                logger.log_warn("User interruption. toggling mosaic state..");
+                continue;
+            }
+            else if(c == 114 || c == 82 || reset_mosaic)//Checking for 'r' or 'R' to reset the mosaic image.
+            {
+                logger.log_warn("User interruption. resetting the image..");
+                mosaic_image.clear();
+                vid.frame_extraction();
+                mosaic_image = current_frame;
+                previous_frame = current_frame;
+                image_count = 1;
+                continue;
+            }
+            if(c == 115 || c == 83 || stop_mosaic)//checking for 's' or 'S' to stop mosaicing
+            {
+                mosaic_trigger = !mosaic_trigger;//Toggling the current value in mosaic_trigger
+                logger.log_warn("User interruption. stopping..");
+                break;
+            }
             if(mosaic_trigger)
             {
             algo.AKAZE_feature_points(current_frame,previous_frame);
             algo.BF_matcher();
             try{find_homography();}
-            catch(int err){logger.log_info("skipping frame");continue;}
+            catch(...){logger.log_warn("Couldn't Find Homography. Skipping frame");continue;}
             good_match_selection();
             matches = good_matches.size();
 
             //Stitch images only if more than 10 good matches are obtained. 4 is the theoratical minimum.
             if(matches > 10)
             {
+                if(mosaic_image.retrieve_image().data)
+                {
+                    algo.previous_image.release();
+                    algo.current_image.release();
+                    algo.previous_image = mosaic_image.retrieve_image().clone();
+                    algo.current_image = current_frame.retrieve_image().clone();
+                }
+
                 try{find_actual_homography();}
-                catch(int err){logger.log_info("skipping frame");continue;}
-                warp_image();
-                image_blender();
+                catch(...){logger.log_info("skipping frame");continue;}
+                try
+                {
+                    warp_image_live();
+                    image_blender_live();
+                }
+                catch(...){logger.log_warn("Image couldn't be mapped. Skipping frame");continue;}
+
+                prev_homography =  prev_homography * homography_matrix;
+                homography_matrix.release();
 
                 //Show live mosaic result 
                 image_count++;
@@ -726,13 +771,10 @@ void ImageMosaic::live_mosaicing_camera(CaptureFrame vid)
                     usleep(50000);
                     //delay
                     vid.frame_extraction();
-                    if(mosaic_image.retrieve_image().data)
-                    {
-                        previous_frame.reload_image(mosaic_image.retrieve_image().clone(),"mosaic as first image");
-                    }
-                    else previous_frame.reload_image(current_frame.retrieve_image().clone(),"current frame as first image");
                     
-                    current_frame.reload_image(vid.retrieve_image(),"current image");
+                    previous_frame.reload_image(current_frame.retrieve_image().clone(),"current frame as first image");
+                    
+                    current_frame.reload_image(vid.retrieve_image(),"latest frame");
                 }
                 catch(...)
                 {
@@ -763,28 +805,7 @@ void ImageMosaic::live_mosaicing_camera(CaptureFrame vid)
             vid.frame_extraction();
             viewer.single_view_uninterrupted(vid);
         }
-            char c = (char)cv::waitKey(30);
-            if(c == 116 || c == 84 || stop_mosaic)//checking for 't' or 'T' to stop mosaicing
-            {
-                mosaic_trigger = !mosaic_trigger;
-                logger.log_warn("User interruption. toggling mosaic state..");
-                continue;
-            }
-            else if(c == 114 || c == 82 || reset_mosaic)//Checking for 'r' or 'R' to reset the mosaic image.
-            {
-                logger.log_warn("User interruption. resetting the image..");
-                mosaic_image.clear();
-                vid.frame_extraction();
-                mosaic_image = current_frame;
-                previous_frame = current_frame;
-                image_count = 1;
-                continue;
-            }
-            if(c == 115 || c == 83 || stop_mosaic)//checking for 's' or 'S' to stop mosaicing
-            {
-                logger.log_warn("User interruption. stopping..");
-                break;
-            }
+            
             
         }
         logger.log_warn("Image mosaicing completed");
