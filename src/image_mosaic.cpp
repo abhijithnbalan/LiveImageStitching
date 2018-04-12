@@ -62,6 +62,7 @@ ImageMosaic::ImageMosaic()
     image_count = 0;
     success_stitch = false;
     stop_mosaic = false;
+    mosaic_state = false;
     reset_mosaic = false;
     use_dehaze = false;
     mosaic_trigger = false;
@@ -528,8 +529,15 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
 {
         //live mosaicing is used to stitch imges in realtme
         //extracting frames
-        try{vid.frame_extraction(5);}
-        catch(...){logger.log_warn("video done already");return;}
+        try
+        {
+            vid.frame_extraction(5);
+        }
+        catch(...)
+        {
+            logger.log_warn("video done already");
+            return;
+        }
 
         ViewFrame viewer;
         blend_once = true;
@@ -540,13 +548,30 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
         int matches = 0;
 
         //Extracting frames and loading it in current and previous images
-        try{vid.frame_extraction(5);}
-            catch(...){logger.log_warn("video ended ");return;}
-            previous_frame = CaptureFrame(vid.retrieve_image(),"previous frame");
-            try{vid.frame_extraction(5);}
-            catch(...){logger.log_warn("video ended ");return;}
-            current_frame = CaptureFrame(vid.retrieve_image(),"current frame");
-           if(use_dehaze){previous_frame = algo.CLAHE_dehaze(previous_frame);}
+        try
+        {
+            vid.frame_extraction(5);
+        }
+        catch (...)
+        {
+            logger.log_warn("video ended ");
+            return;
+        }
+        previous_frame = CaptureFrame(vid.retrieve_image(), "previous frame");
+        try
+        {
+            vid.frame_extraction(5);
+        }
+        catch (...)
+        {
+            logger.log_warn("video ended ");
+            return;
+        }
+        current_frame = CaptureFrame(vid.retrieve_image(), "current frame");
+        if (use_dehaze)
+        {
+            previous_frame = algo.CLAHE_dehaze(previous_frame);
+        }
         //Initialising homographies used in live mosaic
         prev_homography = (cv::Mat_<double>(3,3) << 1, 0, 0, 0, 1,0, 0, 0, 1);
         blend_offset = (cv::Mat_<double>(3,3) << 1, 0, current_frame.retrieve_image().cols, 0, 1,current_frame.retrieve_image().rows, 0, 0, 1);
@@ -555,7 +580,40 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
         // stitching in loop and number of images are counted
         for(image_count = 0; ;)
         {
-            if(mosaic_trigger)
+            char c = (char)cv::waitKey(30);
+            if(c == 116 || c == 84 || mosaic_trigger)//checking for 't' or 'T' to toggle the trigger
+            {
+                if(mosaic_trigger)
+                {
+                    mosaic_trigger = !mosaic_trigger;//Toggling the current value in mosaic_trigger
+                }
+                mosaic_state = !mosaic_state;
+                logger.log_warn("User interruption. Toggling mosaic state..");
+                continue;
+            }
+            else if(c == 114 || c == 82 || reset_mosaic)//Checking for 'r' or 'R' to reset the mosaic image.
+            {
+                if(reset_mosaic)
+                {
+                    reset_mosaic = !reset_mosaic;
+                }
+                logger.log_warn("User interruption. resetting the image..");
+                mosaic_image.clear();
+                prev_homography = (cv::Mat_<double>(3,3) << 1, 0, 0, 0, 1,0, 0, 0, 1);
+                blend_offset = (cv::Mat_<double>(3,3) << 1, 0, current_frame.retrieve_image().cols, 0, 1,current_frame.retrieve_image().rows, 0, 0, 1);
+                blend_once = true;
+                // mosaic_image = current_frame;
+                // previous_frame = current_frame;
+                image_count = 1;
+                continue;
+            }
+            else if(c == 115 || c == 83 || stop_mosaic)//checking for 's' or 'S' to stop mosaicing
+            {
+                stop_mosaic = !stop_mosaic;
+                logger.log_warn("User interruption. Stopping mosaic..");
+                break;
+            }
+            if(mosaic_state)
             {
                 
             if(use_dehaze){current_frame = algo.CLAHE_dehaze(current_frame);}
@@ -596,7 +654,7 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
                 {
                     vid.frame_extraction(5);
                     
-                    previous_frame.reload_image(current_frame.retrieve_image().clone(),"mosaic as first image");
+                    previous_frame.reload_image(current_frame.retrieve_image().clone(),"swap image");
                     
                     current_frame.reload_image(vid.retrieve_image(),"latest frame");
                 }
@@ -628,30 +686,17 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
                 CaptureFrame image_view;
                 if(use_dehaze){image_view = algo.CLAHE_dehaze(vid);viewer.single_view_uninterrupted(vid);}
                 else viewer.single_view_uninterrupted(vid);
-                vid.frame_extraction();
+                try
+                {
+                    vid.frame_extraction();
+                }
+                catch(...)
+                {
+                    logger.log_warn("end of video reached");
+                    break;
+                }
             }
-            char c = (char)cv::waitKey(30);
-            if(c == 116 || c == 84 || stop_mosaic)//checking for 't' or 'T' to toggle the trigger
-            {
-                mosaic_trigger = !mosaic_trigger;//Toggling the current value in mosaic_trigger
-                logger.log_warn("User interruption. Toggling mosaic state..");
-                continue;
-            }
-            else if(c == 114 || c == 82 || reset_mosaic)//Checking for 'r' or 'R' to reset the mosaic image.
-            {
-                logger.log_warn("User interruption. resetting the image..");
-                mosaic_image.clear();
-                mosaic_image = current_frame;
-                previous_frame = current_frame;
-                image_count = 1;
-                continue;
-            }
-            else if(c == 115 || c == 83 || stop_mosaic)//checking for 's' or 'S' to stop mosaicing
-            {
-                mosaic_trigger = !mosaic_trigger;//Toggling the current value in mosaic_trigger
-                logger.log_warn("User interruption. Stopping mosaic..");
-                break;
-            }
+            
             
         }
         logger.log_warn("Image mosaicing completed");
@@ -706,9 +751,13 @@ void ImageMosaic::live_mosaicing_camera(CaptureFrame vid)
         for(image_count = 0; ;)
         {
             char c = (char)cv::waitKey(30);
-            if(c == 116 || c == 84 || stop_mosaic)//checking for 't' or 'T' to stop mosaicing
+            if(c == 116 || c == 84 || mosaic_trigger)//checking for 't' or 'T' to stop mosaicing
             {
-                mosaic_trigger = !mosaic_trigger;
+                if(mosaic_trigger)
+                {
+                    mosaic_trigger = !mosaic_trigger;
+                }
+                mosaic_state = !mosaic_state;
                 logger.log_warn("User interruption. toggling mosaic state..");
                 continue;
             }
@@ -717,18 +766,20 @@ void ImageMosaic::live_mosaicing_camera(CaptureFrame vid)
                 logger.log_warn("User interruption. resetting the image..");
                 mosaic_image.clear();
                 vid.frame_extraction();
-                mosaic_image = current_frame;
-                previous_frame = current_frame;
+                prev_homography = (cv::Mat_<double>(3,3) << 1, 0, 0, 0, 1,0, 0, 0, 1);
+                blend_offset = (cv::Mat_<double>(3,3) << 1, 0, current_frame.retrieve_image().cols, 0, 1,current_frame.retrieve_image().rows, 0, 0, 1);
+                blend_once = true;
+                // mosaic_image = current_frame;
+                // previous_frame = current_frame;
                 image_count = 1;
                 continue;
             }
             if(c == 115 || c == 83 || stop_mosaic)//checking for 's' or 'S' to stop mosaicing
             {
-                mosaic_trigger = !mosaic_trigger;//Toggling the current value in mosaic_trigger
                 logger.log_warn("User interruption. stopping..");
                 break;
             }
-            if(mosaic_trigger)
+            if(mosaic_state)
             {
             algo.AKAZE_feature_points(current_frame,previous_frame);
             algo.BF_matcher();

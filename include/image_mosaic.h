@@ -18,7 +18,7 @@ class ImageMosaic : public ImageProcessing
         std::vector<cv::DMatch> good_matches;
         std::vector<cv::Point2d> good_matched_current_image,good_matched_previous_image;
         cv::Mat original_mask,warped_image, warped_mask,blend_offset;
-        bool success_stitch;
+        bool success_stitch,mosaic_state;
         int previous_area;
         cv::Rect bounding_rect;
         cv::Mat big_pic;

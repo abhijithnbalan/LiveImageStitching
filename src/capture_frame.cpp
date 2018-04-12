@@ -92,7 +92,7 @@ void CaptureFrame::frame_extraction()
         if ( !image.data )
         {
             logger.log_error("No image data found to extract");
-            std::cout<<"No image data found for "<<window_name<<"\n";// no input image found
+            // std::cout<<"No image data found for "<<window_name<<"\n";// no input image found
             throw(1);
         }//After this function call the current frame is saved in the image file of the same object.
         
@@ -104,15 +104,18 @@ void CaptureFrame::frame_extraction()
         //extracting the current frame to the image file.
         for (int i = 1; i < number; i++)
         {
-            cap >> image;
+           
+                cap >> image;
             if (!image.data)
             {
                 logger.log_error("No image data found to extract");
                 // std::cout << "No image data found for " << window_name << "\n"; // no input image found
                 throw(1);
-                break;
-            } //After this function call the current frame is saved in the image file of the same object.
+                break; 
+            }//After this function call the current frame is saved in the image file of the same object.
+            
         }
+
         return;
     }
 
@@ -123,7 +126,7 @@ void CaptureFrame::frame_extraction()
         image.release();
         window_name.clear();
         cap.release();
-        std::cout<<"Capture Frame cleared"<<"\n";
+        logger.log_info("CaptureFrame cleared");
         return;
     }
 
