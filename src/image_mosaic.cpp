@@ -318,13 +318,14 @@ void ImageMosaic::image_blender()
 
 void ImageMosaic::image_blender_live()
 {
-    //Converting into 16S for blending
+    // //Converting into 16S for blending
     algo.previous_image.convertTo(algo.previous_image, CV_16S);
     warped_image.convertTo(warped_image, CV_16S);
 
     //Creating feather blend for blending images with specified sharpness
     
-    cv::detail::FeatherBlender  blender(0.05f); //sharpness
+    cv::detail::FeatherBlender  blender(0.01f); //sharpness
+    // cv::detail::MultiBandBlender  blender(false,1);
 
     //Blender preparing
     blender.prepare(cv::Rect(0,0,std::max(algo.previous_image.cols,warped_image.cols),std::max(algo.previous_image.rows,warped_image.rows)));
@@ -336,7 +337,14 @@ void ImageMosaic::image_blender_live()
     //Blending the fed images
     cv::Mat result_s, result_mask;
     blender.blend(result_s, result_mask);
+    
+
     result_s.convertTo(mosaic, CV_8UC3);
+
+    // cv::cvtColor(mosaic,mosaic,CV_BGR2HSV);
+  
+    // cv::cvtColor(mosaic,mosaic,CV_HSV2BGR);
+
     cv::Mat gray_mosaic = cv::Mat::zeros(mosaic.size(),CV_8UC1);
     cv::cvtColor(mosaic,gray_mosaic,cv::COLOR_BGR2GRAY);
     // cv::imshow("result",mosaic);
@@ -405,7 +413,14 @@ void ImageMosaic::image_blender_live()
     big_pic = cv::Mat::zeros(new_row, new_col ,CV_8UC3);
 
     //Cropping the image
-    cv::Mat cropped_image = mosaic(bounding_rect).clone();
+    // cv::Mat cropped_image = mosaic(bounding_rect).clone();
+    cv::Mat brightness_compensation = cv::Mat::ones(mosaic.size(),CV_8UC1);
+      std::vector<cv::Mat> channels;
+    cv::split(mosaic,channels);
+    cv::add(channels[0],brightness_compensation,channels[0]);
+    cv::add(channels[1],brightness_compensation,channels[1]);
+    cv::add(channels[2],brightness_compensation,channels[2]);
+    cv::merge(channels,mosaic);
     // Loading the image to public CaptureFrame object
     mosaic_image.reload_image(mosaic,"mosaic");
 
@@ -581,7 +596,7 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
             
             
             viewer.single_view_uninterrupted(vid,60);
-            char c = (char)cv::waitKey(25);
+            char c = (char)cv::waitKey(75);
             if (c == 116 || c == 84 || mosaic_trigger) //checking for 't' or 'T' to toggle the trigger
             {
                 if (mosaic_trigger)
@@ -618,7 +633,7 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
                 logger.log_warn("User interruption. resetting the image..");
                 
                     std::string filename = std::to_string(intermediate);
-                    cv::imwrite(filename+".jpg",mosaic_image.retrieve_image().clone());
+                    cv::imwrite(filename+".jpg",crop_live().retrieve_image().clone());
                     intermediate++;
                     logger.log_info("Intermediate Mosaic image is saved to disk");
                 
@@ -646,7 +661,7 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
             {
             
     
-            viewer.multiple_view_uninterrupted(current_frame,previous_frame,25);
+            // viewer.multiple_view_uninterrupted(current_frame,previous_frsame,25);
             algo.AKAZE_feature_points(current_frame,previous_frame);
             algo.BF_matcher();
             try
