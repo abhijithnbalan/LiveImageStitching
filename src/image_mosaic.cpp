@@ -20,6 +20,7 @@
 #include <iostream>
 #include <iomanip>
 #include <unistd.h>
+#include <string.h>
 
 
 //Creates image vector from a video with specified frame interval.
@@ -67,6 +68,7 @@ ImageMosaic::ImageMosaic()
     use_dehaze = false;
     mosaic_trigger = false;
     previous_area = 0;
+    intermediate = 1;
 }
 
 //show keypoints on image
@@ -102,6 +104,7 @@ void ImageMosaic::find_homography()
         logger.log_error("Homography matrix could not be calculated.");
         throw 1;
     }
+
     // std::cout<<homography_matrix<<"\n";
     
     //logging
@@ -168,12 +171,12 @@ void ImageMosaic::find_actual_homography()
     }
     catch(...)
     {
-        logger.log_error("Homography matrix could not be calculated");
+        logger.log_error("Actual Homography matrix could not be calculated");
     }
     // std::cout<<homography_matrix<<"\n";
 
     //logger
-    logger.log_info("Homography matrix calculated");
+    logger.log_info("Actual Homography matrix calculated");
 
     return;
     
@@ -254,7 +257,7 @@ void ImageMosaic::image_blender()
 
     //Creating feather blend for blending images with specified sharpness
     
-    cv::detail::FeatherBlender  blender(0.05f); //sharpness
+    cv::detail::FeatherBlender  blender(0.5f); //sharpness
 
     //Blender preparing
     blender.prepare(cv::Rect(0,0,std::max(algo.previous_image.cols,warped_image.cols),std::max(algo.previous_image.rows,warped_image.rows)));
@@ -527,6 +530,7 @@ void ImageMosaic::Opencv_Stitcher()
 //live mosaic can be used to stitch from video or camera feed in realtime
 void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
 {
+    
         //live mosaicing is used to stitch imges in realtme
         //extracting frames
         try
@@ -547,11 +551,13 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
         CaptureFrame previous_frame;
         //Initialising as number of matches to zero
         int matches = 0;
-        current_frame = CaptureFrame(vid.retrieve_image(), "current frame");
+        previous_frame = CaptureFrame(vid.retrieve_image(), "previous frame");
+        if(use_dehaze)previous_frame = algo.CLAHE_dehaze(previous_frame);
         //Extracting frames and loading it in current and previous images
         try
         {
             vid.frame_extraction(5);
+            current_frame = CaptureFrame(vid.retrieve_image(), "current frame");
         }
         catch (...)
         {
@@ -566,7 +572,16 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
         // stitching in loop and number of images are counted
         for (image_count = 0;;)
         {
-            char c = (char)cv::waitKey(30);
+            current_frame.reload_image(vid.retrieve_image(),"latest frame");
+            if(use_dehaze)
+            {
+                current_frame = algo.CLAHE_dehaze(current_frame);
+            }
+            
+            
+            
+            viewer.single_view_uninterrupted(vid,60);
+            char c = (char)cv::waitKey(25);
             if (c == 116 || c == 84 || mosaic_trigger) //checking for 't' or 'T' to toggle the trigger
             {
                 if (mosaic_trigger)
@@ -576,7 +591,8 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
                 }
                 if (!mosaic_image.retrieve_image().data)
                 {
-                    previous_frame = CaptureFrame(vid.retrieve_image(), "previous frame");
+                    if(use_dehaze)previous_frame = algo.CLAHE_dehaze(vid);
+                    else previous_frame.reload_image(vid.retrieve_image(), "previous frame");
                 }
                 try
                 {
@@ -587,11 +603,8 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
                     logger.log_warn("video ended ");
                     return;
                 }
-                current_frame = CaptureFrame(vid.retrieve_image(), "current frame");
-                if (use_dehaze)
-                {
-                    previous_frame = algo.CLAHE_dehaze(previous_frame);
-                    }
+                // current_frame = CaptureFrame(vid.retrieve_image(), "current frame");
+                
                 mosaic_state = !mosaic_state;
                 logger.log_warn("User interruption. Toggling mosaic state..");
                 continue;
@@ -603,12 +616,22 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
                     reset_mosaic = !reset_mosaic;
                 }
                 logger.log_warn("User interruption. resetting the image..");
-                mosaic_image.clear();
+                
+                    std::string filename = std::to_string(intermediate);
+                    cv::imwrite(filename+".jpg",mosaic_image.retrieve_image().clone());
+                    intermediate++;
+                    logger.log_info("Intermediate Mosaic image is saved to disk");
+                
+                mosaic_image.clear();previous_frame.clear();big_pic.release();
+                prev_homography.release();
                 prev_homography = (cv::Mat_<double>(3, 3) << 1, 0, 0, 0, 1, 0, 0, 0, 1);
                 blend_offset = (cv::Mat_<double>(3, 3) << 1, 0, current_frame.retrieve_image().cols, 0, 1, current_frame.retrieve_image().rows, 0, 0, 1);
                 blend_once = true;
-                // mosaic_image = current_frame;
-                // previous_frame = current_frame;
+                mosaic_image.reload_image(current_frame.retrieve_image().clone(),"mosaic");
+                // viewer.single_view_uninterrupted(mosaic_image,25);
+                previous_frame.reload_image(current_frame.retrieve_image().clone(),"previous frame");
+                homography_matrix.release();
+                vid.frame_extraction(2);
                 image_count = 1;
                 continue;
             }
@@ -618,16 +641,60 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
                 logger.log_warn("User interruption. Stopping mosaic..");
                 break;
             }
+            
             if (mosaic_state)
             {
-                
-            if(use_dehaze){current_frame = algo.CLAHE_dehaze(current_frame);}
+            
+    
+            viewer.multiple_view_uninterrupted(current_frame,previous_frame,25);
             algo.AKAZE_feature_points(current_frame,previous_frame);
             algo.BF_matcher();
-            try{find_homography();}
-            catch(int err){logger.log_info("Couldn't Find Homography. Skipping frame");continue;}
-            good_match_selection();
-            matches = good_matches.size();
+            try
+                {
+                    find_homography();
+                }
+            catch(...)
+                {
+                    logger.log_info("Couldn't Find Homography. Skipping frame");
+                    //start extracting frames for next iteration
+                try
+                    {
+                        vid.frame_extraction(2);
+
+                        // previous_frame.reload_image(current_frame.retrieve_image().clone(),"swap image");
+                    }
+                catch(...)
+                    {
+                        logger.log_warn("end of video reached");
+                        break;
+                    }
+                    continue;
+                }
+            // logger.log_warn("good match");
+            try
+            { 
+                good_match_selection();
+                matches = good_matches.size();
+            }
+            catch(...)
+            {
+                logger.log_info("Couldn't Find Homography. Skipping frame");
+                    //start extracting frames for next iteration
+                try
+                    {
+                        vid.frame_extraction(2);
+
+                        // previous_frame.reload_image(current_frame.retrieve_image().clone(),"swap image");
+                    
+                        // current_frame.reload_image(vid.retrieve_image(),"latest frame");
+                    }
+                catch(...)
+                    {
+                        logger.log_warn("end of video reached");
+                        break;
+                    }
+                    continue;
+            }
 
             //Stitch images only if more than 10 good matches are obtained. 4 is the theoratical minimum.
             if(matches > 10)
@@ -643,6 +710,7 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
 
                 try{find_actual_homography();}
                 catch(...){logger.log_info("skipping frame");continue;}
+                // logger.log_warn("warp image");
                 warp_image_live();
                 image_blender_live();
 
@@ -651,8 +719,8 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
 
                 //Show live mosaic result 
                 image_count++;
-                viewer.single_view_uninterrupted(mosaic_image,80);
-                cv::waitKey(10);
+                viewer.single_view_uninterrupted(mosaic_image,20);
+                cv::waitKey(5);
 
                 //start extracting frames for next iteration
                 try
@@ -661,7 +729,7 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
                     
                     previous_frame.reload_image(current_frame.retrieve_image().clone(),"swap image");
                     
-                    current_frame.reload_image(vid.retrieve_image(),"latest frame");
+                    // current_frame.reload_image(vid.retrieve_image(),"latest frame");
                 }
                 catch(...)
                 {
@@ -676,7 +744,7 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
                 {
                     vid.frame_extraction(5);
                     // previous_frame = current_frame;
-                    current_frame.reload_image(vid.retrieve_image(),"current image");
+                    // current_frame.reload_image(vid.retrieve_image(),"current image");
                 }
                 catch(...)
                 {
@@ -688,9 +756,9 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
             else
             {
                 // cv::destroyAllWindows();
-                CaptureFrame image_view;
-                if(use_dehaze){image_view = algo.CLAHE_dehaze(vid);viewer.single_view_uninterrupted(vid);}
-                else viewer.single_view_uninterrupted(vid);
+                // CaptureFrame image_view;
+                // if(use_dehaze){image_view = algo.CLAHE_dehaze(vid);viewer.single_view_uninterrupted(vid);}
+                viewer.single_view_uninterrupted(vid);
                 try
                 {
                     vid.frame_extraction();

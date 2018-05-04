@@ -21,7 +21,7 @@ int main(int argc, char **argv) //The main Function
         return -1;    
     } 
     ImageMosaic mosaic;
-    // mosaic.use_dehaze = true;
+    mosaic.use_dehaze = true;
     ViewFrame viewer;
     char* mode = argv[1];
     

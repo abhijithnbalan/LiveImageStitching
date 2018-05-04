@@ -14,7 +14,7 @@ class CaptureFrame
     protected://Acessing these variables can only be through member functions
         cv::Mat image;//Stores Image file
         cv::VideoCapture cap;//Stores VideoCapture file
-        Logger logger;
+        // Logger logger;
         
     public:
         std::string window_name;// Window name of stored image 

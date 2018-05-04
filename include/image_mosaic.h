@@ -23,7 +23,7 @@ class ImageMosaic : public ImageProcessing
         cv::Rect bounding_rect;
         cv::Mat big_pic;
         bool blend_once;
-
+        int intermediate;
         Logger logger;//Can be used everywhere inside the class
         
     protected:
