@@ -32,26 +32,27 @@ int main(int argc, char **argv) //The main Function
         argv = argv + 1;
         logger.log_warn("image pair mode");
         CaptureFrame ima1,ima2;
+
         ima1.capture_image(argv[1],"image1");
         ima2.capture_image(argv[2],"image2");
-        logger.log_warn("Capturing images done");
+        logger.log_info("Capturing images successful");
     
         mosaic.algo.AKAZE_feature_points(ima1,ima2);
-        logger.log_warn("feature detection done");
+        logger.log_info("feature detection successful");
         mosaic.view_keypoints();
-        logger.log_warn("Keypoint display done");
+        logger.log_info("Keypoint display successful");
         mosaic.algo.BF_matcher();
-        logger.log_warn("feature matching done");
+        logger.log_info("feature matching successful");
         mosaic.find_homography();
-        logger.log_warn("homography done");
+        logger.log_info("homography successful");
         mosaic.good_match_selection();
-        logger.log_warn("goodmatch selection done");
+        logger.log_info("goodmatch selection successful");
         mosaic.find_actual_homography();
-        logger.log_warn("homography according to good matches");
+        logger.log_info("homography according to good matches");
         mosaic.warp_image();
-        logger.log_warn("image warping done");
+        logger.log_info("image warping successful");
         mosaic.image_blender();
-        logger.log_warn("blending done");
+        logger.log_info("blending successful");
         viewer.single_view_interrupted(mosaic.mosaic_image);
         cv::waitKey(15);
     }
@@ -83,7 +84,7 @@ int main(int argc, char **argv) //The main Function
         mosaic.Opencv_Stitcher();
     }
     
-    std::cout<<argv[1]<<"\n";
+    
     if(std::string(argv[1]) == "live")
     {
         argv = argv + 1;
@@ -94,10 +95,18 @@ int main(int argc, char **argv) //The main Function
         if (!(ss >> camera_port))
         {
             vid.capture_video(argv[1],"video input");
+            mosaic.roi_x = 50;
+            mosaic.roi_y = 60;
+            mosaic.roi_width = 80;
+            mosaic.roi_height = 70;
             mosaic.live_mosaicing_video(vid);
         }
         else
         {
+            // mosaic.roi_x = 50;
+            // mosaic.roi_y = 50;
+            // mosaic.roi_width = 70;
+            // mosaic.roi_height = 70;
             vid.capture_video(camera_port,"camera input");
             mosaic.live_mosaicing_camera(vid);
         }

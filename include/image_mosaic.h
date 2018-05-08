@@ -34,8 +34,12 @@ class ImageMosaic : public ImageProcessing
         bool reset_mosaic,stop_mosaic;
         cv::Mat warp_offset;//used for stitching in all direction
         cv::Mat mosaic;
-        CaptureFrame mosaic_image,mosai_image_stable;//the output variable
+        CaptureFrame mosaic_image,mosaic_image_stable;//the output variable
         int total_images;
+        int video_frame_skip;
+        int camera_frame_delay;
+        int roi_x,roi_y,roi_height,roi_width;
+
 
         
         //Shows found out keypoints on the corresponding image
