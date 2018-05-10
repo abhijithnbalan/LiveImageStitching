@@ -6,6 +6,7 @@
 #include "capture_frame.h"
 #include "view_frame.h"
 #include "logger.h"
+#include "timer.h"
 //Standard libraries
 #include <opencv2/opencv.hpp> 
 
@@ -24,6 +25,7 @@ class ImageMosaic : public ImageProcessing
         cv::Mat big_pic;
         bool blend_once;
         int intermediate;
+        Timer time1,time2,time3,time4,time5,time6,time7,time8;
         Logger logger;//Can be used everywhere inside the class
         
     protected:

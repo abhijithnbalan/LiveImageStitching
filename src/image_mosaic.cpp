@@ -557,6 +557,7 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
     set_roi(roi_x,roi_y,roi_height,roi_width);
         //live mosaicing is used to stitch imges in realtme
         //extracting frames
+        
         try
         {
             vid.frame_extraction(video_frame_skip);
@@ -567,7 +568,8 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
             return;
         }
 
-
+        float t1 = 0,t2 = 0,t3 = 0,t4 = 0,t5 = 0,t6 = 0,t7 = 0,t8 = 0;
+        int count = 1;
         ViewFrame viewer;
         blend_once = true;
         // current frame and previous frames will be used to stitch images
@@ -596,10 +598,13 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
         // stitching in loop and number of images are counted
         for (image_count = 0;;)
         {
+            time7.timer_init();
             current_frame.reload_image(roi_selection(vid).retrieve_image(),"latest frame");
             if(use_dehaze)
             {
+                time8.timer_init();
                 current_frame = algo.CLAHE_dehaze(current_frame);
+                time8.timer_end();
             }
             
             viewer.single_view_uninterrupted(roi_selection(vid),60);
@@ -689,9 +694,13 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
 
             if (mosaic_state)
             {
-
+                time1.timer_init();
                 algo.AKAZE_feature_points(current_frame, previous_frame);
+                time1.timer_end();
+                time2.timer_init();
                 algo.BF_matcher();
+                time2.timer_end();
+                time3.timer_init();
                 try
                 {
                     find_homography();
@@ -713,7 +722,9 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
                     }
                     continue;
                 }
+                time3.timer_end();
                 // logger.log_warn("good match");
+                time4.timer_init();
                 try
                 {
                     good_match_selection();
@@ -734,6 +745,7 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
                     }
                     continue;
                 }
+                time4.timer_end();
 
                 //Stitch images only if more than 10 good matches are obtained. 4 is the theoratical minimum.
                 if (matches > 10)
@@ -757,15 +769,33 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
                         continue;
                     }
                     // logger.log_warn("warp image");
+                    time5.timer_init();
                     warp_image_live();
+                    time5.timer_end();
+                    time6.timer_init();
                     image_blender_live();
+                    time6.timer_end();
 
                     prev_homography = prev_homography * homography_matrix;
                     homography_matrix.release();
 
                     //Show live mosaic result
                     image_count++;
+                    time7.timer_end();
                     viewer.single_view_uninterrupted(mosaic_image, 20);
+                    t1 = (t1*(count - 1) + time1.execution_time)/(count);
+                    // t1 = (t1*count + time1.execution_time)/(count + 1);
+                    t2 = (t2*(count - 1) + time2.execution_time)/count;
+                    t3 = (t3*(count - 1) + time3.execution_time)/count;
+                    t4 = (t4*(count - 1) + time4.execution_time)/count;
+                    t5 = (t5*(count - 1) + time5.execution_time)/count;
+                    t6 = (t6*(count - 1) + time6.execution_time)/count;
+                    t7 = (t7*(count - 1) + time7.execution_time)/count;
+                    t8 = (t8*(count - 1) + time8.execution_time)/count;
+                    count++;
+
+                    printf("feature det : %6f BFMatch : %6f homogra : %6f good_match : %6f warp : %6f blend : %6f overall : %6f CLAHE : %6f \n",t1*1000,t2*1000,t3*1000,t4*1000,t5*1000,t6*1000,t7*1000,t8*1000);
+                    // std::cout<<count<<"\n";
                     cv::waitKey(5);
 
                     //start extracting frames for next iteration

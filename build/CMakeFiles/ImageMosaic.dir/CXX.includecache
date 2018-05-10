@@ -31,6 +31,8 @@ view_frame.h
 ../include/view_frame.h
 logger.h
 ../include/logger.h
+timer.h
+../include/timer.h
 opencv2/opencv.hpp
 -
 
