@@ -923,21 +923,27 @@ void ImageMosaic::live_mosaicing_camera(CaptureFrame vid)
                     reset_mosaic = !reset_mosaic;
                 }
                 logger.log_warn("User interruption. resetting the image..");
-                
+                if(crop_live().retrieve_image().data)
+                {
                     std::string filename = std::to_string(intermediate);
-                    cv::imwrite(filename+".jpg",crop_live().retrieve_image().clone());
+                    cv::imwrite(filename + ".jpg", crop_live().retrieve_image().clone());
                     intermediate++;
                     logger.log_info("Intermediate Mosaic image " + filename + ".jpg" + " is saved to disk");
+                    // mosaic_image.clear();
+                    // mosaic_image.reload_image(current_frame.retrieve_image().clone(),"mosaic image");
+                    previous_frame.clear();
+                    big_pic.release();
+                    prev_homography.release();
+                    prev_homography = (cv::Mat_<double>(3, 3) << 1, 0, 0, 0, 1, 0, 0, 0, 1);
+                    blend_offset = (cv::Mat_<double>(3, 3) << 1, 0, current_frame.retrieve_image().cols, 0, 1, current_frame.retrieve_image().rows, 0, 0, 1);
+                    blend_once = true;
+                    // mosaic_image.reload_image(current_frame.retrieve_image().clone(), "mosaic");
+                    mosaic_image.reload_image(cv::Mat::zeros(current_frame.retrieve_image().size(),CV_8UC3),"mosaic image");
+                    // viewer.single_view_uninterrupted(mosaic_image,25);
+                    previous_frame.reload_image(current_frame.retrieve_image().clone(), "previous frame");
+                    homography_matrix.release();
                 
-                mosaic_image.clear();previous_frame.clear();big_pic.release();
-                prev_homography.release();
-                prev_homography = (cv::Mat_<double>(3, 3) << 1, 0, 0, 0, 1, 0, 0, 0, 1);
-                blend_offset = (cv::Mat_<double>(3, 3) << 1, 0, current_frame.retrieve_image().cols, 0, 1, current_frame.retrieve_image().rows, 0, 0, 1);
-                blend_once = true;
-                mosaic_image.reload_image(current_frame.retrieve_image().clone(),"mosaic");
-                // viewer.single_view_uninterrupted(mosaic_image,25);
-                previous_frame.reload_image(current_frame.retrieve_image().clone(),"previous frame");
-                homography_matrix.release();
+                }
                 usleep(camera_frame_delay/2);
                 vid.frame_extraction();
                 image_count = 1;
@@ -1034,7 +1040,7 @@ void ImageMosaic::live_mosaicing_camera(CaptureFrame vid)
 
                     //Show live mosaic result
                     image_count++;
-                    viewer.single_view_uninterrupted(mosaic_image, 20);
+                    viewer.single_view_uninterrupted(mosaic_image, 75);
                     cv::waitKey(5);
 
                     //start extracting frames for next iteration
