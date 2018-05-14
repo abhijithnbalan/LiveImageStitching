@@ -235,16 +235,18 @@ void ImageMosaic::warp_image_live()
     }
     // std::cout<<prev_homography<<"\n";
     // std::cout<<homography_matrix<<"\n";
-    
-    cv::Mat effective_homography_matrix = warp_offset *  prev_homography * homography_matrix.clone();
+   
+    effective_homography_matrix.release();
+    effective_homography_matrix = warp_offset *  prev_homography.clone() * homography_matrix.clone();
     // std::cout<<effective_homography_matrix<<"\n";
     // blend_offset = (cv::Mat_<double>(3,3) << 1, 0, -homography_matrix.at<int>(0,2), 0, 1,-homography_matrix.at<int>(1,2), 0, 0, 1);
     //Warping the images according to homography + translation
+    
     warpPerspective(algo.current_image, warped_image,effective_homography_matrix,big_pic.size());
     warpPerspective(algo.previous_image, algo.previous_image,blend_offset,big_pic.size());
     warpPerspective(mask1, warped_mask,effective_homography_matrix,big_pic.size());
     warpPerspective(mask2, original_mask, blend_offset,big_pic.size());
-    
+    // viewer.single_view_uninterrupted()
     if(blend_once)
     {
         blend_offset = (cv::Mat_<double>(3,3) << 1, 0, 0, 0, 1,0, 0, 0, 1);
@@ -648,18 +650,24 @@ void ImageMosaic::live_mosaicing_video(CaptureFrame vid)
                     cv::imwrite(filename + ".jpg", crop_live().retrieve_image().clone());
                     intermediate++;
                     logger.log_info("Intermediate Mosaic image " + filename + ".jpg" + " is saved to disk");
-                    // mosaic_image.clear();
+                    mosaic_image.clear();
                     // mosaic_image.reload_image(current_frame.retrieve_image().clone(),"mosaic image");
                     previous_frame.clear();
                     big_pic.release();
-                    prev_homography.release();
+                    warp_offset.release();
+                    warp_offset = (cv::Mat_<double>(3, 3) << 1, 0, current_frame.retrieve_image().cols/2, 0, 1, current_frame.retrieve_image().rows/2, 0, 0, 1);
+
+                    prev_homography.release();blend_offset.release();
                     prev_homography = (cv::Mat_<double>(3, 3) << 1, 0, 0, 0, 1, 0, 0, 0, 1);
-                    blend_offset = (cv::Mat_<double>(3, 3) << 1, 0, current_frame.retrieve_image().cols, 0, 1, current_frame.retrieve_image().rows, 0, 0, 1);
+                    // homography_matrix = (cv::Mat_<double>(3, 3) << 1, 0, 0, 0, 1, 0, 0, 0, 1);
+                    blend_offset = (cv::Mat_<double>(3, 3) << 1, 0, current_frame.retrieve_image().cols/2, 0, 1, current_frame.retrieve_image().rows/2, 0, 0, 1);
                     blend_once = true;
-                    // mosaic_image.reload_image(current_frame.retrieve_image().clone(), "mosaic");
-                    mosaic_image.reload_image(cv::Mat::zeros(current_frame.retrieve_image().size(),CV_8UC3),"mosaic image");
+                    mosaic_image.reload_image(current_frame.retrieve_image().clone(), "mosaic");
+                    // mosaic_image.reload_image(cv::Mat::zeros(current_frame.retrieve_image().size(),CV_8UC3),"mosaic image");
                     // viewer.single_view_uninterrupted(mosaic_image,25);
                     previous_frame.reload_image(current_frame.retrieve_image().clone(), "previous frame");
+                    // algo.previous_image.release();
+                    // algo.current_image.release();
                     homography_matrix.release();
                 
                 }

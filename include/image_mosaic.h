@@ -25,7 +25,7 @@ class ImageMosaic : public ImageProcessing
         bool blend_once;
         int intermediate;
         Logger logger;//Can be used everywhere inside the class
-        
+        cv:: Mat effective_homography_matrix;
     protected:
 
     public:

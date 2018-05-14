@@ -97,7 +97,7 @@ int main(int argc, char **argv) //The main Function
             vid.capture_video(argv[1],"video input");
             mosaic.roi_x = 50;
             mosaic.roi_y = 50;
-            mosaic.roi_width = 70;
+            mosaic.roi_width = 100;
             mosaic.roi_height = 100;
             mosaic.live_mosaicing_video(vid);
         }
