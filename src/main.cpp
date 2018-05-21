@@ -57,12 +57,7 @@ int main(int argc, char **argv) //The main Function
         cv::waitKey(15);
     }
 
-
-
-
-    // CaptureFrame image1,image2;
-    // image1.capture_image(argv[1],"First Image");
-    // image2.capture_image(argv[2],"Second Image");
+    
     else if(std::string(argv[1]) == "img_vec_img")
     {
         argv = argv + 1;
@@ -92,28 +87,23 @@ int main(int argc, char **argv) //The main Function
         CaptureFrame vid;
         std::istringstream ss(argv[1]);
         int camera_port;
+        mosaic.roi_x = 50;
+        mosaic.roi_y = 50;
+        mosaic.roi_width = 100;
+        mosaic.roi_height = 100;
         if (!(ss >> camera_port))
         {
             vid.capture_video(argv[1],"video input");
-            mosaic.roi_x = 50;
-            mosaic.roi_y = 50;
-            mosaic.roi_width = 100;
-            mosaic.roi_height = 100;
+            
             mosaic.live_mosaicing_video(vid);
         }
         else
         {
-            // mosaic.roi_x = 50;
-            // mosaic.roi_y = 50;
-            // mosaic.roi_width = 70;
-            // mosaic.roi_height = 70;
+        
             vid.capture_video(camera_port,"camera input");
             mosaic.live_mosaicing_camera(vid);
         }
-        // mosaic.image_vector_maker(vid);
-        // mosaic.display_image_vector();
-        // mosaic.Opencv_Stitcher();
-        
+ 
         logger.log_info("Mosaicing Completed ");
         viewer.single_view_interrupted(mosaic.mosaic_image);
         //Writing the mosaic image to disk
