@@ -23,6 +23,7 @@ class ImageProcessing //-------medianBlur or CLAHE dehazing-------//
         
 
     public:
+        bool dev_mode;
     int white_use_value;
         bool use_white;//controlling variable for white filtering
         Algorithm algo;//algorithm object

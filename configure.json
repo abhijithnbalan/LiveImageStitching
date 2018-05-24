@@ -1,0 +1,32 @@
+{
+    "Program Execution" :
+    {
+        "DebugMode"                     : false,
+        "RunningMode"                   :"commandline",
+        "ExeMode"                       :"DEV"
+    },
+
+
+    "General Settings"  :
+    {
+        "DefaultVideo"                  :"samples/default.mp4",
+        "DefaultImage"                  :"samples/default.jpg",
+
+        "RegionOfInterest_x"            :50,
+        "RegionOfInterest_y"            :50,
+        "RegionOfInterest_height"       :60,
+        "RegionOfInterest_width"        :65,
+        "UseDehaze(CLAHE)"              :true,
+        "UseSameLocation"               :true
+    },
+
+
+    "Live Mosaic":
+    {
+        "CameraDelay"                   :5,
+        "VideoFrameSkip"                :20,
+        "DefaultIntermediateOutput"     :"/home/rd/Pictures/mosaic_default/intermediate.jpg",
+        "DefaultOutput"                 :"/home/rd/Pictures/mosaic_default/result.jpg"
+    }
+    
+}

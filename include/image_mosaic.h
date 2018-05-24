@@ -29,7 +29,7 @@ class ImageMosaic : public ImageProcessing
     protected:
 
     public:
-        bool mosaic_trigger,use_dehaze;
+        bool mosaic_trigger,use_dehaze,debug_mode;
         int image_count;
         bool reset_mosaic,stop_mosaic;
         cv::Mat warp_offset;//used for stitching in all direction
@@ -39,6 +39,7 @@ class ImageMosaic : public ImageProcessing
         int video_frame_skip;
         int camera_frame_delay;
         int roi_x,roi_y,roi_height,roi_width;
+        std::string output_filename,intermediate_filename;
 
 
         

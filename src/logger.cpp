@@ -16,29 +16,49 @@
 
 void Logger::log_error(std::string error_message)
 {
-	log4cpp::Category& sub1 = log4cpp::Category::getInstance(std::string("sub1"));
-	sub1 << log4cpp::Priority::ERROR << error_message;
+	log4cpp::Category& root = log4cpp::Category::getInstance(std::string("root"));
+    log4cpp::Category& sub1 = log4cpp::Category::getInstance(std::string("sub1"));
+
+	if(debug_mode)
+    sub1 << log4cpp::Priority::ERROR << error_message;
+    else root << log4cpp::Priority::ERROR << error_message;
+    // sub1.shutdown();
     
     return;
 }
 void Logger::log_debug(std::string debug_message)
 {
-	log4cpp::Category& sub1 = log4cpp::Category::getInstance(std::string("sub1"));
+	log4cpp::Category& root = log4cpp::Category::getInstance(std::string("root"));
+    log4cpp::Category& sub1 = log4cpp::Category::getInstance(std::string("sub1"));
+
+    if(debug_mode)
 	sub1 << log4cpp::Priority::DEBUG << debug_message;
+    else root << log4cpp::Priority::DEBUG << debug_message;
+    // sub1.shutdown();
     
     return;
 }
 void Logger::log_warn(std::string warn_message)
 {
-	log4cpp::Category& sub1 = log4cpp::Category::getInstance(std::string("sub1"));
+	log4cpp::Category& root = log4cpp::Category::getInstance(std::string("root"));
+    log4cpp::Category& sub1 = log4cpp::Category::getInstance(std::string("sub1"));
+
+    if(debug_mode)
 	sub1 << log4cpp::Priority::WARN << warn_message;
+    else root << log4cpp::Priority::WARN << warn_message;
+    // sub1.shutdown();
     
     return;
 }
 void Logger::log_info(std::string info_message)
 {
-	log4cpp::Category& sub1 = log4cpp::Category::getInstance(std::string("sub1"));
+	log4cpp::Category& root = log4cpp::Category::getInstance(std::string("root"));
+    log4cpp::Category& sub1 = log4cpp::Category::getInstance(std::string("sub1"));
+
+    if(debug_mode)
 	sub1 << log4cpp::Priority::INFO << info_message;
+    else root << log4cpp::Priority::INFO << info_message;
+    // sub1.shutdown();    
     
     return;
 }
@@ -57,7 +77,14 @@ void Logger::logger_initialize()
     }
     return;
 }
+
 Logger::Logger()
 {
    logger_initialize();
+   debug_mode = false;
+}
+
+Logger::~Logger()
+{
+
 }

@@ -647,6 +647,32 @@ CMakeFiles/ImageMosaic.dir/src/main.cpp.o
  ../include/image_mosaic.h
  ../include/image_processing.h
  ../include/logger.h
+ ../include/rapidjson/allocators.h
+ ../include/rapidjson/document.h
+ ../include/rapidjson/encodedstream.h
+ ../include/rapidjson/encodings.h
+ ../include/rapidjson/error/error.h
+ ../include/rapidjson/internal/biginteger.h
+ ../include/rapidjson/internal/diyfp.h
+ ../include/rapidjson/internal/dtoa.h
+ ../include/rapidjson/internal/ieee754.h
+ ../include/rapidjson/internal/itoa.h
+ ../include/rapidjson/internal/meta.h
+ ../include/rapidjson/internal/pow10.h
+ ../include/rapidjson/internal/stack.h
+ ../include/rapidjson/internal/strfunc.h
+ ../include/rapidjson/internal/strtod.h
+ ../include/rapidjson/internal/swap.h
+ ../include/rapidjson/istreamwrapper.h
+ ../include/rapidjson/memorystream.h
+ ../include/rapidjson/msinttypes/inttypes.h
+ ../include/rapidjson/msinttypes/stdint.h
+ ../include/rapidjson/ostreamwrapper.h
+ ../include/rapidjson/rapidjson.h
+ ../include/rapidjson/reader.h
+ ../include/rapidjson/stream.h
+ ../include/rapidjson/stringbuffer.h
+ ../include/rapidjson/writer.h
  ../include/view_frame.h
  /home/rd/Vision_Opencv/ImageMosaic/src/main.cpp
  /usr/local/include/log4cpp/Appender.hh
