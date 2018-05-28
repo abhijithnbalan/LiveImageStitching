@@ -28,6 +28,7 @@ Make sure you have the following files in your system
 16. log4cpp.properties
 17. Image_Mosaic.log (will be automatically created if not)
 18. CMakeLists.txt
+19. configure.json
 
 Dependencies
 
@@ -53,6 +54,85 @@ To Execute the code, change the directory to bin.
 ```
 cd bin
 ```
+
+### Configuration File
+
+#### Program Execution
+1. DebugMode : 
+
+    "true" : Log file will be written to disk, Debug logs will be recorded.
+
+    "false" : Log file will not be written. All logs above Debug flag will be shown in console.
+
+2. RunnningMode : 
+
+    "commandline" : run with arguments list in terminal.
+
+    "GUI" : Run with information flow from GUI layer.
+
+    "automated" : Run with Directory for enhancing every file in it.
+
+3. ExeMode : 
+
+    "DEV" : Developer mode. This will display every windows during execution.
+
+    "EXE" Execution mode. This will suppress every windows displays. Output files will be written
+
+#### General Settings
+1. DefaultVideo : 
+
+    "PathToVideo" : This video file will be used when no file are supplied by the user.
+
+2. DefaultImage : 
+
+    "PathToImage" : This image file will be used when no files are supplied by the user.
+
+3. RegionOfInterest_x
+
+    integer(0,100) : Distance to the left side of Region of interest in percentage of width.
+
+4. RegionOfInterest_y
+
+    integer(0,100) :  Distance to the top side of Region of interest in percentage of height.
+
+5. RegionOfInterest_width
+
+    integer(0,100) :  Width of Region of interest in percentage of width.
+
+6. RegionOfInterest_height
+
+    integer(0,100) : Height of Region of interest in percentage of height.
+
+7. UseDehaze(CLAHE)
+    
+    "true"        : Dehaze will be done in all frame before attempting mosaicing.
+    "false"         : Dehazing will not be used.
+
+8. UseDehaze(CLAHE)
+    
+    "true"        : Same location wiht same name will be used for all the outputs.
+    "false"         :Values in default output paths will be used .
+
+
+
+#### Live Mosaic
+
+1. CameraDelay : 
+
+    integer(>0) : Time in milliseconds to wait before acquiring the next next frame.
+2. VideoFrameSkip : 
+
+    integer(>0) : The number of frames to skip before acquiring the next frame.
+
+3. DefaulIntermediateOutput : 
+
+    file path : The default file path to write intermediate output files
+
+4. DefaultOutput : 
+
+    file path : The default file path to write output files
+
+## commandline execution
 
 1. pair mode:
 
@@ -94,11 +174,11 @@ cd bin
     ```
 
 
-## RUNNING THE CODE
+## PROGRAM ACCESSIBLE PARAMETERS
 
 *(for the following section, 'Mosaic' is used as an object to the class ImageMosaic)
 
-### Public Variables that can be set manually for Laser Ranging
+### Public Variables that can be set manually for Image Mosaic
 
 1. Mosaic.roi\_x
 
