@@ -3,5 +3,4 @@
 *.mp4
 *.jpg
 *.log
-!filesystem.png
-!Image_Mosaicing.png
+!documentation/*.*

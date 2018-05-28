@@ -4,7 +4,12 @@
 **Planys Technologies**
 
 
+
+
 ## __Overview__
+
+
+![ImageMosaic FlowChart](documentation/ImageMosaic_flowchart.png)
 
 _Image mosaicing(or image stitching) is the method of creating a Larger picture by stitching up smaller pictures. This method provides larger field of vision without compromising on resolution of the image._
 _Two images are stitchable when we can identify enought number of(depending on the type of transformation assumption we are using)unique features._

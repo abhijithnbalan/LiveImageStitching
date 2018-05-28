@@ -193,8 +193,14 @@ cd bin
     Only used in live mosaicing.
 
 ## Program Flow
-![Optional Text](documentation/Image_Mosaicing.png)
 
+### Basic Mosaicing
+
+![Optional Text](documentation/ImageMosaic_functionflow_basic.png)
+
+### Live Mosaicing
+
+![Optional Text](documentation/ImageMosaic_functionflow_live.png)
 
 ## INCLUDED FILES
 
