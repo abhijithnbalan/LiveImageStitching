@@ -576,58 +576,24 @@ Logger class is used for logging the state of the program during execution. A lo
 
 ## Program Execution Time
 
-Program's execution times are very important in terms of scalability and reliability. The program is tested with 2 computers with the following configuration
+Program's execution times are very important in terms of scalability and reliability. 
 
 ### System - 1
-     CPU   - Intel i5 5th Generation quad core
-     RAM  - 4 GB
-    Ubuntu 14.04
-
-
-| Tasks                 |   Time Taken  (ms)                    |
-| -------               | ----------                            |
-| ROI selection         |       1.56                           |
-| Dehazing (optional)   |   21.76 (CLAHE) \| 11.75(Eq Histogram) |
-| Image segmentation    |   11.25                                 |
-| Contour Identification|   2.24                                |
-| Data Overlay          |   1.03                                |
-| Display               |   37.9                               |
-
-#### --With Dehaze (CLAHE)--
-
-_total time in developer mode_ -- 78.9 ms
-
-_total time in execution mode_ -- 40.33 ms   (without display)
-
-#### --Without Dehaze--
-
-_total time in developer mode_ -- 56.78 ms
-
-_total time in execution mode_ -- 18.67 ms   (without display)
-
-
-### System - 2
      CPU   - Intel i7 5th Generation octa core
-     RAM  - 8 GB
+     RAM  - 16 GB
     Ubuntu 16.04
 
 | Tasks                 |   Time Taken  (ms)                    |
 | -------               | ----------                            |
-| ROI selection         |   0.55                                |
-| Dehazing (optional)   |   14.7 (CLAHE) \| 11.8(Eq Histogram) |
-| Image segmentation    |   7.72                                 |
-| Contour Identification|   1.32                               |
-| Data Overlay          |   0.52                                |
-| Display               |   21.31                               |
+| Feature Detection (AKAZE)       |   1010.71                                |
+| Dehazing (optional)   |   57.37 (CLAHE)  |
+| Brute Force Matcher     |   1.07                               |
+| Find homography |   0.4341                               |
+| Good match filtering           |   0.175                                |
+| Warping images               |   624.09                               |
+| Blending images               |   634.03                              |
+|             |                                 |
+| Overall               |   2361.11                         |
 
-#### --With Dehaze (CLAHE)--
 
-_total time in developer mode_ -- 46.73 ms
-
-_total time in execution mode_ -- 24.91 ms   (without display)
-
-#### --Without Dehaze--
-
-_total time in developer mode_ -- 32.66 ms
-
-_total time in execution mode_ -- 11.55 ms   (without display)
+(NOTE : THE TIME TAKEN FOR AKAZE FEATURE POINT IDENTIFICATION AND BRUTE FORCE MATCHER WILL DEPEND ON THE NUMBER OF FEATURES IDENTIFIED IN THE SCENE. AS THE NUMBER OF FEATURES INCREASES, THE TIME TAKEN ALSO INCREASES. HOWEVER CLAHE, WARPING AND BLENDING ONLY DEPENDS ON THE SIZE AND RESOLUTION OF THE IMAGES. THE REST HAS NO DEPENDANCIES)
