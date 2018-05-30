@@ -136,6 +136,7 @@ int main(int argc, char **argv) //The main Function
             mosaic.find_homography();
             logger.log_info("homography successful");
             mosaic.good_match_selection();
+            mosaic.view_matches();
             logger.log_info("goodmatch selection successful");
             mosaic.find_actual_homography();
             logger.log_info("homography according to good matches");

@@ -23,8 +23,8 @@
 
     "Live Mosaic":
     {
-        "CameraDelay"                   :5,
-        "VideoFrameSkip"                :20,
+        "CameraDelay"                   :5000,
+        "VideoFrameSkip"                :5,
         "DefaultIntermediateOutput"     :"/home/rd/Pictures/mosaic_default/intermediate.jpg",
         "DefaultOutput"                 :"/home/rd/Pictures/mosaic_default/result.jpg"
     }

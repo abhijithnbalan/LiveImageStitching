@@ -119,7 +119,7 @@ cd bin
 
 1. CameraDelay : 
 
-    integer(>0) : Time in milliseconds to wait before acquiring the next next frame.
+    integer(>0) : Time in micro-seconds to wait before acquiring the next next frame.
 2. VideoFrameSkip : 
 
     integer(>0) : The number of frames to skip before acquiring the next frame.
